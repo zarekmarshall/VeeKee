@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <color name="primary_green">#2dca70</color>
+  <color name="primary_dark_green">#26ac5f</color>
+  <color name="primary_text_grey">#212121</color>
+  <color name="secondary_text_grey">#757575</color>
+  <color name="connection_error_red">#ef5350</color>
+</resources>

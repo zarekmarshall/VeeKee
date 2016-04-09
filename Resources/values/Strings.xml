@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ApplicationName">VeeKee</string>
+
+  <!-- Settings menu -->
+  <string name="SettingsItemTitle">Settings</string>
+  
+  <!-- Connection menu -->
+  <string name="RefreshItemTitle">Refresh</string>
+
+  <!-- Messages -->
+  <string name="NotConnectedToWifiMessage">Not connected to wifi</string>
+  <string name="NotConnectedToCorrectWifiMessage">Not connected to correct wifi</string>
+
+  <string name="UpdatingVpnTitle">Updating...</string>
+  <string name="EnablingVpnMessage">Enabling</string>
+  <string name="DisablingVpnMessage">Disabling</string>
+
+  <string name="CheckingVpnStatusTitle">Checking...</string>
+  <string name="CheckingVpnStatusMessage">Checking current vpn status</string>
+  
+  <!-- Preferences -->
+  <string name="RouterPreferenceCategoryTitle">Router settings</string>
+  <string name="VpnItemPreferenceCategoryTitle">Vpn settings</string>
+  
+  <string name="RouterIpAddressPreferenceTitle">Ip Address</string>
+  <string name="RouterIpAddressPreferenceKey">RouterIpAddress</string>
+
+  <string name="RouterUsernamePreferenceTitle">User name</string>
+  <string name="RouterUsernamePreferenceKey">RouterUsername</string>
+
+  <string name="RouterPasswordPreferenceTitle">Password</string>
+  <string name="RouterPasswordPreferenceKey">RouterPassword</string>
+
+  <string name="RouterPortPreferenceTitle">SSH Port</string>
+  <string name="RouterPortPreferenceKey">RouterSSHPort</string>
+</resources>

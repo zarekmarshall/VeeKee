@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+  <PreferenceCategory android:title="@string/RouterPreferenceCategoryTitle">
+    <EditTextPreference
+      android:key="@string/RouterIpAddressPreferenceKey"
+      android:title="@string/RouterIpAddressPreferenceTitle"/>
+
+    <EditTextPreference
+      android:key="@string/RouterUsernamePreferenceKey"
+      android:title="@string/RouterUsernamePreferenceTitle"/>
+
+    <EditTextPreference
+      android:key="@string/RouterPasswordPreferenceKey"
+      android:title="@string/RouterPasswordPreferenceTitle"
+      android:inputType="textPassword"/>
+
+    <EditTextPreference
+      android:key="@string/RouterPortPreferenceKey"
+      android:title="@string/RouterPortPreferenceTitle"
+      android:inputType="number"/>
+  </PreferenceCategory>
+
+  <PreferenceCategory android:title="@string/VpnItemPreferenceCategoryTitle">
+  </PreferenceCategory>
+</PreferenceScreen>

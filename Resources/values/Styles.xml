@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <!-- Inherit from the light Material Theme -->
+  <style name="VeekeeTheme" parent="android:Theme.Material.Light">
+    <!-- Colour overrides -->
+    <item name="android:colorPrimary">@color/primary_green</item>
+    <item name="android:colorPrimaryDark">@color/primary_dark_green</item>
+    <item name="android:textColorPrimary">@color/primary_text_grey</item>
+    <item name="android:colorAccent">@color/primary_green</item>
+    <item name="android:navigationBarColor">@color/primary_dark_green</item>
+  </style>
+</resources>
