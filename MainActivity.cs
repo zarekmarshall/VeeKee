@@ -16,19 +16,15 @@ namespace VeeKee
     public class MainActivity : Activity
     {
         private VeeKeePreferences _preferences;
-        private bool _connectedToWifi = false;
-        private bool _connectedToCorrectWifi = false;
 
-        private enum ConnectionToolbarMode
+        public enum VeeKeeWifiStatus
         {
             Off = 0,
-            NotConnectedToWifi = 1,
-            NotConnectedToCorrectWifi = 2,
-            RouterConnectionAuthorizationIssue = 3,
-            RouterCommandIssue = 4,
-            NetworkIssue = 5,
-            RouterConnectionTimeout = 6
+            Connected = 1,
+            ConnectedToCorrectWifi = 2
         }
+
+        private VeeKeeWifiStatus _wifiStatus;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -67,7 +63,8 @@ namespace VeeKee
             base.OnResume();
 
             // Connection Toolbar should be off by default
-            DisplayConnectionToolbar(ConnectionToolbarMode.Off);
+            var connectionStatusViewer = new RouterConnectionStatusViewer(this);
+            connectionStatusViewer.Hide();
 
             if (_preferences.FirstRun)
             {
@@ -85,20 +82,14 @@ namespace VeeKee
 
         async private Task InitialiseMainScreen()
         {
-            ConnectionToolbarMode connectionToolbarMode = ConnectionToolbarMode.Off;
-
             // Determine the wifi connection status of the device
             DetectWifiStatus();
-
-            if (!_connectedToWifi)
-            {
-                connectionToolbarMode = ConnectionToolbarMode.NotConnectedToWifi;
-            }
 
             // Initialise a list of VpnItems
             var vpnItems = VpnItems();
 
-            if (_connectedToCorrectWifi)
+            RouterConnectionStatus routerStatus = RouterConnectionStatus.NotConnected;
+            if (_wifiStatus == VeeKeeWifiStatus.ConnectedToCorrectWifi)
             {
                 // Check the current status of vpns
                 var progressDialog = new ProgressDialog(this);
@@ -110,23 +101,10 @@ namespace VeeKee
                 {
                     bool connected = await asusCommander.Connect();
 
+                    routerStatus = asusCommander.Connection.Status;
+
                     // Handle connection and command issues here
                     if (!asusCommander.Connection.IsConnected)
-                    {
-                        switch (asusCommander.Connection.Status)
-                        {
-                            case ConnectionStatus.AuthorizationError:
-                                connectionToolbarMode = ConnectionToolbarMode.RouterConnectionAuthorizationIssue;
-                                break;
-                            case ConnectionStatus.ConnectionTimeoutError:
-                                connectionToolbarMode = ConnectionToolbarMode.RouterConnectionTimeout;
-                                break;
-                            case ConnectionStatus.NetworkError:
-                                connectionToolbarMode = ConnectionToolbarMode.NetworkIssue;
-                                break;
-                        }
-                    }
-                    else
                     {
                         progressDialog.SetMessage(this.GetString(Resource.String.CheckingVpnStatusMessage));
                         vpnItems = await CheckCurrentVpnStatus(asusCommander, vpnItems);
@@ -136,47 +114,15 @@ namespace VeeKee
                 progressDialog.Dismiss();
             }
 
-            DisplayConnectionToolbar(connectionToolbarMode);
+            var connectionStatusViewer = new RouterConnectionStatusViewer(this);
+            connectionStatusViewer.Display(this._wifiStatus, routerStatus, ConnectionToolbar_MenuItemClick);
 
             var adapter = new VpnArrayAdapter(this, vpnItems);
             var vpnListView = FindViewById<ListView>(Resource.Id.vpnListView);
             vpnListView.Adapter = adapter;
-            vpnListView.Enabled = _connectedToCorrectWifi && connectionToolbarMode == ConnectionToolbarMode.Off;
+            vpnListView.Enabled = _wifiStatus == VeeKeeWifiStatus.ConnectedToCorrectWifi && !connectionStatusViewer.IsVisible;
 
             vpnListView.ItemClick += new EventHandler<AdapterView.ItemClickEventArgs>(VpnListView_ItemClick);
-        }
-
-        private void DisplayConnectionToolbar(
-            ConnectionToolbarMode mode)
-        {
-            var connectionToolbar = FindViewById<Toolbar>(Resource.Id.connectiontoolbar);
-            connectionToolbar.Visibility = Android.Views.ViewStates.Visible;
-
-            switch (mode)
-            {
-                case ConnectionToolbarMode.NotConnectedToWifi:
-                    connectionToolbar.Title = this.Resources.GetString(Resource.String.NotConnectedToWifiMessage);
-                    break;
-                case ConnectionToolbarMode.RouterConnectionAuthorizationIssue:
-                    connectionToolbar.Title = this.Resources.GetString(Resource.String.RouterConnectionAuthorizationIssueMessage);
-                    break;
-                case ConnectionToolbarMode.NetworkIssue:
-                    connectionToolbar.Title = this.Resources.GetString(Resource.String.NetworkIssueMessage);
-                    break;
-                case ConnectionToolbarMode.RouterConnectionTimeout:
-                    connectionToolbar.Title = this.Resources.GetString(Resource.String.ConnectionTimeoutMessage);
-                    break;
-                case ConnectionToolbarMode.Off:
-                    connectionToolbar.Visibility = Android.Views.ViewStates.Gone;
-                    break;
-            }
-
-            // Add the refresh button if it isn't already visible
-            if (!connectionToolbar.Menu.HasVisibleItems)
-            {
-                connectionToolbar.InflateMenu(Resource.Menu.connectionrefreshmenu);
-                connectionToolbar.MenuItemClick += ConnectionToolbar_MenuItemClick;
-            }
         }
 
         private async void ConnectionToolbar_MenuItemClick(object sender, Toolbar.MenuItemClickEventArgs e)
@@ -186,12 +132,14 @@ namespace VeeKee
 
         private void DetectWifiStatus()
         {
+            _wifiStatus = VeeKeeWifiStatus.Off;
+
             // Check if we are connected to wifi
             string currentWifiName = string.Empty;
-            _connectedToWifi = ConnectedToWifi(out currentWifiName);
-
-            if (_connectedToWifi)
+            if (ConnectedToWifi(out currentWifiName))
             {
+                _wifiStatus = VeeKeeWifiStatus.Connected;
+
                 if (_preferences.WifiName == string.Empty)
                 {
                     // We haven't connected to Wifi before so lets
@@ -202,7 +150,10 @@ namespace VeeKee
                 }
 
                 // Check that we are connected to the right Wifi connection
-                _connectedToCorrectWifi = ConnectedToCorrectWifi(_preferences.WifiName);
+                if (ConnectedToCorrectWifi(_preferences.WifiName))
+                {
+                    _wifiStatus = VeeKeeWifiStatus.ConnectedToCorrectWifi;
+                }
             }
         }
 
@@ -251,6 +202,7 @@ namespace VeeKee
             using (var progressDialog = new ProgressDialog(this))
             {
                 var vpnListView = (ListView)sender;
+                var updatingFormat = string.Empty;
                 var updatingMessage = string.Empty;
 
                 // Ensure that the correct Vpn Switches are enabled and disabled accordingly
@@ -263,8 +215,8 @@ namespace VeeKee
                     if (i == e.Position)
                     {
                         vpnSwitch.Checked = !vpnSwitch.Checked;
-                        updatingMessage = vpnSwitch.Checked ? this.Resources.GetString(Resource.String.EnablingVpnMessage) : this.Resources.GetString(Resource.String.DisablingVpnMessage);
-                        updatingMessage = String.Format("{0} {1}", updatingMessage, (string)vpnName.Text);
+                        updatingFormat = vpnSwitch.Checked ? this.Resources.GetString(Resource.String.EnablingVpnFormat) : this.Resources.GetString(Resource.String.DisablingVpnFormat);
+                        updatingMessage = String.Format(updatingFormat, (string)vpnName.Text);
                     }
                     else
                     {

@@ -22,7 +22,7 @@ namespace VeeKee.Ssh.SshNet
 
         public async Task<bool> Connect()
         {
-            this.Connection = new ConnectionResult();
+            this.Connection = new RouterConnectionResult();
             try
             {
                 await Task.Run(() => _client.Connect());
@@ -31,15 +31,15 @@ namespace VeeKee.Ssh.SshNet
             {
                 if (ex is SshAuthenticationException)
                 {
-                    this.Connection.Status = ConnectionStatus.AuthorizationError;
+                    this.Connection.Status = RouterConnectionStatus.AuthorizationError;
                 }
                 else if (ex is SshOperationTimeoutException)
                 {
-                    this.Connection.Status = ConnectionStatus.ConnectionTimeoutError;
+                    this.Connection.Status = RouterConnectionStatus.ConnectionTimeoutError;
                 }
                 else if (ex is SocketException)
                 {
-                    this.Connection.Status = ConnectionStatus.NetworkError;
+                    this.Connection.Status = RouterConnectionStatus.NetworkError;
                 }
 
                 this.Connection.Error = ex;
@@ -48,7 +48,7 @@ namespace VeeKee.Ssh.SshNet
             {
                 if (this.Connection.Error == null)
                 {
-                    this.Connection.Status = ConnectionStatus.Connected;
+                    this.Connection.Status = RouterConnectionStatus.Connected;
                 }
             }
 

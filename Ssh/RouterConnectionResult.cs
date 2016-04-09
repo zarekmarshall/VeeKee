@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace VeeKee.Ssh
 {
-    public enum ConnectionStatus
+    public enum RouterConnectionStatus
     {
         NotConnected = 0,
         Connected = 1,
@@ -21,7 +21,7 @@ namespace VeeKee.Ssh
         ConnectionTimeoutError = 4
     }
 
-    public enum CommandStatus
+    public enum RouterCommandStatus
     {
         Fail = 0,
         Success = 1
@@ -33,22 +33,22 @@ namespace VeeKee.Ssh
     }
 
 
-    public class ConnectionResult : SshResult
+    public class RouterConnectionResult : SshResult
     {
-        public ConnectionStatus Status { get; set; }
+        public RouterConnectionStatus Status { get; set; }
         
         public bool IsConnected
         {
             get
             {
-                return this.Status == ConnectionStatus.Connected;
+                return this.Status == RouterConnectionStatus.Connected;
             }
         }
     }
 
-    public class CommandResult : SshResult
+    public class RouterCommandResult : SshResult
     {
-        public CommandStatus Status { get; set; }
+        public RouterCommandStatus Status { get; set; }
         public string Result { get; set; }
     }
 }

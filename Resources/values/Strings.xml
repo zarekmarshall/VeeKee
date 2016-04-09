@@ -19,8 +19,8 @@
   <string name="ConnectionTimeoutMessage">Connection timeout</string>
 
   <string name="UpdatingVpnTitle">Updating...</string>
-  <string name="EnablingVpnMessage">Enabling</string>
-  <string name="DisablingVpnMessage">Disabling</string>
+  <string name="EnablingVpnFormat">Enabling {0}</string>
+  <string name="DisablingVpnFormat">Disabling {0}</string>
 
   <string name="CheckingVpnStatusTitle">Checking...</string>
   <string name="ConnectingToRouterStatusMessage">Connecting to router</string>

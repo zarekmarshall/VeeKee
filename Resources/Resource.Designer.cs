@@ -210,10 +210,10 @@ namespace VeeKee
 			public const int DefaultRouterUsername = 2131165210;
 			
 			// aapt resource value: 0x7f07000b
-			public const int DisablingVpnMessage = 2131165195;
+			public const int DisablingVpnFormat = 2131165195;
 			
 			// aapt resource value: 0x7f07000a
-			public const int EnablingVpnMessage = 2131165194;
+			public const int EnablingVpnFormat = 2131165194;
 			
 			// aapt resource value: 0x7f070007
 			public const int NetworkIssueMessage = 2131165191;

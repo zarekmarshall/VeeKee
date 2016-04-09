@@ -14,11 +14,11 @@ namespace VeeKee.Ssh
 {
     public abstract class SshCommander
     {
-        public ConnectionResult Connection { get; set; }
+        public RouterConnectionResult Connection { get; set; }
 
         public SshCommander()
         {
-            this.Connection = new ConnectionResult();
+            this.Connection = new RouterConnectionResult();
         }
     }
 }
