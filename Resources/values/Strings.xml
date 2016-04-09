@@ -12,6 +12,8 @@
   <string name="NotConnectedToWifiMessage">Not connected to wifi</string>
   <string name="NotConnectedToCorrectWifiMessage">Not connected to correct wifi</string>
 
+  <string name="RouterConnectionAuthorizationIssueMessage">Authorization problem</string>
+
   <string name="UpdatingVpnTitle">Updating...</string>
   <string name="EnablingVpnMessage">Enabling</string>
   <string name="DisablingVpnMessage">Disabling</string>

@@ -5,7 +5,7 @@ using Renci.SshNet.Common;
 
 namespace VeeKee.Ssh.SshNet
 {
-    public class SshNetCommander : ISshCommander, IDisposable
+    public class SshNetCommander : SshCommander, ISshCommander, IDisposable
     {
         private SshClient _client;
 
@@ -18,32 +18,31 @@ namespace VeeKee.Ssh.SshNet
             _client = new SshClient(connectionInfo);
         }
 
-        public async Task<ConnectionResult> Connect()
+        public async Task<bool> Connect()
         {
-            var status = new ConnectionResult();
+            this.Connection = new ConnectionResult();
             try
             {
                 await Task.Run(() => _client.Connect());
             }
             catch (SshAuthenticationException ex)
             {
-                status.Status = ConnectionStatus.AuthorizationError;
-                status.Error = ex;
+                this.Connection.Status = ConnectionStatus.AuthorizationError;
+                this.Connection.Error = ex;
             }
             catch (Exception ex)
             {
-                // Throw any unhandled exceptions
-                status.Error = ex;
+                this.Connection.Error = ex;
             }
             finally
             {
-                if (status.Error == null)
+                if (this.Connection.Error == null)
                 {
-                    status.Status = ConnectionStatus.Connected;
+                    this.Connection.Status = ConnectionStatus.Connected;
                 }
             }
 
-            return status;
+            return this.Connection.IsConnected;
         }
 
         public async Task<string> SendCommand(string command)

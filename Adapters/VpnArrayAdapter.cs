@@ -10,7 +10,6 @@ namespace VeeKee.Adapters
 {
     public class VpnItem
     {
-        //test
         public string Name { get; set; }
         public int FlagResourceId { get; set; } 
         public VpnStatus Status { get; set; }

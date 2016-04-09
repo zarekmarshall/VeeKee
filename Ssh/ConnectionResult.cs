@@ -19,9 +19,34 @@ namespace VeeKee.Ssh
         AuthorizationError = 2
     }
 
-    public class ConnectionResult
+    public enum CommandStatus
+    {
+        Fail = 0,
+        Success = 1
+    }
+
+    public abstract class SshResult
+    {
+        public Exception Error { get; set; }
+    }
+
+
+    public class ConnectionResult : SshResult
     {
         public ConnectionStatus Status { get; set; }
-        public Exception Error { get; set; }
+        
+        public bool IsConnected
+        {
+            get
+            {
+                return this.Status == ConnectionStatus.Connected;
+            }
+        }
+    }
+
+    public class CommandResult : SshResult
+    {
+        public CommandStatus Status { get; set; }
+        public string Result { get; set; }
     }
 }

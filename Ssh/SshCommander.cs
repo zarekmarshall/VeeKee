@@ -9,14 +9,16 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using System.Threading.Tasks;
 
 namespace VeeKee.Ssh
 {
-    interface ISshCommander
+    public abstract class SshCommander
     {
-        Task<bool> Connect();
+        public ConnectionResult Connection { get; set; }
 
-        Task<string> SendCommand(string command);
+        public SshCommander()
+        {
+            this.Connection = new ConnectionResult();
+        }
     }
 }
