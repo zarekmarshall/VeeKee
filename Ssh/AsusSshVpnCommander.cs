@@ -19,7 +19,7 @@ namespace VeeKee.Ssh
         private const int VpnClientStatusEnabling = 1;
         private const int VpnClientStatusEnabled = 2;
 
-        public AsusSshVpnCommander(string ipAddress, string userName, string password, int port) : base(ipAddress, userName, password, port)
+        public AsusSshVpnCommander(string ipAddress, string userName, string password, int port, int connectionTimeoutSeconds) : base(ipAddress, userName, password, port, connectionTimeoutSeconds)
         {
         }
 

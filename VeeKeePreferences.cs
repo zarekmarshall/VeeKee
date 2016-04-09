@@ -38,19 +38,10 @@ namespace VeeKee
             _routerIpAddressPreferenceKey = _context.GetString(Resource.String.RouterIpAddressPreferenceKey);
             _routerUsernamePreferenceKey = _context.GetString(Resource.String.RouterUsernamePreferenceKey);
             _routerPasswordPreferenceKey = _context.GetString(Resource.String.RouterPasswordPreferenceKey);
-            _routerPortPreferenceKey = _context.GetString(Resource.String.RouterPortPreferenceKey);
+            _routerPortPreferenceKey = _context.GetString(Resource.String.RouterSshPortPreferenceKey);
 
             _sharedPreferences = PreferenceManager.GetDefaultSharedPreferences(this._context);
             _sharedPreferencesEditor = _sharedPreferences.Edit();
-
-            if (this.FirstRun == true)
-            {
-                // Set up defaults
-                this.RouterIpAddress = RouterIpAddressPreferenceDefault;
-                this.RouterUsername = RouterUsernamePreferenceDefault;
-                this.RouterPort = RouterPortPreferenceDefault;
-                this.Save();
-            }
         }
 
         public void Save()
@@ -118,15 +109,15 @@ namespace VeeKee
             }
         }
 
-        public int RouterPort
+        public string RouterPort
         {
             get
             {
-                return _sharedPreferences.GetInt(_routerPortPreferenceKey, RouterPortPreferenceDefault);
+                return _sharedPreferences.GetString(_routerPortPreferenceKey, RouterPortPreferenceDefault.ToString());
             }
             set
             {
-                _sharedPreferencesEditor.PutInt(_routerPortPreferenceKey, value);
+                _sharedPreferencesEditor.PutString(_routerPortPreferenceKey, value);
             }
         }
     }

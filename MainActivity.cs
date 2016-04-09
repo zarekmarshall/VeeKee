@@ -25,7 +25,9 @@ namespace VeeKee
             NotConnectedToWifi = 1,
             NotConnectedToCorrectWifi = 2,
             RouterConnectionAuthorizationIssue = 3,
-            RouterCommandIssue = 4
+            RouterCommandIssue = 4,
+            NetworkIssue = 5,
+            RouterConnectionTimeout = 6
         }
 
         protected override void OnCreate(Bundle bundle)
@@ -36,9 +38,6 @@ namespace VeeKee
             _preferences = new VeeKeePreferences(Application.Context);
 
             this.SetContentView(Resource.Layout.Main);
-
-            // Connection Toolbar should be off by default
-            DisplayConnectionToolbar(ConnectionToolbarMode.Off);
 
             // Set up the Action Bar
             ActionBar.DisplayOptions = ActionBarDisplayOptions.UseLogo | ActionBarDisplayOptions.ShowHome | ActionBarDisplayOptions.ShowTitle;
@@ -66,6 +65,9 @@ namespace VeeKee
         async protected override void OnResume()
         {
             base.OnResume();
+
+            // Connection Toolbar should be off by default
+            DisplayConnectionToolbar(ConnectionToolbarMode.Off);
 
             if (_preferences.FirstRun)
             {
@@ -100,13 +102,13 @@ namespace VeeKee
             {
                 // Check the current status of vpns
                 var progressDialog = new ProgressDialog(this);
-                progressDialog.SetTitle(this.GetString(Resource.String.CheckingVpnStatusTitle));
-                progressDialog.SetMessage(this.GetString(Resource.String.CheckingVpnStatusMessage));
+                progressDialog.SetTitle(this.GetString(Resource.String.CheckingVpnStatusMessage));
+                progressDialog.SetMessage(this.GetString(Resource.String.ConnectingToRouterStatusMessage));
                 progressDialog.Show();
 
                 using (var asusCommander = GetAsusSshVpnCommander())
                 {
-                    vpnItems = await CheckCurrentVpnStatus(asusCommander, vpnItems);
+                    bool connected = await asusCommander.Connect();
 
                     // Handle connection and command issues here
                     if (!asusCommander.Connection.IsConnected)
@@ -116,7 +118,18 @@ namespace VeeKee
                             case ConnectionStatus.AuthorizationError:
                                 connectionToolbarMode = ConnectionToolbarMode.RouterConnectionAuthorizationIssue;
                                 break;
+                            case ConnectionStatus.ConnectionTimeoutError:
+                                connectionToolbarMode = ConnectionToolbarMode.RouterConnectionTimeout;
+                                break;
+                            case ConnectionStatus.NetworkError:
+                                connectionToolbarMode = ConnectionToolbarMode.NetworkIssue;
+                                break;
                         }
+                    }
+                    else
+                    {
+                        progressDialog.SetMessage(this.GetString(Resource.String.CheckingVpnStatusMessage));
+                        vpnItems = await CheckCurrentVpnStatus(asusCommander, vpnItems);
                     }
                 }
 
@@ -128,7 +141,7 @@ namespace VeeKee
             var adapter = new VpnArrayAdapter(this, vpnItems);
             var vpnListView = FindViewById<ListView>(Resource.Id.vpnListView);
             vpnListView.Adapter = adapter;
-            vpnListView.Enabled = _connectedToCorrectWifi;
+            vpnListView.Enabled = _connectedToCorrectWifi && connectionToolbarMode == ConnectionToolbarMode.Off;
 
             vpnListView.ItemClick += new EventHandler<AdapterView.ItemClickEventArgs>(VpnListView_ItemClick);
         }
@@ -146,6 +159,12 @@ namespace VeeKee
                     break;
                 case ConnectionToolbarMode.RouterConnectionAuthorizationIssue:
                     connectionToolbar.Title = this.Resources.GetString(Resource.String.RouterConnectionAuthorizationIssueMessage);
+                    break;
+                case ConnectionToolbarMode.NetworkIssue:
+                    connectionToolbar.Title = this.Resources.GetString(Resource.String.NetworkIssueMessage);
+                    break;
+                case ConnectionToolbarMode.RouterConnectionTimeout:
+                    connectionToolbar.Title = this.Resources.GetString(Resource.String.ConnectionTimeoutMessage);
                     break;
                 case ConnectionToolbarMode.Off:
                     connectionToolbar.Visibility = Android.Views.ViewStates.Gone;
@@ -189,13 +208,13 @@ namespace VeeKee
 
         private Dictionary<int, VpnItem> VpnItems()
         {
-            // TODO
             var vpnItems = new Dictionary<int, VpnItem>();
-            vpnItems.Add(1, new VpnItem("Vpn 1", 0, VpnStatus.Off));
-            vpnItems.Add(2, new VpnItem("Vpn 2", 0, VpnStatus.Off));
-            vpnItems.Add(3, new VpnItem("Vpn 3", 0, VpnStatus.Off));
-            vpnItems.Add(4, new VpnItem("Vpn 4", 0, VpnStatus.Off));
-            vpnItems.Add(5, new VpnItem("Vpn 5", 0, VpnStatus.Off));
+
+            for (int i = 1; i<this.Resources.GetInteger(Resource.Integer.VpnItemCount) + 1; i++)
+            {
+                var vpnItemName = string.Format(this.Resources.GetString(Resource.String.VpnClientFormat), i);
+                vpnItems.Add(i, new VpnItem(vpnItemName, 0, VpnStatus.Off));
+            }
 
             return vpnItems;
         }
@@ -206,16 +225,15 @@ namespace VeeKee
                 _preferences.RouterIpAddress,
                 _preferences.RouterUsername,
                 _preferences.RouterPassword,
-                _preferences.RouterPort);
+                int.Parse(_preferences.RouterPort),
+                this.Resources.GetInteger(Resource.Integer.DefaultRouterSshPort));
 
             return asusCommander;
         }
 
         private async Task<Dictionary<int, VpnItem>> CheckCurrentVpnStatus(AsusSshVpnCommander asusCommander, Dictionary<int, VpnItem> vpnItems)
         {
-            bool connected = await asusCommander.Connect();
-
-            if (connected)
+            if (asusCommander.Connection.IsConnected)
             {
                 var vpnStatus = await asusCommander.Status();
 
@@ -262,11 +280,7 @@ namespace VeeKee
                 try
                 {
                     // TODO
-                    using (var asusCommander = new AsusSshVpnCommander(
-                        _preferences.RouterIpAddress,
-                        _preferences.RouterUsername,
-                        _preferences.RouterPassword,
-                        _preferences.RouterPort))
+                    using (var asusCommander = GetAsusSshVpnCommander())
                     {
                         var vpnIndex = e.Position + 1;
                         var connected = await asusCommander.Connect();

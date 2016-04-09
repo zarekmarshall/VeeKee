@@ -3,23 +3,30 @@
   <PreferenceCategory android:title="@string/RouterPreferenceCategoryTitle">
     <EditTextPreference
       android:key="@string/RouterIpAddressPreferenceKey"
-      android:title="@string/RouterIpAddressPreferenceTitle"/>
+      android:title="@string/RouterIpAddressPreferenceTitle"
+      android:inputType="text"
+      android:singleLine="true"
+      android:defaultValue="@string/DefaultRouterIpAddress"/>
 
     <EditTextPreference
       android:key="@string/RouterUsernamePreferenceKey"
-      android:title="@string/RouterUsernamePreferenceTitle"/>
+      android:title="@string/RouterUsernamePreferenceTitle"
+      android:inputType="text"
+      android:singleLine="true"
+      android:capitalize="none"
+      android:defaultValue="@string/DefaultRouterUsername"/>
 
     <EditTextPreference
       android:key="@string/RouterPasswordPreferenceKey"
       android:title="@string/RouterPasswordPreferenceTitle"
-      android:inputType="textPassword"/>
+      android:inputType="textPassword"
+      android:singleLine="true"
+      android:capitalize="none"/>
 
     <EditTextPreference
-      android:key="@string/RouterPortPreferenceKey"
-      android:title="@string/RouterPortPreferenceTitle"
-      android:inputType="number"/>
-  </PreferenceCategory>
-
-  <PreferenceCategory android:title="@string/VpnItemPreferenceCategoryTitle">
+      android:key="@string/RouterSshPortPreferenceKey"
+      android:title="@string/RouterSshPortPreferenceTitle"
+      android:singleLine="true"
+      android:defaultValue="@integer/DefaultRouterSshPort"/>
   </PreferenceCategory>
 </PreferenceScreen>

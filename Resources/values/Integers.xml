@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <integer name="VpnItemCount">5</integer>
+  <integer name="DefaultRouterSshPort">22</integer>
+  <integer name="ConnectionTimeoutSeconds">5</integer>
+</resources>

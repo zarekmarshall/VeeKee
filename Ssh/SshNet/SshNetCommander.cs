@@ -2,6 +2,7 @@ using System;
 using Renci.SshNet;
 using System.Threading.Tasks;
 using Renci.SshNet.Common;
+using System.Net.Sockets;
 
 namespace VeeKee.Ssh.SshNet
 {
@@ -9,8 +10,9 @@ namespace VeeKee.Ssh.SshNet
     {
         private SshClient _client;
 
-        public SshNetCommander(string ipAddress, string userName, string password, int port) : this(new ConnectionInfo(ipAddress, userName, new AuthenticationMethod[] { new PasswordAuthenticationMethod(userName, password) }))
+        public SshNetCommander(string ipAddress, string userName, string password, int port, int connectionTimeoutSeconds) : this(new ConnectionInfo(ipAddress, port, userName, new AuthenticationMethod[] { new PasswordAuthenticationMethod(userName, password) }))
         {
+            _client.ConnectionInfo.Timeout = new TimeSpan(0, 0, connectionTimeoutSeconds);
         }
 
         public SshNetCommander(ConnectionInfo connectionInfo)
@@ -25,13 +27,21 @@ namespace VeeKee.Ssh.SshNet
             {
                 await Task.Run(() => _client.Connect());
             }
-            catch (SshAuthenticationException ex)
-            {
-                this.Connection.Status = ConnectionStatus.AuthorizationError;
-                this.Connection.Error = ex;
-            }
             catch (Exception ex)
             {
+                if (ex is SshAuthenticationException)
+                {
+                    this.Connection.Status = ConnectionStatus.AuthorizationError;
+                }
+                else if (ex is SshOperationTimeoutException)
+                {
+                    this.Connection.Status = ConnectionStatus.ConnectionTimeoutError;
+                }
+                else if (ex is SocketException)
+                {
+                    this.Connection.Status = ConnectionStatus.NetworkError;
+                }
+
                 this.Connection.Error = ex;
             }
             finally

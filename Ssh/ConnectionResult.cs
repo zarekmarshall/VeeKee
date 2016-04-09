@@ -16,7 +16,9 @@ namespace VeeKee.Ssh
     {
         NotConnected = 0,
         Connected = 1,
-        AuthorizationError = 2
+        AuthorizationError = 2,
+        NetworkError = 3,
+        ConnectionTimeoutError = 4
     }
 
     public enum CommandStatus
