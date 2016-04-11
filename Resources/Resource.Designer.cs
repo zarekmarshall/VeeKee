@@ -28,6 +28,25 @@ namespace VeeKee
 		{
 		}
 		
+		public partial class Array
+		{
+			
+			// aapt resource value: 0x7f080001
+			public const int flag_image_names = 2131230721;
+			
+			// aapt resource value: 0x7f080000
+			public const int flag_titles = 2131230720;
+			
+			static Array()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Array()
+			{
+			}
+		}
+		
 		public partial class Attribute
 		{
 			
@@ -73,13 +92,31 @@ namespace VeeKee
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int refresh = 2130837504;
+			public const int BRA = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int settings = 2130837505;
+			public const int DEFAULTFLAG = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int VeeKeeIcon = 2130837506;
+			public const int DEU = 2130837506;
+			
+			// aapt resource value: 0x7f020003
+			public const int FRA = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int GBR = 2130837508;
+			
+			// aapt resource value: 0x7f020005
+			public const int refresh = 2130837509;
+			
+			// aapt resource value: 0x7f020006
+			public const int settings = 2130837510;
+			
+			// aapt resource value: 0x7f020007
+			public const int USA = 2130837511;
+			
+			// aapt resource value: 0x7f020008
+			public const int VeeKeeIcon = 2130837512;
 			
 			static Drawable()
 			{
@@ -94,26 +131,26 @@ namespace VeeKee
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0a0000
-			public const int connectiontoolbar = 2131361792;
+			// aapt resource value: 0x7f0b0000
+			public const int connectiontoolbar = 2131427328;
 			
-			// aapt resource value: 0x7f0a0005
-			public const int refresh_button = 2131361797;
+			// aapt resource value: 0x7f0b0005
+			public const int refresh_button = 2131427333;
 			
-			// aapt resource value: 0x7f0a0006
-			public const int settings_button = 2131361798;
+			// aapt resource value: 0x7f0b0006
+			public const int settings_button = 2131427334;
 			
-			// aapt resource value: 0x7f0a0002
-			public const int vpnLinearLayout = 2131361794;
+			// aapt resource value: 0x7f0b0002
+			public const int vpnLinearLayout = 2131427330;
 			
-			// aapt resource value: 0x7f0a0001
-			public const int vpnListView = 2131361793;
+			// aapt resource value: 0x7f0b0001
+			public const int vpnListView = 2131427329;
 			
-			// aapt resource value: 0x7f0a0004
-			public const int vpnName = 2131361796;
+			// aapt resource value: 0x7f0b0004
+			public const int vpnName = 2131427332;
 			
-			// aapt resource value: 0x7f0a0003
-			public const int vpnSwitch = 2131361795;
+			// aapt resource value: 0x7f0b0003
+			public const int vpnSwitch = 2131427331;
 			
 			static Id()
 			{
@@ -169,11 +206,11 @@ namespace VeeKee
 		public partial class Menu
 		{
 			
-			// aapt resource value: 0x7f090000
-			public const int connectionrefreshmenu = 2131296256;
+			// aapt resource value: 0x7f0a0000
+			public const int connectionrefreshmenu = 2131361792;
 			
-			// aapt resource value: 0x7f090001
-			public const int settingsmenu = 2131296257;
+			// aapt resource value: 0x7f0a0001
+			public const int settingsmenu = 2131361793;
 			
 			static Menu()
 			{
@@ -203,11 +240,14 @@ namespace VeeKee
 			// aapt resource value: 0x7f070008
 			public const int ConnectionTimeoutMessage = 2131165192;
 			
-			// aapt resource value: 0x7f070019
-			public const int DefaultRouterIpAddress = 2131165209;
+			// aapt resource value: 0x7f07001d
+			public const int DefaultFlag = 2131165213;
 			
-			// aapt resource value: 0x7f07001a
-			public const int DefaultRouterUsername = 2131165210;
+			// aapt resource value: 0x7f07001b
+			public const int DefaultRouterIpAddress = 2131165211;
+			
+			// aapt resource value: 0x7f07001c
+			public const int DefaultRouterUsername = 2131165212;
 			
 			// aapt resource value: 0x7f07000b
 			public const int DisablingVpnFormat = 2131165195;
@@ -266,6 +306,12 @@ namespace VeeKee
 			// aapt resource value: 0x7f070003
 			public const int VpnClientFormat = 2131165187;
 			
+			// aapt resource value: 0x7f07001a
+			public const int VpnFlagKeyPreferenceFormat = 2131165210;
+			
+			// aapt resource value: 0x7f070019
+			public const int VpnFlagPreferenceFormat = 2131165209;
+			
 			// aapt resource value: 0x7f070010
 			public const int VpnItemPreferenceCategoryTitle = 2131165200;
 			
@@ -282,8 +328,8 @@ namespace VeeKee
 		public partial class Style
 		{
 			
-			// aapt resource value: 0x7f080000
-			public const int VeekeeTheme = 2131230720;
+			// aapt resource value: 0x7f090000
+			public const int VeekeeTheme = 2131296256;
 			
 			static Style()
 			{

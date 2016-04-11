@@ -16,6 +16,7 @@ namespace VeeKee
     public class MainActivity : Activity
     {
         private VeeKeePreferences _preferences;
+        private RouterConnectionStatusViewer _routerStatusViewer;
 
         public enum VeeKeeWifiStatus
         {
@@ -32,6 +33,8 @@ namespace VeeKee
 
             // Set up default Shared Preferences (setting defaults if required)
             _preferences = new VeeKeePreferences(Application.Context);
+
+            _routerStatusViewer = new RouterConnectionStatusViewer(this);
 
             this.SetContentView(Resource.Layout.Main);
 
@@ -63,8 +66,7 @@ namespace VeeKee
             base.OnResume();
 
             // Connection Toolbar should be off by default
-            var connectionStatusViewer = new RouterConnectionStatusViewer(this);
-            connectionStatusViewer.Hide();
+            _routerStatusViewer.Hide();
 
             if (_preferences.FirstRun)
             {
@@ -103,8 +105,7 @@ namespace VeeKee
 
                     routerStatus = asusCommander.Connection.Status;
 
-                    // Handle connection and command issues here
-                    if (!asusCommander.Connection.IsConnected)
+                    if (asusCommander.Connection.IsConnected)
                     {
                         progressDialog.SetMessage(this.GetString(Resource.String.CheckingVpnStatusMessage));
                         vpnItems = await CheckCurrentVpnStatus(asusCommander, vpnItems);
@@ -114,13 +115,12 @@ namespace VeeKee
                 progressDialog.Dismiss();
             }
 
-            var connectionStatusViewer = new RouterConnectionStatusViewer(this);
-            connectionStatusViewer.Display(this._wifiStatus, routerStatus, ConnectionToolbar_MenuItemClick);
+            _routerStatusViewer.Display(this._wifiStatus, routerStatus, ConnectionToolbar_MenuItemClick);
 
             var adapter = new VpnArrayAdapter(this, vpnItems);
             var vpnListView = FindViewById<ListView>(Resource.Id.vpnListView);
             vpnListView.Adapter = adapter;
-            vpnListView.Enabled = _wifiStatus == VeeKeeWifiStatus.ConnectedToCorrectWifi && !connectionStatusViewer.IsVisible;
+            vpnListView.Enabled = _wifiStatus == VeeKeeWifiStatus.ConnectedToCorrectWifi && !_routerStatusViewer.IsVisible;
 
             vpnListView.ItemClick += new EventHandler<AdapterView.ItemClickEventArgs>(VpnListView_ItemClick);
         }
@@ -164,10 +164,23 @@ namespace VeeKee
             for (int i = 1; i<this.Resources.GetInteger(Resource.Integer.VpnItemCount) + 1; i++)
             {
                 var vpnItemName = string.Format(this.Resources.GetString(Resource.String.VpnClientFormat), i);
-                vpnItems.Add(i, new VpnItem(vpnItemName, 0, VpnStatus.Off));
+
+                vpnItems.Add(i, new VpnItem(vpnItemName, GetFlagResourceId(_preferences.GetVpnFlag(i)), VpnStatus.Off));
             }
 
             return vpnItems;
+        }
+
+        private int GetFlagResourceId(string flagName)
+        {
+            int resourceId = Resources.GetIdentifier(flagName.ToLower(), "drawable", PackageName);
+
+            if (resourceId == 0)
+            {
+                resourceId = Resource.Drawable.DEFAULTFLAG;
+            }
+
+            return resourceId;
         }
 
         private AsusSshVpnCommander GetAsusSshVpnCommander()
@@ -197,52 +210,77 @@ namespace VeeKee
             return vpnItems;            
         }
 
+        private string UpdateSelectedVpnItems(
+            ListView vpnListView,
+            int selectedIndex)
+        {
+            var updatingFormat = string.Empty;
+            var updatingMessage = string.Empty;
+
+            // Ensure that the correct Vpn Switches are enabled and disabled accordingly
+            for (int i = 0; i < vpnListView.Count; i++)
+            {
+                var vpnRowItem = vpnListView.GetChildAt(i);
+                var vpnSwitch = (Switch)vpnRowItem.FindViewById(Resource.Id.vpnSwitch);
+                var vpnName = (TextView)vpnRowItem.FindViewById(Resource.Id.vpnName);
+
+                if (i == selectedIndex)
+                {
+                    vpnSwitch.Checked = !vpnSwitch.Checked;
+                    updatingFormat = vpnSwitch.Checked ? this.Resources.GetString(Resource.String.EnablingVpnFormat) : this.Resources.GetString(Resource.String.DisablingVpnFormat);
+                    updatingMessage = String.Format(updatingFormat, (string)vpnName.Text);
+                }
+                else
+                {
+                    vpnSwitch.Checked = false;
+                }
+            }
+
+            return updatingMessage;
+        }
+
         private async void VpnListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             using (var progressDialog = new ProgressDialog(this))
             {
                 var vpnListView = (ListView)sender;
-                var updatingFormat = string.Empty;
-                var updatingMessage = string.Empty;
 
                 // Ensure that the correct Vpn Switches are enabled and disabled accordingly
-                for (int i = 0; i < vpnListView.Count; i++)
-                {
-                    var vpnRowItem = vpnListView.GetChildAt(i);
-                    var vpnSwitch = (Switch)vpnRowItem.FindViewById(Resource.Id.vpnSwitch);
-                    var vpnName = (TextView)vpnRowItem.FindViewById(Resource.Id.vpnName);
-
-                    if (i == e.Position)
-                    {
-                        vpnSwitch.Checked = !vpnSwitch.Checked;
-                        updatingFormat = vpnSwitch.Checked ? this.Resources.GetString(Resource.String.EnablingVpnFormat) : this.Resources.GetString(Resource.String.DisablingVpnFormat);
-                        updatingMessage = String.Format(updatingFormat, (string)vpnName.Text);
-                    }
-                    else
-                    {
-                        vpnSwitch.Checked = false;
-                    }
-                }
+                var updatingMessage = UpdateSelectedVpnItems(vpnListView, e.Position);
 
                 // TODO
                 progressDialog.SetTitle(this.Resources.GetString(Resource.String.UpdatingVpnTitle));
                 progressDialog.SetMessage(updatingMessage);
                 progressDialog.Show();
 
+                RouterConnectionStatus routerStatus = RouterConnectionStatus.NotConnected;
                 try
                 {
-                    // TODO
                     using (var asusCommander = GetAsusSshVpnCommander())
                     {
                         var vpnIndex = e.Position + 1;
                         var connected = await asusCommander.Connect();
+                        routerStatus = asusCommander.Connection.Status;
 
-                        //var success = await asusCommander.EnableVpn(vpnIndex);
+                        if (routerStatus == RouterConnectionStatus.Connected)
+                        {
+                            // TODO
+                            var success = await asusCommander.EnableVpn(vpnIndex);
+                        }
                     }
+                }
+                catch (Exception ex)
+                {
+                    Toast.MakeText(this, String.Format("Unhandled exception {0}", ex.ToString()), ToastLength.Long);
                 }
                 finally
                 {
                     progressDialog.Dismiss();
+                }
+
+                if (routerStatus != RouterConnectionStatus.Connected)
+                {
+                    _routerStatusViewer.Display(this._wifiStatus, routerStatus, ConnectionToolbar_MenuItemClick);
                 }
             }
         }

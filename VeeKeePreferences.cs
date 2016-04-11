@@ -120,5 +120,11 @@ namespace VeeKee
                 _sharedPreferencesEditor.PutString(_routerPortPreferenceKey, value);
             }
         }
+
+        public string GetVpnFlag(int i)
+        {
+            var key = String.Format(this._context.GetString(Resource.String.VpnFlagKeyPreferenceFormat), i);
+            return _sharedPreferences.GetString(key, this._context.GetString(Resource.String.DefaultFlag));
+        }
     }
 }

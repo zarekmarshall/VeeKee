@@ -24,16 +24,16 @@
 
   <string name="CheckingVpnStatusTitle">Checking...</string>
   <string name="ConnectingToRouterStatusMessage">Connecting to router</string>
-  <string name="CheckingVpnStatusMessage">Checking current vpn status</string>
+  <string name="CheckingVpnStatusMessage">Checking current VPN status</string>
   
   <!-- Preferences -->
-  <string name="RouterPreferenceCategoryTitle">Router settings</string>
-  <string name="VpnItemPreferenceCategoryTitle">Vpn settings</string>
+  <string name="RouterPreferenceCategoryTitle">Router Settings</string>
+  <string name="VpnItemPreferenceCategoryTitle">VPN Settings</string>
   
   <string name="RouterIpAddressPreferenceTitle">Ip Address</string>
   <string name="RouterIpAddressPreferenceKey">RouterIpAddress</string>
 
-  <string name="RouterUsernamePreferenceTitle">User name</string>
+  <string name="RouterUsernamePreferenceTitle">User Name</string>
   <string name="RouterUsernamePreferenceKey">RouterUsername</string>
 
   <string name="RouterPasswordPreferenceTitle">Password</string>
@@ -41,8 +41,29 @@
 
   <string name="RouterSshPortPreferenceTitle">SSH Port</string>
   <string name="RouterSshPortPreferenceKey">RouterSSHPort</string>
+
+  <string name="VpnFlagPreferenceFormat">VPN Client {0}</string>
+  <string name="VpnFlagKeyPreferenceFormat">VPNClient{0}_flag</string>
   
   <!-- Default Preferences -->
   <string name="DefaultRouterIpAddress">192.168.1.1</string>
   <string name="DefaultRouterUsername">admin</string>
+  <string name="DefaultFlag">DEFAULTFLAG</string>
+  
+  <!-- Flags -->
+  <string-array name="flag_titles">
+    <item>Brazil</item>
+    <item>Germany</item>
+    <item>France</item>
+    <item>UK</item>
+    <item>USA</item>
+  </string-array>
+
+  <string-array name="flag_image_names">
+    <item>BRA</item>
+    <item>DEU</item>
+    <item>FRA</item>
+    <item>GBR</item>
+    <item>USA</item>
+  </string-array>
 </resources>

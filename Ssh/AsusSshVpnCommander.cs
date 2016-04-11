@@ -10,8 +10,8 @@ namespace VeeKee.Ssh
         private const int VpnClientCount = 5;
 
         // Vpn commands
-        private const string EnableVpnClientCommandTemplate = "service start_{0}";
-        private const string DisableVpnClientCommandTemplate = "service stop_{0}";
+        private const string EnableVpnClientCommandTemplate = "service start_vpnclient{0}";
+        private const string DisableVpnClientCommandTemplate = "service stop_vpnclient{0}";
         private const string VpnClientStatusCommandTemplate = "nvram get vpn_client{0}_state";
 
         // Vpn status results
@@ -47,9 +47,10 @@ namespace VeeKee.Ssh
                 disableCommands.Add(command);
             }
 
+            string disableResult;
             // Run commands to disable all Vpns
-            disableCommands.Select(async c =>
-                await SendCommand(c));
+            disableCommands.ForEach(async c =>
+                disableResult = await SendCommand(c));
 
             // Run command to enable chosen Vpn
             var enableCommand = string.Format(EnableVpnClientCommandTemplate, vpnIndex);

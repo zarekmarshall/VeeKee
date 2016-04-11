@@ -1,9 +1,11 @@
 using Android.Content;
+using Android.Graphics.Drawables;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using VeeKee.Ssh;
 
 namespace VeeKee.Adapters
@@ -70,8 +72,9 @@ namespace VeeKee.Adapters
             var vpnItem = this[position];
             holder.VpnSwitch.Checked = vpnItem.Status == VpnStatus.Enabled;
             holder.VpnName.Text = vpnItem.Name;
-
-            // TODO: Icon
+            var flag = this._context.GetDrawable(vpnItem.FlagResourceId);
+            flag.SetBounds(0, 0, 280, 188);
+            holder.VpnName.SetCompoundDrawables(flag, null, null, null);
 
             return row;
         }
@@ -92,6 +95,8 @@ namespace VeeKee.Adapters
             }
         }
     }
+
+
 
     public class VpnArrayAdapterViewHolder : Java.Lang.Object
     {

@@ -29,4 +29,7 @@
       android:singleLine="true"
       android:defaultValue="@integer/DefaultRouterSshPort"/>
   </PreferenceCategory>
+
+  <PreferenceCategory android:title="@string/VpnItemPreferenceCategoryTitle">
+  </PreferenceCategory>
 </PreferenceScreen>
