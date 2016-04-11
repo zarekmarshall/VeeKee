@@ -52,6 +52,7 @@
   
   <!-- Flags -->
   <string-array name="flag_titles">
+    <item>Default</item>
     <item>Brazil</item>
     <item>Germany</item>
     <item>France</item>
@@ -60,6 +61,7 @@
   </string-array>
 
   <string-array name="flag_image_names">
+    <item>DEFAULTFLAG</item>
     <item>BRA</item>
     <item>DEU</item>
     <item>FRA</item>
