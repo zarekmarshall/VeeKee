@@ -7,14 +7,14 @@
     android:minHeight="25px"
     android:animateLayoutChanges="true">
     <Toolbar
-        android:id="@+id/connectiontoolbar"
+        android:id="@+id/connectionToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/connection_error_red" />
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"
-        android:layout_below="@id/connectiontoolbar"
+        android:layout_below="@id/connectionToolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/vpnListView"

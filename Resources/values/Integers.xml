@@ -2,5 +2,5 @@
 <resources>
   <integer name="VpnItemCount">5</integer>
   <integer name="DefaultRouterSshPort">22</integer>
-  <integer name="ConnectionTimeoutSeconds">5</integer>
+  <integer name="ConnectionTimeoutSeconds">30</integer>
 </resources>

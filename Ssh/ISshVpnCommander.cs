@@ -15,5 +15,7 @@ namespace VeeKee.Ssh
         Task<Dictionary<int, VpnStatus>> Status();
 
         Task<bool> EnableVpn(int vpnIndex);
+
+        Task<bool> DisableVpn(int vpnIndex);
     }
 }

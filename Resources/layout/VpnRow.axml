@@ -6,8 +6,8 @@
     p1:minHeight="25px"
     p1:layout_width="match_parent"
     p1:layout_height="match_parent"
-    p1:paddingTop="10dp"
-    p1:paddingBottom="10dp"
+    p1:paddingTop="14dp"
+    p1:paddingBottom="14dp"
     p1:descendantFocusability="blocksDescendants">
     <Switch
         p1:id="@+id/vpnSwitch"

@@ -80,7 +80,7 @@ namespace VeeKee
         {
             get
             {
-                var connectionToolbar = this._contextActivity.FindViewById<Toolbar>(Resource.Id.connectiontoolbar);
+                var connectionToolbar = this._contextActivity.FindViewById<Toolbar>(Resource.Id.connectionToolbar);
 
                 return connectionToolbar;
             }

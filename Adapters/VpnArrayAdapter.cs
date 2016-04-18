@@ -72,8 +72,12 @@ namespace VeeKee.Adapters
             var vpnItem = this[position];
             holder.VpnSwitch.Checked = vpnItem.Status == VpnStatus.Enabled;
             holder.VpnName.Text = vpnItem.Name;
+
+            // Disable the row if the status is currently changing
+            row.Enabled = vpnItem.Status != VpnStatus.Enabling;
+
             var flag = this._context.GetDrawable(vpnItem.FlagResourceId);
-            flag.SetBounds(0, 0, 280, 188);
+            flag.SetBounds(0, 0, 157, 105);
             holder.VpnName.SetCompoundDrawables(flag, null, null, null);
 
             return row;
@@ -95,8 +99,6 @@ namespace VeeKee.Adapters
             }
         }
     }
-
-
 
     public class VpnArrayAdapterViewHolder : Java.Lang.Object
     {

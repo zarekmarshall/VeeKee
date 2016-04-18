@@ -36,8 +36,20 @@ namespace VeeKee.Ssh
             return vpnStatusList;
         }
 
+        public async Task<bool> DisableVpn(int vpnIndex)
+        {
+            return await ToggleVpn(vpnIndex, false);
+        }
+
         public async Task<bool> EnableVpn(int vpnIndex)
         {
+            return await ToggleVpn(vpnIndex, true);
+        }
+
+        private async Task<bool> ToggleVpn(int vpnIndex, bool enabled)
+        {
+            string result = string.Empty;
+
             var disableCommands = new List<string>();
 
             // Construct commands for disabling all Vpns
@@ -47,16 +59,19 @@ namespace VeeKee.Ssh
                 disableCommands.Add(command);
             }
 
-            string disableResult;
             // Run commands to disable all Vpns
             disableCommands.ForEach(async c =>
-                disableResult = await SendCommand(c));
+                result = await SendCommand(c));
 
-            // Run command to enable chosen Vpn
-            var enableCommand = string.Format(EnableVpnClientCommandTemplate, vpnIndex);
+            if (enabled)
+            {
+                // Run command to enable chosen Vpn
+                var enableCommand = string.Format(EnableVpnClientCommandTemplate, vpnIndex);
 
-            // TODO
-            var result = await SendCommand(enableCommand);
+                result = await SendCommand(enableCommand);
+            }
+
+            // TODO - do something with result
 
             return true;
         }

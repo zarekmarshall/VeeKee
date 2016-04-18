@@ -132,7 +132,7 @@ namespace VeeKee
 		{
 			
 			// aapt resource value: 0x7f0b0000
-			public const int connectiontoolbar = 2131427328;
+			public const int connectionToolbar = 2131427328;
 			
 			// aapt resource value: 0x7f0b0005
 			public const int refresh_button = 2131427333;
