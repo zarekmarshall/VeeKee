@@ -10,6 +10,7 @@ using VeeKee.Ssh;
 using Android.Views;
 using Android.Content;
 using Android.Support.V7.App;
+using Android.Support.V7.Widget;
 using Android.Support.Design.Widget;
 using AlertDialog = Android.Support.V7.App.AlertDialog;
 
@@ -18,6 +19,8 @@ namespace VeeKee
     [Activity(Label = "VeeKee", MainLauncher = true, Icon = "@drawable/VeeKeeIcon")]
     public class MainActivity : AppCompatActivity
     {
+        private Android.Support.V7.Widget.Toolbar _toolbar;
+
         private VeeKeePreferences _preferences;
 
         private WifiChecker _wifiChecker;
@@ -34,10 +37,8 @@ namespace VeeKee
 
             this.SetContentView(Resource.Layout.Main);
 
-            // Set up the Action Bar
-            //SupportActionBar.SetDisplayUseLogoEnabled(true);
-            //SupportActionBar.SetHomeButtonEnabled(true);
-            //SupportActionBar.SetDisplayShowTitleEnabled(true);
+            _toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(_toolbar);
         }
 
         async protected override void OnResume()
@@ -131,7 +132,7 @@ namespace VeeKee
 
                 if (routerStatus == RouterConnectionStatus.Connected && success)
                 {
-                    var coordinatorLayout = this.FindViewById<CoordinatorLayout>(Resource.Id.mainCoordinatorLayout);
+                    var coordinatorLayout = this.FindViewById<CoordinatorLayout>(Resource.Id.mainLinearLayout);
 
                     Snackbar.Make(coordinatorLayout, _updatedMessage, Snackbar.LengthLong)
                         .SetAction(this.GetString(Resource.String.OkMessage), (view) => {})

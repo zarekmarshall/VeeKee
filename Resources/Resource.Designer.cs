@@ -2274,8 +2274,8 @@ namespace VeeKee
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f08008d
-			public const int action0 = 2131230861;
+			// aapt resource value: 0x7f08008e
+			public const int action0 = 2131230862;
 			
 			// aapt resource value: 0x7f08005a
 			public const int action_bar = 2131230810;
@@ -2301,8 +2301,8 @@ namespace VeeKee
 			// aapt resource value: 0x7f08005b
 			public const int action_context_bar = 2131230811;
 			
-			// aapt resource value: 0x7f080091
-			public const int action_divider = 2131230865;
+			// aapt resource value: 0x7f080092
+			public const int action_divider = 2131230866;
 			
 			// aapt resource value: 0x7f080003
 			public const int action_menu_divider = 2131230723;
@@ -2337,8 +2337,8 @@ namespace VeeKee
 			// aapt resource value: 0x7f080044
 			public const int buttonPanel = 2131230788;
 			
-			// aapt resource value: 0x7f08008e
-			public const int cancel_action = 2131230862;
+			// aapt resource value: 0x7f08008f
+			public const int cancel_action = 2131230863;
 			
 			// aapt resource value: 0x7f08002b
 			public const int center = 2131230763;
@@ -2352,8 +2352,8 @@ namespace VeeKee
 			// aapt resource value: 0x7f080052
 			public const int checkbox = 2131230802;
 			
-			// aapt resource value: 0x7f080094
-			public const int chronometer = 2131230868;
+			// aapt resource value: 0x7f080095
+			public const int chronometer = 2131230869;
 			
 			// aapt resource value: 0x7f080033
 			public const int clip_horizontal = 2131230771;
@@ -2403,8 +2403,8 @@ namespace VeeKee
 			// aapt resource value: 0x7f08001c
 			public const int end = 2131230748;
 			
-			// aapt resource value: 0x7f080099
-			public const int end_padder = 2131230873;
+			// aapt resource value: 0x7f08009a
+			public const int end_padder = 2131230874;
 			
 			// aapt resource value: 0x7f080023
 			public const int enterAlways = 2131230755;
@@ -2448,8 +2448,8 @@ namespace VeeKee
 			// aapt resource value: 0x7f08003f
 			public const int image = 2131230783;
 			
-			// aapt resource value: 0x7f080098
-			public const int info = 2131230872;
+			// aapt resource value: 0x7f080099
+			public const int info = 2131230873;
 			
 			// aapt resource value: 0x7f080000
 			public const int item_touch_helper_previous_elevation = 2131230720;
@@ -2457,11 +2457,11 @@ namespace VeeKee
 			// aapt resource value: 0x7f08002f
 			public const int left = 2131230767;
 			
-			// aapt resource value: 0x7f080092
-			public const int line1 = 2131230866;
+			// aapt resource value: 0x7f080093
+			public const int line1 = 2131230867;
 			
-			// aapt resource value: 0x7f080096
-			public const int line3 = 2131230870;
+			// aapt resource value: 0x7f080097
+			public const int line3 = 2131230871;
 			
 			// aapt resource value: 0x7f08000b
 			public const int listMode = 2131230731;
@@ -2470,10 +2470,10 @@ namespace VeeKee
 			public const int list_item = 2131230785;
 			
 			// aapt resource value: 0x7f080072
-			public const int mainCoordinatorLayout = 2131230834;
+			public const int mainLinearLayout = 2131230834;
 			
-			// aapt resource value: 0x7f080090
-			public const int media_actions = 2131230864;
+			// aapt resource value: 0x7f080091
+			public const int media_actions = 2131230865;
 			
 			// aapt resource value: 0x7f08001d
 			public const int middle = 2131230749;
@@ -2481,77 +2481,77 @@ namespace VeeKee
 			// aapt resource value: 0x7f080037
 			public const int mini = 2131230775;
 			
-			// aapt resource value: 0x7f08007f
-			public const int mr_art = 2131230847;
-			
-			// aapt resource value: 0x7f080074
-			public const int mr_chooser_list = 2131230836;
-			
-			// aapt resource value: 0x7f080077
-			public const int mr_chooser_route_desc = 2131230839;
+			// aapt resource value: 0x7f080080
+			public const int mr_art = 2131230848;
 			
 			// aapt resource value: 0x7f080075
-			public const int mr_chooser_route_icon = 2131230837;
-			
-			// aapt resource value: 0x7f080076
-			public const int mr_chooser_route_name = 2131230838;
-			
-			// aapt resource value: 0x7f08007c
-			public const int mr_close = 2131230844;
-			
-			// aapt resource value: 0x7f080082
-			public const int mr_control_divider = 2131230850;
-			
-			// aapt resource value: 0x7f080088
-			public const int mr_control_play_pause = 2131230856;
-			
-			// aapt resource value: 0x7f08008b
-			public const int mr_control_subtitle = 2131230859;
-			
-			// aapt resource value: 0x7f08008a
-			public const int mr_control_title = 2131230858;
-			
-			// aapt resource value: 0x7f080089
-			public const int mr_control_title_container = 2131230857;
-			
-			// aapt resource value: 0x7f08007d
-			public const int mr_custom_control = 2131230845;
-			
-			// aapt resource value: 0x7f08007e
-			public const int mr_default_control = 2131230846;
-			
-			// aapt resource value: 0x7f080079
-			public const int mr_dialog_area = 2131230841;
+			public const int mr_chooser_list = 2131230837;
 			
 			// aapt resource value: 0x7f080078
-			public const int mr_expandable_area = 2131230840;
+			public const int mr_chooser_route_desc = 2131230840;
 			
-			// aapt resource value: 0x7f08008c
-			public const int mr_group_expand_collapse = 2131230860;
+			// aapt resource value: 0x7f080076
+			public const int mr_chooser_route_icon = 2131230838;
 			
-			// aapt resource value: 0x7f080080
-			public const int mr_media_main_control = 2131230848;
+			// aapt resource value: 0x7f080077
+			public const int mr_chooser_route_name = 2131230839;
 			
-			// aapt resource value: 0x7f08007b
-			public const int mr_name = 2131230843;
-			
-			// aapt resource value: 0x7f080081
-			public const int mr_playback_control = 2131230849;
-			
-			// aapt resource value: 0x7f08007a
-			public const int mr_title_bar = 2131230842;
+			// aapt resource value: 0x7f08007d
+			public const int mr_close = 2131230845;
 			
 			// aapt resource value: 0x7f080083
-			public const int mr_volume_control = 2131230851;
+			public const int mr_control_divider = 2131230851;
+			
+			// aapt resource value: 0x7f080089
+			public const int mr_control_play_pause = 2131230857;
+			
+			// aapt resource value: 0x7f08008c
+			public const int mr_control_subtitle = 2131230860;
+			
+			// aapt resource value: 0x7f08008b
+			public const int mr_control_title = 2131230859;
+			
+			// aapt resource value: 0x7f08008a
+			public const int mr_control_title_container = 2131230858;
+			
+			// aapt resource value: 0x7f08007e
+			public const int mr_custom_control = 2131230846;
+			
+			// aapt resource value: 0x7f08007f
+			public const int mr_default_control = 2131230847;
+			
+			// aapt resource value: 0x7f08007a
+			public const int mr_dialog_area = 2131230842;
+			
+			// aapt resource value: 0x7f080079
+			public const int mr_expandable_area = 2131230841;
+			
+			// aapt resource value: 0x7f08008d
+			public const int mr_group_expand_collapse = 2131230861;
+			
+			// aapt resource value: 0x7f080081
+			public const int mr_media_main_control = 2131230849;
+			
+			// aapt resource value: 0x7f08007c
+			public const int mr_name = 2131230844;
+			
+			// aapt resource value: 0x7f080082
+			public const int mr_playback_control = 2131230850;
+			
+			// aapt resource value: 0x7f08007b
+			public const int mr_title_bar = 2131230843;
 			
 			// aapt resource value: 0x7f080084
-			public const int mr_volume_group_list = 2131230852;
+			public const int mr_volume_control = 2131230852;
 			
-			// aapt resource value: 0x7f080086
-			public const int mr_volume_item_icon = 2131230854;
+			// aapt resource value: 0x7f080085
+			public const int mr_volume_group_list = 2131230853;
 			
 			// aapt resource value: 0x7f080087
-			public const int mr_volume_slider = 2131230855;
+			public const int mr_volume_item_icon = 2131230855;
+			
+			// aapt resource value: 0x7f080088
+			public const int mr_volume_slider = 2131230856;
 			
 			// aapt resource value: 0x7f080016
 			public const int multiply = 2131230742;
@@ -2586,8 +2586,8 @@ namespace VeeKee
 			// aapt resource value: 0x7f080054
 			public const int radio = 2131230804;
 			
-			// aapt resource value: 0x7f08009d
-			public const int refresh_button = 2131230877;
+			// aapt resource value: 0x7f08009e
+			public const int refresh_button = 2131230878;
 			
 			// aapt resource value: 0x7f080030
 			public const int right = 2131230768;
@@ -2643,8 +2643,8 @@ namespace VeeKee
 			// aapt resource value: 0x7f080068
 			public const int select_dialog_listview = 2131230824;
 			
-			// aapt resource value: 0x7f08009e
-			public const int settings_button = 2131230878;
+			// aapt resource value: 0x7f08009f
+			public const int settings_button = 2131230879;
 			
 			// aapt resource value: 0x7f080053
 			public const int shortcut = 2131230803;
@@ -2685,8 +2685,8 @@ namespace VeeKee
 			// aapt resource value: 0x7f080031
 			public const int start = 2131230769;
 			
-			// aapt resource value: 0x7f08008f
-			public const int status_bar_latest_event_content = 2131230863;
+			// aapt resource value: 0x7f080090
+			public const int status_bar_latest_event_content = 2131230864;
 			
 			// aapt resource value: 0x7f080065
 			public const int submit_area = 2131230821;
@@ -2694,23 +2694,26 @@ namespace VeeKee
 			// aapt resource value: 0x7f08000d
 			public const int tabMode = 2131230733;
 			
-			// aapt resource value: 0x7f080097
-			public const int text = 2131230871;
+			// aapt resource value: 0x7f080098
+			public const int text = 2131230872;
 			
-			// aapt resource value: 0x7f080095
-			public const int text2 = 2131230869;
+			// aapt resource value: 0x7f080096
+			public const int text2 = 2131230870;
 			
 			// aapt resource value: 0x7f08004d
 			public const int textSpacerNoButtons = 2131230797;
 			
-			// aapt resource value: 0x7f080093
-			public const int time = 2131230867;
+			// aapt resource value: 0x7f080094
+			public const int time = 2131230868;
 			
 			// aapt resource value: 0x7f080043
 			public const int title = 2131230787;
 			
 			// aapt resource value: 0x7f080048
 			public const int title_template = 2131230792;
+			
+			// aapt resource value: 0x7f080073
+			public const int toolbar = 2131230835;
 			
 			// aapt resource value: 0x7f080032
 			public const int top = 2131230770;
@@ -2730,20 +2733,20 @@ namespace VeeKee
 			// aapt resource value: 0x7f08000a
 			public const int view_offset_helper = 2131230730;
 			
-			// aapt resource value: 0x7f080085
-			public const int volume_item_container = 2131230853;
-			
-			// aapt resource value: 0x7f08009a
-			public const int vpnLinearLayout = 2131230874;
-			
-			// aapt resource value: 0x7f080073
-			public const int vpnListView = 2131230835;
-			
-			// aapt resource value: 0x7f08009c
-			public const int vpnName = 2131230876;
+			// aapt resource value: 0x7f080086
+			public const int volume_item_container = 2131230854;
 			
 			// aapt resource value: 0x7f08009b
-			public const int vpnSwitch = 2131230875;
+			public const int vpnLinearLayout = 2131230875;
+			
+			// aapt resource value: 0x7f080074
+			public const int vpnListView = 2131230836;
+			
+			// aapt resource value: 0x7f08009d
+			public const int vpnName = 2131230877;
+			
+			// aapt resource value: 0x7f08009c
+			public const int vpnSwitch = 2131230876;
 			
 			// aapt resource value: 0x7f080022
 			public const int withText = 2131230754;
@@ -3004,7 +3007,10 @@ namespace VeeKee
 			public const int support_simple_spinner_dropdown_item = 2130903095;
 			
 			// aapt resource value: 0x7f030038
-			public const int VpnRow = 2130903096;
+			public const int toolbar = 2130903096;
+			
+			// aapt resource value: 0x7f030039
+			public const int VpnRow = 2130903097;
 			
 			static Layout()
 			{

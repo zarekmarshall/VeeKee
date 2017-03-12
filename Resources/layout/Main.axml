@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainCoordinatorLayout"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:minWidth="25px"
-    android:minHeight="25px"
-    android:animateLayoutChanges="true"
-    tools:menu="settingsmenu">
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  app:layout_behavior="@string/appbar_scrolling_view_behavior"
+  android:id="@+id/mainLinearLayout">
+  <include
+      android:id="@+id/toolbar"
+      layout="@layout/toolbar" />
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"
@@ -17,4 +17,4 @@
         android:layout_height="match_parent"
         android:id="@+id/vpnListView"
         android:choiceMode="singleChoice" />
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
