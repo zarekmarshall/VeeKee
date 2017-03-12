@@ -21,7 +21,7 @@ namespace VeeKee
             base.OnCreate(savedInstanceState);
 
             // Set up the Action Bar
-            ActionBar.DisplayOptions = ActionBarDisplayOptions.ShowHome | ActionBarDisplayOptions.HomeAsUp | ActionBarDisplayOptions.ShowTitle;
+            //ActionBar.DisplayOptions = ActionBarDisplayOptions.ShowHome | ActionBarDisplayOptions.HomeAsUp | ActionBarDisplayOptions.ShowTitle;
 
             FragmentManager.BeginTransaction().Replace(Android.Resource.Id.Content, new AppPreferencesFragment()).Commit();
         }

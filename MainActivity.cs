@@ -9,23 +9,20 @@ using VeeKee.Adapters;
 using VeeKee.Ssh;
 using Android.Views;
 using Android.Content;
+using Android.Support.V7.App;
+using Android.Support.Design.Widget;
+using AlertDialog = Android.Support.V7.App.AlertDialog;
 
 namespace VeeKee
 {
     [Activity(Label = "VeeKee", MainLauncher = true, Icon = "@drawable/VeeKeeIcon")]
-    public class MainActivity : Activity
+    public class MainActivity : AppCompatActivity
     {
         private VeeKeePreferences _preferences;
-        private RouterConnectionStatusViewer _routerStatusViewer;
 
-        public enum VeeKeeWifiStatus
-        {
-            Off = 0,
-            Connected = 1,
-            ConnectedToCorrectWifi = 2
-        }
-
-        private VeeKeeWifiStatus _wifiStatus;
+        private WifiChecker _wifiChecker;
+        private string _updatingMessage;
+        private string _updatedMessage;
 
         #region Activity Events
         protected override void OnCreate(Bundle bundle)
@@ -35,20 +32,17 @@ namespace VeeKee
             // Set up default Shared Preferences (setting defaults if required)
             _preferences = new VeeKeePreferences(Application.Context);
 
-            _routerStatusViewer = new RouterConnectionStatusViewer(this);
-
             this.SetContentView(Resource.Layout.Main);
 
             // Set up the Action Bar
-            ActionBar.DisplayOptions = ActionBarDisplayOptions.UseLogo | ActionBarDisplayOptions.ShowHome | ActionBarDisplayOptions.ShowTitle;
+            //SupportActionBar.SetDisplayUseLogoEnabled(true);
+            //SupportActionBar.SetHomeButtonEnabled(true);
+            //SupportActionBar.SetDisplayShowTitleEnabled(true);
         }
 
         async protected override void OnResume()
         {
             base.OnResume();
-
-            // Connection Toolbar should be off by default
-            _routerStatusViewer.Hide();
 
             if (_preferences.FirstRun)
             {
@@ -96,13 +90,14 @@ namespace VeeKee
                 bool tappedVpnCurrentlyEnabled = vpnSwitch.Checked;
 
                 // Ensure that the correct Vpn Switches are enabled and disabled accordingly
-                var updatingMessage = UpdateSelectedVpnItems(vpnListView, e.Position);
+                UpdateSelectedVpnItems(vpnListView, e.Position);
 
                 // TODO
                 progressDialog.SetTitle(this.Resources.GetString(Resource.String.UpdatingVpnTitle));
-                progressDialog.SetMessage(updatingMessage);
+                progressDialog.SetMessage(_updatingMessage);
                 progressDialog.Show();
 
+                bool success = false;
                 RouterConnectionStatus routerStatus = RouterConnectionStatus.NotConnected;
                 try
                 {
@@ -114,14 +109,13 @@ namespace VeeKee
 
                         if (routerStatus == RouterConnectionStatus.Connected)
                         {
-                            var success = false;
                             if (tappedVpnCurrentlyEnabled)
                             {
-                                success = await asusCommander.DisableVpn(vpnIndex);
+                                //success = await asusCommander.DisableVpn(vpnIndex);
                             }
                             else
                             {
-                                success = await asusCommander.EnableVpn(vpnIndex);
+                                //success = await asusCommander.EnableVpn(vpnIndex);
                             }
                         }
                     }
@@ -135,30 +129,48 @@ namespace VeeKee
                     progressDialog.Dismiss();
                 }
 
-                if (routerStatus != RouterConnectionStatus.Connected)
+                if (routerStatus == RouterConnectionStatus.Connected && success)
                 {
-                    _routerStatusViewer.Display(this._wifiStatus, routerStatus, ConnectionToolbar_MenuItemClick);
+                    var coordinatorLayout = this.FindViewById<CoordinatorLayout>(Resource.Id.mainCoordinatorLayout);
+
+                    Snackbar.Make(coordinatorLayout, _updatedMessage, Snackbar.LengthLong)
+                        .SetAction(this.GetString(Resource.String.OkMessage), (view) => {})
+                        .Show();
+                }
+                else
+                {
+                    // Display a dialog which indicates there was an issue
+                    //DisplayIssueDialog(this._wifiStatus, routerStatus);
                 }
             }
         }
-
-        private async void ConnectionToolbar_MenuItemClick(object sender, Toolbar.MenuItemClickEventArgs e)
-        {
-            await InitialiseMainScreen();
-        }
         #endregion Click Events
+
+        private void InitialiseWifi()
+        {
+            DetectAndStoreWifiStatus();
+
+            if (_wifiChecker.Status != WifiStatus.ConnectedToExpectedWifi)
+            {
+                DisplayWifiIssueDialog();
+                return;
+            }
+        }
 
         async private Task InitialiseMainScreen()
         {
+            bool initialisationIssue = true;
+
             // Determine the wifi connection status of the device
-            DetectWifiStatus();
+            InitialiseWifi();
 
-            // Initialise a list of VpnItems
-            var vpnItems = VpnItems();
-
-            RouterConnectionStatus routerStatus = RouterConnectionStatus.NotConnected;
-            if (_wifiStatus == VeeKeeWifiStatus.ConnectedToCorrectWifi)
+            if (_wifiChecker.Status == WifiStatus.ConnectedToExpectedWifi)
             {
+                // Initialise a list of VpnItems
+                var vpnItems = VpnItems();
+
+                RouterConnectionStatus routerStatus = RouterConnectionStatus.NotConnected;
+
                 // Check the current status of vpns
                 var progressDialog = new ProgressDialog(this);
                 progressDialog.SetTitle(this.GetString(Resource.String.CheckingVpnStatusMessage));
@@ -175,20 +187,19 @@ namespace VeeKee
                     {
                         progressDialog.SetMessage(this.GetString(Resource.String.CheckingVpnStatusMessage));
                         vpnItems = await CheckCurrentVpnStatus(asusCommander, vpnItems);
+                        initialisationIssue = false;
                     }
                 }
 
                 progressDialog.Dismiss();
+
+                var adapter = new VpnArrayAdapter(this, vpnItems);
+                var vpnListView = FindViewById<ListView>(Resource.Id.vpnListView);
+                vpnListView.Adapter = adapter;
+                vpnListView.Enabled = !initialisationIssue;
+
+                vpnListView.ItemClick += new EventHandler<AdapterView.ItemClickEventArgs>(VpnListView_ItemClick);
             }
-
-            _routerStatusViewer.Display(this._wifiStatus, routerStatus, ConnectionToolbar_MenuItemClick);
-
-            var adapter = new VpnArrayAdapter(this, vpnItems);
-            var vpnListView = FindViewById<ListView>(Resource.Id.vpnListView);
-            vpnListView.Adapter = adapter;
-            vpnListView.Enabled = _wifiStatus == VeeKeeWifiStatus.ConnectedToCorrectWifi && !_routerStatusViewer.IsVisible;
-
-            vpnListView.ItemClick += new EventHandler<AdapterView.ItemClickEventArgs>(VpnListView_ItemClick);
         }
 
         private async Task<Dictionary<int, VpnItem>> CheckCurrentVpnStatus(AsusSshVpnCommander asusCommander, Dictionary<int, VpnItem> vpnItems)
@@ -227,7 +238,7 @@ namespace VeeKee
                 _preferences.RouterUsername,
                 _preferences.RouterPassword,
                 int.Parse(_preferences.RouterPort),
-                this.Resources.GetInteger(Resource.Integer.DefaultRouterSshPort));
+                this.Resources.GetInteger(Resource.Integer.ConnectionTimeoutSeconds));
 
             return asusCommander;
         }
@@ -244,12 +255,11 @@ namespace VeeKee
             return resourceId;
         }
 
-        private string UpdateSelectedVpnItems(
+        private void UpdateSelectedVpnItems(
             ListView vpnListView,
             int selectedIndex)
         {
-            var updatingFormat = string.Empty;
-            var updatingMessage = string.Empty;
+            var format = string.Empty;
 
             // Ensure that the correct Vpn Switches are enabled and disabled accordingly
             for (int i = 0; i < vpnListView.Count; i++)
@@ -261,71 +271,108 @@ namespace VeeKee
                 if (i == selectedIndex)
                 {
                     vpnSwitch.Checked = !vpnSwitch.Checked;
-                    updatingFormat = vpnSwitch.Checked ? this.Resources.GetString(Resource.String.EnablingVpnFormat) : this.Resources.GetString(Resource.String.DisablingVpnFormat);
-                    updatingMessage = String.Format(updatingFormat, (string)vpnName.Text);
+                    format = vpnSwitch.Checked ? this.Resources.GetString(Resource.String.EnablingVpnFormat) : this.Resources.GetString(Resource.String.DisablingVpnFormat);
+                    _updatingMessage = String.Format(format, (string)vpnName.Text);
+
+                    format = vpnSwitch.Checked ? this.Resources.GetString(Resource.String.EnabledVpnFormat) : this.Resources.GetString(Resource.String.DisabledVpnFormat);
+                    _updatedMessage = String.Format(format, (string)vpnName.Text);
                 }
                 else
                 {
                     vpnSwitch.Checked = false;
                 }
             }
-
-            return updatingMessage;
         }
 
         #region Wifi Utils
-        private void DetectWifiStatus()
+        private void DetectAndStoreWifiStatus()
         {
-            _wifiStatus = VeeKeeWifiStatus.Off;
-
             // Check if we are connected to wifi
-            string currentWifiName = string.Empty;
-            if (ConnectedToWifi(out currentWifiName))
+            _wifiChecker = new WifiChecker(this.ApplicationContext);
+            _wifiChecker.Check(_preferences.WifiName);
+
+            if (_wifiChecker.Connected && _preferences.WifiName == string.Empty)
             {
-                _wifiStatus = VeeKeeWifiStatus.Connected;
-
-                if (_preferences.WifiName == string.Empty)
-                {
-                    // We haven't connected to Wifi before so lets
-                    // save the name of the Wifi we are connected to 
-                    // (which we will use to check we are connected to the correct Wifi next time)
-                    _preferences.WifiName = currentWifiName;
-                    _preferences.Save();
-                }
-
-                // Check that we are connected to the right Wifi connection
-                if (ConnectedToCorrectWifi(_preferences.WifiName))
-                {
-                    _wifiStatus = VeeKeeWifiStatus.ConnectedToCorrectWifi;
-                }
+                // We haven't connected to Wifi before so lets
+                // save the name of the Wifi we are connected to 
+                // (which we will use to check we are connected to the correct Wifi next time)
+                _preferences.WifiName = _wifiChecker.ConnectedToWifiName;
+                _preferences.Save();
             }
-        }
-
-        private bool ConnectedToWifi(out string wifiName)
-        {
-            wifiName = string.Empty;
-
-            var connectivityManager = (ConnectivityManager)GetSystemService(ConnectivityService);
-            var networkInfo = connectivityManager.ActiveNetworkInfo;
-
-            var wifiConnected = networkInfo != null && networkInfo.IsConnected;
-
-            if (wifiConnected)
-            {
-                wifiName = networkInfo.ExtraInfo.Trim().Replace("\"", "");
-            }
-
-            return wifiConnected;
-        }
-
-        private bool ConnectedToCorrectWifi(string correctWifiName)
-        {
-            string currentWifiName = string.Empty;
-            bool wifiConnected = ConnectedToWifi(out currentWifiName);
-
-            return wifiConnected && currentWifiName == correctWifiName;
         }
         #endregion Wifi Utils
+
+        public void DisplayWifiIssueDialog()
+        {
+            string dialogTitle = "Oops, something's wrong"; // TODO
+            string dialogMessage = String.Empty;
+
+            // Wifi issue?
+            if (!_wifiChecker.Connected)
+            {
+                dialogMessage = this.Resources.GetString(Resource.String.NotConnectedToWifiMessage);
+            }
+            else if (_wifiChecker.Status != WifiStatus.ConnectedToExpectedWifi)
+            {
+                dialogMessage = this.Resources.GetString(Resource.String.NotConnectedToExpectedWifiMessage);
+            }
+
+            // Display dialog to notify user they're connected to a different wifi connection than last time
+            // Allow them to use this one by default, or allow them to quit
+            var builder = new AlertDialog.Builder(this)
+            .SetTitle(dialogTitle)
+            .SetMessage(dialogMessage)
+            .SetPositiveButton("Settings", delegate
+            {
+                _preferences.WifiName = string.Empty;
+                _preferences.Save();
+
+                var preferencesIntent = new Intent(Application.Context, typeof(AppPreferencesActivity));
+                StartActivity(preferencesIntent);
+            })
+            .SetNegativeButton("Quit", delegate
+            {
+                this.Finish();
+            })
+            .SetCancelable(true)
+            .Show();
+        }
+
+        private void DisplayRouterIssueDialog(RouterConnectionStatus routerStatus)
+        {
+            string dialogTitle = "Oops, something's wrong"; // TODO
+            string dialogMessage = String.Empty;
+
+            // Router connection issue?
+            if (routerStatus != RouterConnectionStatus.Connected)
+            {
+                switch (routerStatus)
+                {
+                    case RouterConnectionStatus.AuthorizationError:
+                        dialogMessage = this.Resources.GetString(Resource.String.RouterConnectionAuthorizationIssueMessage);
+                        break;
+                    case RouterConnectionStatus.NetworkError:
+                    case RouterConnectionStatus.ConnectionTimeoutError:
+                        dialogMessage = this.Resources.GetString(Resource.String.NetworkIssueMessage);
+                        break;
+                }
+
+                var builder = new AlertDialog.Builder(this)
+                .SetTitle(dialogTitle)
+                .SetMessage(dialogMessage)
+                .SetPositiveButton("Settings", delegate
+                {
+                    var preferencesIntent = new Intent(Application.Context, typeof(AppPreferencesActivity));
+                    StartActivity(preferencesIntent);
+                })
+                .SetNegativeButton("Quit", delegate
+                {
+                    this.Finish();
+                })
+                .SetCancelable(true)
+                .Show();
+            }
+        }
     }
 }
 
