@@ -39,6 +39,9 @@ namespace VeeKee
 
             _toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(_toolbar);
+
+            var vpnListView = FindViewById<ListView>(Resource.Id.vpnListView);
+            vpnListView.ItemClick += new EventHandler<AdapterView.ItemClickEventArgs>(VpnListView_ItemClick);
         }
 
         async protected override void OnResume()
@@ -112,11 +115,11 @@ namespace VeeKee
                         {
                             if (tappedVpnCurrentlyEnabled)
                             {
-                                //success = await asusCommander.DisableVpn(vpnIndex);
+                                success = await asusCommander.DisableVpn(vpnIndex);
                             }
                             else
                             {
-                                //success = await asusCommander.EnableVpn(vpnIndex);
+                                success = await asusCommander.EnableVpn(vpnIndex);
                             }
                         }
                     }
@@ -132,9 +135,9 @@ namespace VeeKee
 
                 if (routerStatus == RouterConnectionStatus.Connected && success)
                 {
-                    var coordinatorLayout = this.FindViewById<CoordinatorLayout>(Resource.Id.mainLinearLayout);
+                    var mainLayout = this.FindViewById<LinearLayout>(Resource.Id.mainLinearLayout);
 
-                    Snackbar.Make(coordinatorLayout, _updatedMessage, Snackbar.LengthLong)
+                    Snackbar.Make(mainLayout, _updatedMessage, Snackbar.LengthLong)
                         .SetAction(this.GetString(Resource.String.OkMessage), (view) => {})
                         .Show();
                 }
@@ -199,7 +202,7 @@ namespace VeeKee
                 vpnListView.Adapter = adapter;
                 vpnListView.Enabled = !initialisationIssue;
 
-                vpnListView.ItemClick += new EventHandler<AdapterView.ItemClickEventArgs>(VpnListView_ItemClick);
+                //vpnListView.ItemClick += new EventHandler<AdapterView.ItemClickEventArgs>(VpnListView_ItemClick);
             }
         }
 

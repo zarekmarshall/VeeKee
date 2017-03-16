@@ -60,8 +60,7 @@ namespace VeeKee.Ssh
             }
 
             // Run commands to disable all Vpns
-            disableCommands.ForEach(async c =>
-                result = await SendCommand(c));
+            await Task.WhenAll(disableCommands.Select(c => SendCommand(c)));
 
             if (enabled)
             {
