@@ -121,13 +121,11 @@ namespace VeeKee
                             case RouterConnectionStatus.Connected:
                                 if (tappedVpnCurrentlyEnabled)
                                 {
-                                    success = true;
-                                    //success = await asusCommander.DisableVpn(vpnIndex);
+                                    success = await asusCommander.DisableVpn(vpnIndex);
                                 }
                                 else
                                 {
-                                    success = true;
-                                    //success = await asusCommander.EnableVpn(vpnIndex);
+                                    success = await asusCommander.EnableVpn(vpnIndex);
                                 }
                                 break;
 
