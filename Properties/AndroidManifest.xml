@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="Zarek.VeeKee" android:versionCode="2" android:versionName="0.1" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="Zarek.VeeKee" android:versionCode="2" android:versionName="0.1" android:installLocation="internalOnly">
 	<uses-sdk android:minSdkVersion="23" />
 	<application android:label="VeeKee" android:theme="@style/VeekeeTheme" android:icon="@drawable/VeeKeeIcon" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
 </manifest>
