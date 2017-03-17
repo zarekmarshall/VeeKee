@@ -11,9 +11,12 @@
   <string name="VpnClientFormat">VPN Client {0}</string>
   
   <!-- Messages -->
+  <string name="OopsMessage">Oops, something is not quite right</string>
+  
   <string name="NotConnectedToWifiMessage">Not connected to wifi</string>
   <string name="NotConnectedToExpectedWifiMessage">Not connected to expected wifi</string>
 
+  <string name="RouterNotConnectedMessage">Unable to connect to router</string>
   <string name="RouterConnectionAuthorizationIssueMessage">Authorization problem</string>
   <string name="NetworkIssueMessage">Network problem</string>
   <string name="ConnectionTimeoutMessage">Connection timeout</string>

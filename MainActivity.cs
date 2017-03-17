@@ -85,6 +85,12 @@ namespace VeeKee
 
         private async void VpnListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
+            // Determine the wifi connection status of the device
+            if (!ConfirmWifi())
+            {
+                return;
+            }
+
             using (var progressDialog = new ProgressDialog(this))
             {
                 var vpnListView = (ListView)sender;
@@ -96,7 +102,6 @@ namespace VeeKee
                 // Ensure that the correct Vpn Switches are enabled and disabled accordingly
                 UpdateSelectedVpnItems(vpnListView, e.Position);
 
-                // TODO
                 progressDialog.SetTitle(this.Resources.GetString(Resource.String.UpdatingVpnTitle));
                 progressDialog.SetMessage(_updatingMessage);
                 progressDialog.Show();
@@ -111,16 +116,24 @@ namespace VeeKee
                         var connected = await asusCommander.Connect();
                         routerStatus = asusCommander.Connection.Status;
 
-                        if (routerStatus == RouterConnectionStatus.Connected)
+                        switch (routerStatus)
                         {
-                            if (tappedVpnCurrentlyEnabled)
-                            {
-                                success = await asusCommander.DisableVpn(vpnIndex);
-                            }
-                            else
-                            {
-                                success = await asusCommander.EnableVpn(vpnIndex);
-                            }
+                            case RouterConnectionStatus.Connected:
+                                if (tappedVpnCurrentlyEnabled)
+                                {
+                                    success = true;
+                                    //success = await asusCommander.DisableVpn(vpnIndex);
+                                }
+                                else
+                                {
+                                    success = true;
+                                    //success = await asusCommander.EnableVpn(vpnIndex);
+                                }
+                                break;
+
+                            default:
+                                DisplayRouterIssueDialog(routerStatus);
+                                return;
                         }
                     }
                 }
@@ -133,7 +146,7 @@ namespace VeeKee
                     progressDialog.Dismiss();
                 }
 
-                if (routerStatus == RouterConnectionStatus.Connected && success)
+                if (success)
                 {
                     var mainLayout = this.FindViewById<LinearLayout>(Resource.Id.mainLinearLayout);
 
@@ -141,24 +154,21 @@ namespace VeeKee
                         .SetAction(this.GetString(Resource.String.OkMessage), (view) => {})
                         .Show();
                 }
-                else
-                {
-                    // Display a dialog which indicates there was an issue
-                    //DisplayIssueDialog(this._wifiStatus, routerStatus);
-                }
             }
         }
         #endregion Click Events
 
-        private void InitialiseWifi()
+        private bool ConfirmWifi()
         {
             DetectAndStoreWifiStatus();
 
             if (_wifiChecker.Status != WifiStatus.ConnectedToExpectedWifi)
             {
                 DisplayWifiIssueDialog();
-                return;
+                return false;
             }
+
+            return true;
         }
 
         async private Task InitialiseMainScreen()
@@ -166,44 +176,45 @@ namespace VeeKee
             bool initialisationIssue = true;
 
             // Determine the wifi connection status of the device
-            InitialiseWifi();
-
-            if (_wifiChecker.Status == WifiStatus.ConnectedToExpectedWifi)
+            if (!ConfirmWifi())
             {
-                // Initialise a list of VpnItems
-                var vpnItems = VpnItems();
+                return;
+            }
 
-                RouterConnectionStatus routerStatus = RouterConnectionStatus.NotConnected;
+            // Initialise a list of VpnItems
+            var vpnItems = VpnItems();
 
-                // Check the current status of vpns
-                var progressDialog = new ProgressDialog(this);
-                progressDialog.SetTitle(this.GetString(Resource.String.CheckingVpnStatusMessage));
-                progressDialog.SetMessage(this.GetString(Resource.String.ConnectingToRouterStatusMessage));
-                progressDialog.Show();
+            var routerStatus = RouterConnectionStatus.NotConnected;
 
-                using (var asusCommander = GetAsusSshVpnCommander())
+            // Check the current status of vpns
+            var progressDialog = new ProgressDialog(this);
+            progressDialog.SetTitle(this.GetString(Resource.String.CheckingVpnStatusMessage));
+            progressDialog.SetMessage(this.GetString(Resource.String.ConnectingToRouterStatusMessage));
+            progressDialog.Show();
+
+            using (var asusCommander = GetAsusSshVpnCommander())
+            {
+                bool connected = await asusCommander.Connect();
+
+                routerStatus = asusCommander.Connection.Status;
+
+                if (!asusCommander.Connection.IsConnected)
                 {
-                    bool connected = await asusCommander.Connect();
-
-                    routerStatus = asusCommander.Connection.Status;
-
-                    if (asusCommander.Connection.IsConnected)
-                    {
-                        progressDialog.SetMessage(this.GetString(Resource.String.CheckingVpnStatusMessage));
-                        vpnItems = await CheckCurrentVpnStatus(asusCommander, vpnItems);
-                        initialisationIssue = false;
-                    }
+                    DisplayRouterIssueDialog(routerStatus);
+                    return;
                 }
 
-                progressDialog.Dismiss();
-
-                var adapter = new VpnArrayAdapter(this, vpnItems);
-                var vpnListView = FindViewById<ListView>(Resource.Id.vpnListView);
-                vpnListView.Adapter = adapter;
-                vpnListView.Enabled = !initialisationIssue;
-
-                //vpnListView.ItemClick += new EventHandler<AdapterView.ItemClickEventArgs>(VpnListView_ItemClick);
+                progressDialog.SetMessage(this.GetString(Resource.String.CheckingVpnStatusMessage));
+                vpnItems = await CheckCurrentVpnStatus(asusCommander, vpnItems);
+                initialisationIssue = false;
             }
+
+            progressDialog.Dismiss();
+
+            var adapter = new VpnArrayAdapter(this, vpnItems);
+            var vpnListView = FindViewById<ListView>(Resource.Id.vpnListView);
+            vpnListView.Adapter = adapter;
+            vpnListView.Enabled = !initialisationIssue;
         }
 
         private async Task<Dictionary<int, VpnItem>> CheckCurrentVpnStatus(AsusSshVpnCommander asusCommander, Dictionary<int, VpnItem> vpnItems)
@@ -306,9 +317,9 @@ namespace VeeKee
         }
         #endregion Wifi Utils
 
-        public void DisplayWifiIssueDialog()
+        private void DisplayWifiIssueDialog()
         {
-            string dialogTitle = "Oops, something's wrong"; // TODO
+            string dialogTitle = this.Resources.GetString(Resource.String.OopsMessage);
             string dialogMessage = String.Empty;
 
             // Wifi issue?
@@ -344,7 +355,7 @@ namespace VeeKee
 
         private void DisplayRouterIssueDialog(RouterConnectionStatus routerStatus)
         {
-            string dialogTitle = "Oops, something's wrong"; // TODO
+            string dialogTitle = this.Resources.GetString(Resource.String.OopsMessage);
             string dialogMessage = String.Empty;
 
             // Router connection issue?
@@ -358,6 +369,9 @@ namespace VeeKee
                     case RouterConnectionStatus.NetworkError:
                     case RouterConnectionStatus.ConnectionTimeoutError:
                         dialogMessage = this.Resources.GetString(Resource.String.NetworkIssueMessage);
+                        break;
+                    default:
+                        dialogMessage = this.Resources.GetString(Resource.String.RouterNotConnectedMessage);
                         break;
                 }
 

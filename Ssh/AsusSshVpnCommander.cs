@@ -71,7 +71,6 @@ namespace VeeKee.Ssh
             }
 
             // TODO - do something with result
-
             return true;
         }
 
