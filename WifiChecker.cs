@@ -47,17 +47,18 @@ namespace VeeKee
         {
             var connectivityManager = (ConnectivityManager)this._applicationContext.GetSystemService("connectivity");
 
-            // I can't figure out how to check for Wifi connection without using the deprecated
-            // GetNetworkInfo method. ActiveNetworkInfo works, but only if Wifi internet is working
-            // otherwise mobile data becomes the active network, if enabled on the device.
-            var networkInfo = connectivityManager.GetNetworkInfo(ConnectivityType.Wifi);
-            
-            var wifiConnected = networkInfo != null && networkInfo.IsConnected;
+            var networks = connectivityManager.GetAllNetworks();
+            var wifiNetworkInfo = (from w in (from n in networks
+                                  select connectivityManager.GetNetworkInfo(n))
+                                  where w.Type == ConnectivityType.Wifi
+                                  select w).FirstOrDefault();
+
+            var wifiConnected = wifiNetworkInfo != null && wifiNetworkInfo.IsConnected;
 
             if (wifiConnected)
             {
                 this.Status = WifiStatus.Connected;
-                this.ConnectedToWifiName = networkInfo.ExtraInfo.Trim().Replace("\"", "");
+                this.ConnectedToWifiName = wifiNetworkInfo.ExtraInfo.Trim().Replace("\"", "");
 
                 if (expectedWifiName == String.Empty || this.ConnectedToWifiName.CompareTo(expectedWifiName) == 0)
                 {
