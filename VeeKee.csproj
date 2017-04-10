@@ -42,6 +42,15 @@
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <BundleAssemblies>False</BundleAssemblies>
+    <AndroidCreatePackagePerAbi>True</AndroidCreatePackagePerAbi>
+    <Debugger>.Net (Xamarin)</Debugger>
+    <AotAssemblies>False</AotAssemblies>
+    <EnableLLVM>False</EnableLLVM>
+    <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
+    <EnableProguard>False</EnableProguard>
+    <DebugSymbols>False</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FormsViewGroup, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -276,4 +285,12 @@
 		<Target Name="AfterBuild">
 		</Target>
  -->
+  <Target Name="AfterBuild">
+    <Exec Command="&quot;C:\Program Files (x86)\Microsoft Visual Studio 14.0\PreEmptive Solutions\Dotfuscator and Analytics Community Edition\DotfuscatorCLI.exe&quot; -p=OutDir=$(OutDir) &quot;$(ProjectDir)Obfuscate.VeeKee.xml&quot;" />
+    <ItemGroup>
+      <ObfuscatedFiles Include="$(ProjectDir)\Dotfuscated\*.dll" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ObfuscatedFiles)" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="$(ProjectDir)\Dotfuscated\VeeKee.dll" DestinationFolder="$(ProjectDir)\..\VeeKee\$(OutputPath)" />
+  </Target>
 </Project>
