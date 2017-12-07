@@ -2,8 +2,8 @@
 <!DOCTYPE dotfuscatorMap SYSTEM "http://www.preemptive.com/dotfuscator/dtd/dotfuscatorMap_v1.2.dtd">
 <dotfuscatorMap version="1.1">
     <header>
-        <timestamp>2017-12-07T22:04:01</timestamp>
-        <product version="5.32.1.6167" user="Zarek Marshall" serial="229580-391">Dotfuscator Community Edition</product>
+        <timestamp>2017-04-10T21:11:34</timestamp>
+        <product version="5.22.0.3788" user="Zarek Marshall" serial="212146-391">Dotfuscator and Analytics Community Edition</product>
     </header>
     <mapping>
         <module>
@@ -695,17 +695,13 @@
                 <methodlist>
                     <method>
                         <signature>void()</signature>
-                        <name>.ctor</name>
-                    </method>
-                    <method>
-                        <signature>void()</signature>
                         <name>MoveNext</name>
-                        <newname>f</newname>
+                        <newname>e</newname>
                     </method>
                     <method>
                         <signature>void(System.Runtime.CompilerServices.IAsyncStateMachine)</signature>
                         <name>SetStateMachine</name>
-                        <newname>f</newname>
+                        <newname>e</newname>
                     </method>
                 </methodlist>
                 <fieldlist>
@@ -715,21 +711,6 @@
                         <newname>a</newname>
                     </field>
                     <field>
-                        <signature>VeeKee.MainActivity</signature>
-                        <name>&lt;&gt;4__this</name>
-                        <newname>e</newname>
-                    </field>
-                    <field>
-                        <signature>System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Ssh.VpnStatus&gt;</signature>
-                        <name>&lt;&gt;s__2</name>
-                        <newname>g</newname>
-                    </field>
-                    <field>
-                        <signature>System.Collections.Generic.Dictionary`2/KeyCollection/Enumerator&lt;int32,VeeKee.Ssh.VpnStatus&gt;</signature>
-                        <name>&lt;&gt;s__3</name>
-                        <newname>h</newname>
-                    </field>
-                    <field>
                         <signature>System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1&lt;System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Adapters.VpnItem&gt;&gt;</signature>
                         <name>&lt;&gt;t__builder</name>
                         <newname>b</newname>
@@ -737,17 +718,7 @@
                     <field>
                         <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Ssh.VpnStatus&gt;&gt;</signature>
                         <name>&lt;&gt;u__1</name>
-                        <newname>j</newname>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>&lt;key&gt;5__4</name>
-                        <newname>i</newname>
-                    </field>
-                    <field>
-                        <signature>System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Ssh.VpnStatus&gt;</signature>
-                        <name>&lt;vpnStatus&gt;5__1</name>
-                        <newname>f</newname>
+                        <newname>e</newname>
                     </field>
                     <field>
                         <signature>VeeKee.Ssh.AsusSshVpnCommander</signature>
@@ -769,10 +740,6 @@
                 <methodlist>
                     <method>
                         <signature>void()</signature>
-                        <name>.ctor</name>
-                    </method>
-                    <method>
-                        <signature>void()</signature>
                         <name>MoveNext</name>
                         <newname>d</newname>
                     </method>
@@ -794,16 +761,6 @@
                         <newname>c</newname>
                     </field>
                     <field>
-                        <signature>System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Adapters.VpnItem&gt;</signature>
-                        <name>&lt;&gt;s__10</name>
-                        <newname>m</newname>
-                    </field>
-                    <field>
-                        <signature>bool</signature>
-                        <name>&lt;&gt;s__9</name>
-                        <newname>l</newname>
-                    </field>
-                    <field>
                         <signature>System.Runtime.CompilerServices.AsyncTaskMethodBuilder</signature>
                         <name>&lt;&gt;t__builder</name>
                         <newname>b</newname>
@@ -811,52 +768,27 @@
                     <field>
                         <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;bool&gt;</signature>
                         <name>&lt;&gt;u__1</name>
-                        <newname>n</newname>
+                        <newname>g</newname>
                     </field>
                     <field>
                         <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Adapters.VpnItem&gt;&gt;</signature>
                         <name>&lt;&gt;u__2</name>
-                        <newname>o</newname>
-                    </field>
-                    <field>
-                        <signature>VeeKee.Adapters.VpnArrayAdapter</signature>
-                        <name>&lt;adapter&gt;5__5</name>
                         <newname>h</newname>
                     </field>
                     <field>
                         <signature>VeeKee.Ssh.AsusSshVpnCommander</signature>
-                        <name>&lt;asusCommander&gt;5__7</name>
-                        <newname>j</newname>
-                    </field>
-                    <field>
-                        <signature>bool</signature>
-                        <name>&lt;connected&gt;5__8</name>
-                        <newname>k</newname>
-                    </field>
-                    <field>
-                        <signature>bool</signature>
-                        <name>&lt;initialisationIssue&gt;5__1</name>
+                        <name>&lt;asusCommander&gt;5__1</name>
                         <newname>d</newname>
                     </field>
                     <field>
                         <signature>Android.App.ProgressDialog</signature>
-                        <name>&lt;progressDialog&gt;5__4</name>
-                        <newname>g</newname>
-                    </field>
-                    <field>
-                        <signature>VeeKee.Ssh.RouterConnectionStatus</signature>
-                        <name>&lt;routerStatus&gt;5__3</name>
-                        <newname>f</newname>
-                    </field>
-                    <field>
-                        <signature>System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Adapters.VpnItem&gt;</signature>
-                        <name>&lt;vpnItems&gt;5__2</name>
+                        <name>&lt;progressDialog&gt;5__2</name>
                         <newname>e</newname>
                     </field>
                     <field>
-                        <signature>Android.Widget.ListView</signature>
-                        <name>&lt;vpnListView&gt;5__6</name>
-                        <newname>i</newname>
+                        <signature>System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Adapters.VpnItem&gt;</signature>
+                        <name>&lt;vpnItems&gt;5__3</name>
+                        <newname>f</newname>
                     </field>
                 </fieldlist>
                 <propertylist />
@@ -866,10 +798,6 @@
                 <name>VeeKee.MainActivity/&lt;OnResume&gt;d__6</name>
                 <newname>VeeKee.MainActivity/a</newname>
                 <methodlist>
-                    <method>
-                        <signature>void()</signature>
-                        <name>.ctor</name>
-                    </method>
                     <method>
                         <signature>void()</signature>
                         <name>MoveNext</name>
@@ -900,11 +828,6 @@
                     <field>
                         <signature>System.Runtime.CompilerServices.TaskAwaiter</signature>
                         <name>&lt;&gt;u__1</name>
-                        <newname>e</newname>
-                    </field>
-                    <field>
-                        <signature>Android.Content.Intent</signature>
-                        <name>&lt;preferencesIntent&gt;5__1</name>
                         <newname>d</newname>
                     </field>
                 </fieldlist>
@@ -915,10 +838,6 @@
                 <name>VeeKee.MainActivity/&lt;VpnListView_ItemClick&gt;d__9</name>
                 <newname>VeeKee.MainActivity/b</newname>
                 <methodlist>
-                    <method>
-                        <signature>void()</signature>
-                        <name>.ctor</name>
-                    </method>
                     <method>
                         <signature>void()</signature>
                         <name>MoveNext</name>
@@ -939,22 +858,7 @@
                     <field>
                         <signature>VeeKee.MainActivity</signature>
                         <name>&lt;&gt;4__this</name>
-                        <newname>e</newname>
-                    </field>
-                    <field>
-                        <signature>bool</signature>
-                        <name>&lt;&gt;s__11</name>
-                        <newname>p</newname>
-                    </field>
-                    <field>
-                        <signature>bool</signature>
-                        <name>&lt;&gt;s__12</name>
-                        <newname>q</newname>
-                    </field>
-                    <field>
-                        <signature>bool</signature>
-                        <name>&lt;&gt;s__13</name>
-                        <newname>r</newname>
+                        <newname>c</newname>
                     </field>
                     <field>
                         <signature>System.Runtime.CompilerServices.AsyncVoidMethodBuilder</signature>
@@ -964,37 +868,22 @@
                     <field>
                         <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;bool&gt;</signature>
                         <name>&lt;&gt;u__1</name>
-                        <newname>u</newname>
+                        <newname>l</newname>
                     </field>
                     <field>
                         <signature>VeeKee.Ssh.AsusSshVpnCommander</signature>
-                        <name>&lt;asusCommander&gt;5__8</name>
-                        <newname>m</newname>
-                    </field>
-                    <field>
-                        <signature>bool</signature>
-                        <name>&lt;connected&gt;5__10</name>
-                        <newname>o</newname>
-                    </field>
-                    <field>
-                        <signature>System.Exception</signature>
-                        <name>&lt;ex&gt;5__14</name>
-                        <newname>s</newname>
-                    </field>
-                    <field>
-                        <signature>Android.Widget.LinearLayout</signature>
-                        <name>&lt;mainLayout&gt;5__15</name>
-                        <newname>t</newname>
-                    </field>
-                    <field>
-                        <signature>Android.App.ProgressDialog</signature>
-                        <name>&lt;progressDialog&gt;5__1</name>
+                        <name>&lt;asusCommander&gt;5__1</name>
                         <newname>f</newname>
                     </field>
                     <field>
+                        <signature>Android.App.ProgressDialog</signature>
+                        <name>&lt;progressDialog&gt;5__5</name>
+                        <newname>j</newname>
+                    </field>
+                    <field>
                         <signature>VeeKee.Ssh.RouterConnectionStatus</signature>
-                        <name>&lt;routerStatus&gt;5__7</name>
-                        <newname>l</newname>
+                        <name>&lt;routerStatus&gt;5__4</name>
+                        <newname>i</newname>
                     </field>
                     <field>
                         <signature>bool</signature>
@@ -1003,38 +892,22 @@
                     </field>
                     <field>
                         <signature>bool</signature>
-                        <name>&lt;tappedVpnCurrentlyEnabled&gt;5__5</name>
-                        <newname>j</newname>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>&lt;vpnIndex&gt;5__9</name>
-                        <newname>n</newname>
-                    </field>
-                    <field>
-                        <signature>Android.Widget.ListView</signature>
-                        <name>&lt;vpnListView&gt;5__2</name>
+                        <name>&lt;tappedVpnCurrentlyEnabled&gt;5__2</name>
                         <newname>g</newname>
                     </field>
                     <field>
-                        <signature>Android.Views.View</signature>
-                        <name>&lt;vpnRowItem&gt;5__3</name>
+                        <signature>int32</signature>
+                        <name>&lt;vpnIndex&gt;5__3</name>
                         <newname>h</newname>
-                    </field>
-                    <field>
-                        <signature>Android.Widget.Switch</signature>
-                        <name>&lt;vpnSwitch&gt;5__4</name>
-                        <newname>i</newname>
                     </field>
                     <field>
                         <signature>Android.Widget.AdapterView/ItemClickEventArgs</signature>
                         <name>e</name>
-                        <newname>d</newname>
                     </field>
                     <field>
                         <signature>object</signature>
                         <name>sender</name>
-                        <newname>c</newname>
+                        <newname>d</newname>
                     </field>
                 </fieldlist>
                 <propertylist />
@@ -4010,31 +3883,7 @@
                     </field>
                     <field>
                         <signature>int32</signature>
-                        <name>avd_hide_password_1</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>avd_hide_password_2</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>avd_hide_password_3</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
                         <name>avd_show_password</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>avd_show_password_1</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>avd_show_password_2</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>avd_show_password_3</name>
                     </field>
                     <field>
                         <signature>int32</signature>
@@ -10126,10 +9975,6 @@
                 <methodlist>
                     <method>
                         <signature>void()</signature>
-                        <name>.ctor</name>
-                    </method>
-                    <method>
-                        <signature>void()</signature>
                         <name>MoveNext</name>
                         <newname>e</newname>
                     </method>
@@ -10148,12 +9993,7 @@
                     <field>
                         <signature>VeeKee.Ssh.AsusSshVpnCommander</signature>
                         <name>&lt;&gt;4__this</name>
-                        <newname>d</newname>
-                    </field>
-                    <field>
-                        <signature>bool</signature>
-                        <name>&lt;&gt;s__1</name>
-                        <newname>e</newname>
+                        <newname>c</newname>
                     </field>
                     <field>
                         <signature>System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1&lt;bool&gt;</signature>
@@ -10163,12 +10003,12 @@
                     <field>
                         <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;bool&gt;</signature>
                         <name>&lt;&gt;u__1</name>
-                        <newname>f</newname>
+                        <newname>e</newname>
                     </field>
                     <field>
                         <signature>int32</signature>
                         <name>vpnIndex</name>
-                        <newname>c</newname>
+                        <newname>d</newname>
                     </field>
                 </fieldlist>
                 <propertylist />
@@ -10180,10 +10020,6 @@
                 <methodlist>
                     <method>
                         <signature>void()</signature>
-                        <name>.ctor</name>
-                    </method>
-                    <method>
-                        <signature>void()</signature>
                         <name>MoveNext</name>
                         <newname>e</newname>
                     </method>
@@ -10202,12 +10038,7 @@
                     <field>
                         <signature>VeeKee.Ssh.AsusSshVpnCommander</signature>
                         <name>&lt;&gt;4__this</name>
-                        <newname>d</newname>
-                    </field>
-                    <field>
-                        <signature>bool</signature>
-                        <name>&lt;&gt;s__1</name>
-                        <newname>e</newname>
+                        <newname>c</newname>
                     </field>
                     <field>
                         <signature>System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1&lt;bool&gt;</signature>
@@ -10217,12 +10048,12 @@
                     <field>
                         <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;bool&gt;</signature>
                         <name>&lt;&gt;u__1</name>
-                        <newname>f</newname>
+                        <newname>e</newname>
                     </field>
                     <field>
                         <signature>int32</signature>
                         <name>vpnIndex</name>
-                        <newname>c</newname>
+                        <newname>d</newname>
                     </field>
                 </fieldlist>
                 <propertylist />
@@ -10234,10 +10065,6 @@
                 <methodlist>
                     <method>
                         <signature>void()</signature>
-                        <name>.ctor</name>
-                    </method>
-                    <method>
-                        <signature>void()</signature>
                         <name>MoveNext</name>
                         <newname>d</newname>
                     </method>
@@ -10259,11 +10086,6 @@
                         <newname>c</newname>
                     </field>
                     <field>
-                        <signature>string</signature>
-                        <name>&lt;&gt;s__4</name>
-                        <newname>g</newname>
-                    </field>
-                    <field>
                         <signature>System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1&lt;System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Ssh.VpnStatus&gt;&gt;</signature>
                         <name>&lt;&gt;t__builder</name>
                         <newname>b</newname>
@@ -10271,7 +10093,7 @@
                     <field>
                         <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;string&gt;</signature>
                         <name>&lt;&gt;u__1</name>
-                        <newname>h</newname>
+                        <newname>f</newname>
                     </field>
                     <field>
                         <signature>int32</signature>
@@ -10283,11 +10105,6 @@
                         <name>&lt;vpnStatusList&gt;5__1</name>
                         <newname>d</newname>
                     </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>&lt;vpnStatusResult&gt;5__3</name>
-                        <newname>f</newname>
-                    </field>
                 </fieldlist>
                 <propertylist />
                 <eventlist />
@@ -10296,10 +10113,6 @@
                 <name>VeeKee.Ssh.AsusSshVpnCommander/&lt;ToggleVpn&gt;d__11</name>
                 <newname>VeeKee.Ssh.AsusSshVpnCommander/d</newname>
                 <methodlist>
-                    <method>
-                        <signature>void()</signature>
-                        <name>.ctor</name>
-                    </method>
                     <method>
                         <signature>void()</signature>
                         <name>MoveNext</name>
@@ -10320,12 +10133,7 @@
                     <field>
                         <signature>VeeKee.Ssh.AsusSshVpnCommander</signature>
                         <name>&lt;&gt;4__this</name>
-                        <newname>e</newname>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>&lt;&gt;s__6</name>
-                        <newname>k</newname>
+                        <newname>c</newname>
                     </field>
                     <field>
                         <signature>System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1&lt;bool&gt;</signature>
@@ -10335,37 +10143,12 @@
                     <field>
                         <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;string[]&gt;</signature>
                         <name>&lt;&gt;u__1</name>
-                        <newname>l</newname>
+                        <newname>f</newname>
                     </field>
                     <field>
                         <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;string&gt;</signature>
                         <name>&lt;&gt;u__2</name>
-                        <newname>m</newname>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>&lt;command&gt;5__4</name>
-                        <newname>i</newname>
-                    </field>
-                    <field>
-                        <signature>System.Collections.Generic.List`1&lt;string&gt;</signature>
-                        <name>&lt;disableCommands&gt;5__2</name>
                         <newname>g</newname>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>&lt;enableCommand&gt;5__5</name>
-                        <newname>j</newname>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>&lt;i&gt;5__3</name>
-                        <newname>h</newname>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>&lt;result&gt;5__1</name>
-                        <newname>f</newname>
                     </field>
                     <field>
                         <signature>bool</signature>
@@ -10375,7 +10158,7 @@
                     <field>
                         <signature>int32</signature>
                         <name>vpnIndex</name>
-                        <newname>c</newname>
+                        <newname>e</newname>
                     </field>
                 </fieldlist>
                 <propertylist />
@@ -10634,10 +10417,6 @@
                 <methodlist>
                     <method>
                         <signature>void()</signature>
-                        <name>.ctor</name>
-                    </method>
-                    <method>
-                        <signature>void()</signature>
                         <name>MoveNext</name>
                         <newname>d</newname>
                     </method>
@@ -10666,11 +10445,6 @@
                     <field>
                         <signature>System.Runtime.CompilerServices.TaskAwaiter</signature>
                         <name>&lt;&gt;u__1</name>
-                        <newname>e</newname>
-                    </field>
-                    <field>
-                        <signature>System.Exception</signature>
-                        <name>&lt;ex&gt;5__1</name>
                         <newname>d</newname>
                     </field>
                 </fieldlist>
@@ -10681,10 +10455,6 @@
                 <name>VeeKee.Ssh.SshNet.SshNetCommander/&lt;SendCommand&gt;d__4</name>
                 <newname>VeeKee.Ssh.SshNet.SshNetCommander/b</newname>
                 <methodlist>
-                    <method>
-                        <signature>void()</signature>
-                        <name>.ctor</name>
-                    </method>
                     <method>
                         <signature>void()</signature>
                         <name>MoveNext</name>
@@ -10705,12 +10475,7 @@
                     <field>
                         <signature>VeeKee.Ssh.SshNet.SshNetCommander</signature>
                         <name>&lt;&gt;4__this</name>
-                        <newname>d</newname>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>&lt;&gt;s__3</name>
-                        <newname>g</newname>
+                        <newname>c</newname>
                     </field>
                     <field>
                         <signature>System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1&lt;string&gt;</signature>
@@ -10720,22 +10485,17 @@
                     <field>
                         <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;string&gt;</signature>
                         <name>&lt;&gt;u__1</name>
-                        <newname>h</newname>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>&lt;result&gt;5__1</name>
-                        <newname>e</newname>
+                        <newname>f</newname>
                     </field>
                     <field>
                         <signature>Renci.SshNet.SshCommand</signature>
-                        <name>&lt;sshCommand&gt;5__2</name>
-                        <newname>f</newname>
+                        <name>&lt;sshCommand&gt;5__1</name>
+                        <newname>e</newname>
                     </field>
                     <field>
                         <signature>string</signature>
                         <name>command</name>
-                        <newname>c</newname>
+                        <newname>d</newname>
                     </field>
                 </fieldlist>
                 <propertylist />
@@ -11104,11 +10864,11 @@
         </statisticline>
         <statisticline>
             <description>Total Methods</description>
-            <statistic>174</statistic>
+            <statistic>164</statistic>
         </statisticline>
         <statisticline>
             <description>Total Fields</description>
-            <statistic>2372</statistic>
+            <statistic>2331</statistic>
         </statisticline>
         <statisticline>
             <description>Total Properties</description>
@@ -11126,12 +10886,12 @@
         <statisticline>
             <description>Total Methods Renamed</description>
             <statistic>45</statistic>
-            <statistic>25.86%</statistic>
+            <statistic>27.44%</statistic>
         </statisticline>
         <statisticline>
             <description>Total Fields Renamed</description>
-            <statistic>177</statistic>
-            <statistic>7.46%</statistic>
+            <statistic>141</statistic>
+            <statistic>6.05%</statistic>
         </statisticline>
         <statisticline>
             <description>Total Properties Renamed</description>
@@ -11146,37 +10906,37 @@
         <statisticline>
             <description>Methods Renamed to 'a'</description>
             <statistic>14</statistic>
-            <statistic>8.05%</statistic>
+            <statistic>8.54%</statistic>
         </statisticline>
         <statisticline>
             <description>Methods Renamed to 'd'</description>
             <statistic>10</statistic>
-            <statistic>5.75%</statistic>
+            <statistic>6.10%</statistic>
         </statisticline>
         <statisticline>
             <description>Methods Renamed to 'e'</description>
-            <statistic>7</statistic>
-            <statistic>4.02%</statistic>
+            <statistic>9</statistic>
+            <statistic>5.49%</statistic>
         </statisticline>
         <statisticline>
             <description>Methods Renamed to 'f'</description>
-            <statistic>7</statistic>
-            <statistic>4.02%</statistic>
+            <statistic>5</statistic>
+            <statistic>3.05%</statistic>
         </statisticline>
         <statisticline>
             <description>Methods Renamed to 'b'</description>
             <statistic>4</statistic>
-            <statistic>2.30%</statistic>
+            <statistic>2.44%</statistic>
         </statisticline>
         <statisticline>
             <description>Methods Renamed to 'c'</description>
             <statistic>2</statistic>
-            <statistic>1.15%</statistic>
+            <statistic>1.22%</statistic>
         </statisticline>
         <statisticline>
             <description>Methods Renamed to 'g'</description>
             <statistic>1</statistic>
-            <statistic>0.57%</statistic>
+            <statistic>0.61%</statistic>
         </statisticline>
     </statistics>
 </dotfuscatorMap>
