@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
   <!-- Inherit from the light Material Theme -->
-  <style name="VeekeeTheme" parent="android:Theme.Material.Light">
+  <style name="VeekeeTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowNoTitle">true</item>
     <!-- Colour overrides -->
     <item name="android:colorPrimary">@color/primary_green</item>
     <item name="android:colorPrimaryDark">@color/primary_dark_green</item>

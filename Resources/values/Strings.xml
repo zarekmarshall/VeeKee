@@ -11,16 +11,22 @@
   <string name="VpnClientFormat">VPN Client {0}</string>
   
   <!-- Messages -->
-  <string name="NotConnectedToWifiMessage">Not connected to wifi</string>
-  <string name="NotConnectedToCorrectWifiMessage">Not connected to correct wifi</string>
+  <string name="OopsMessage">Something is not quite right</string>
+  
+  <string name="NotConnectedToWifiMessage">You need to enable wifi, and ensure that it is connected</string>
+  <string name="NotConnectedToExpectedWifiMessage">You appear to be connected to a different wifi connection this time</string>
 
-  <string name="RouterConnectionAuthorizationIssueMessage">Authorization problem</string>
-  <string name="NetworkIssueMessage">Network problem</string>
-  <string name="ConnectionTimeoutMessage">Connection timeout</string>
+  <string name="RouterNotConnectedMessage">Unable to connect to the router</string>
+  <string name="RouterConnectionAuthorizationIssueMessage">There has been an authorization problem. Please check your router credentials</string>
+  <string name="NetworkIssueMessage">There seems to be a network problem</string>
+  <string name="ConnectionTimeoutMessage">The connection to the router timed out</string>
 
   <string name="UpdatingVpnTitle">Updating...</string>
   <string name="EnablingVpnFormat">Enabling {0}</string>
   <string name="DisablingVpnFormat">Disabling {0}</string>
+  <string name="EnabledVpnFormat">Enabled {0}</string>
+  <string name="DisabledVpnFormat">Disabled {0}</string>
+  <string name="OkMessage">Ok</string>
 
   <string name="CheckingVpnStatusTitle">Checking...</string>
   <string name="ConnectingToRouterStatusMessage">Connecting to router</string>
