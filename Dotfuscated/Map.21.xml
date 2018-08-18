@@ -2,7 +2,7 @@
 <!DOCTYPE dotfuscatorMap SYSTEM "http://www.preemptive.com/dotfuscator/dtd/dotfuscatorMap_v1.2.dtd">
 <dotfuscatorMap version="1.1">
     <header>
-        <timestamp>2017-12-09T16:15:48</timestamp>
+        <timestamp>2017-12-09T16:02:39</timestamp>
         <product version="5.32.1.6167" user="Zarek Marshall" serial="229657-391">Dotfuscator Community Edition</product>
     </header>
     <mapping>
