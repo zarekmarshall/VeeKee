@@ -1,14 +1,11 @@
 using Android.Content;
-using Android.Graphics.Drawables;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using System;
 using System.Collections.Generic;
-using System.IO;
-using VeeKee.Ssh;
+using VeeKee.Shared.Ssh;
 
-namespace VeeKee.Adapters
+namespace VeeKee.Android.Adapters
 {
     public class VpnItem
     {

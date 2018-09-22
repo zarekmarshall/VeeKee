@@ -1,31 +1,31 @@
 ﻿using Android.App;
-using Android.Net;
+using Android.Content;
 using Android.OS;
+using Android.Support.Design.Widget;
+using Android.Support.V7.App;
+using Android.Views;
 using Android.Widget;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using VeeKee.Adapters;
-using VeeKee.Ssh;
-using Android.Views;
-using Android.Content;
-using Android.Support.V7.App;
-using Android.Support.V7.Widget;
-using Android.Support.Design.Widget;
+using VeeKee.Android.Adapters;
+using VeeKee.Shared.Ssh;
 using AlertDialog = Android.Support.V7.App.AlertDialog;
+using WidgetToolBar = Android.Support.V7.Widget.Toolbar;
 
-namespace VeeKee
+namespace VeeKee.Android
 {
     [Activity(Label = "VeeKee", MainLauncher = true, Icon = "@drawable/VeeKeeIcon")]
     public class MainActivity : AppCompatActivity
     {
-        private Android.Support.V7.Widget.Toolbar _toolbar;
+        private WidgetToolBar _toolbar;
 
         private VeeKeePreferences _preferences;
 
         private WifiChecker _wifiChecker;
         private string _updatingMessage;
         private string _updatedMessage;
+        private ProgressBar _progressBar;
 
         #region Activity Events
         protected override void OnCreate(Bundle bundle)
@@ -37,11 +37,15 @@ namespace VeeKee
 
             this.SetContentView(Resource.Layout.Main);
 
-            _toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            _toolbar = FindViewById<WidgetToolBar>(Resource.Id.toolbar);
             SetSupportActionBar(_toolbar);
 
+            _progressBar = FindViewById<ProgressBar>(Resource.Id.progressBarVpnUpdate);
+
             var vpnListView = FindViewById<ListView>(Resource.Id.vpnListView);
-            vpnListView.ItemClick += new EventHandler<AdapterView.ItemClickEventArgs>(VpnListView_ItemClick);
+            //vpnListView.ItemClick += new EventHandler<AdapterView.ItemClickEventArgs>(VpnListView_ItemClick);
+            vpnListView.ItemClick += VpnListView_ItemClick;
+
         }
 
         async protected override void OnResume()
@@ -91,68 +95,67 @@ namespace VeeKee
                 return;
             }
 
-            using (var progressDialog = new ProgressDialog(this))
+            var vpnListView = (ListView)sender;
+            var vpnRowItem = vpnListView.GetChildAt(e.Position);
+            var vpnSwitch = (Switch)vpnRowItem.FindViewById(Resource.Id.vpnSwitch);
+
+            bool tappedVpnCurrentlyEnabled = vpnSwitch.Checked;
+
+            // Ensure that the correct Vpn Switches are enabled and disabled accordingly
+            this.RunOnUiThread(() => UpdateSelectedVpnItems(vpnListView, e.Position));
+
+            _progressBar.Visibility = ViewStates.Visible;
+
+            bool success = false;
+            var routerStatus = RouterConnectionStatus.NotConnected;
+            try
             {
-                var vpnListView = (ListView)sender;
-                var vpnRowItem = vpnListView.GetChildAt(e.Position);
-                var vpnSwitch = (Switch)vpnRowItem.FindViewById(Resource.Id.vpnSwitch);
-
-                bool tappedVpnCurrentlyEnabled = vpnSwitch.Checked;
-
-                // Ensure that the correct Vpn Switches are enabled and disabled accordingly
-                UpdateSelectedVpnItems(vpnListView, e.Position);
-
-                progressDialog.SetTitle(this.Resources.GetString(Resource.String.UpdatingVpnTitle));
-                progressDialog.SetMessage(_updatingMessage);
-                progressDialog.Show();
-
-                bool success = false;
-                RouterConnectionStatus routerStatus = RouterConnectionStatus.NotConnected;
-                try
+                using (var asusCommander = GetAsusSshVpnCommander())
                 {
-                    using (var asusCommander = GetAsusSshVpnCommander())
+                    var vpnIndex = e.Position + 1;
+                    var connected = await asusCommander.Connect();
+                    routerStatus = asusCommander.Connection.Status;
+
+                    switch (routerStatus)
                     {
-                        var vpnIndex = e.Position + 1;
-                        var connected = await asusCommander.Connect();
-                        routerStatus = asusCommander.Connection.Status;
+                        case RouterConnectionStatus.Connected:
+                            if (tappedVpnCurrentlyEnabled)
+                            {
+                                success = await asusCommander.DisableVpn(vpnIndex);
+                            }
+                            else
+                            {
+                                success = await asusCommander.EnableVpn(vpnIndex);
+                            }
+                            break;
 
-                        switch (routerStatus)
-                        {
-                            case RouterConnectionStatus.Connected:
-                                if (tappedVpnCurrentlyEnabled)
-                                {
-                                    success = await asusCommander.DisableVpn(vpnIndex);
-                                }
-                                else
-                                {
-                                    success = await asusCommander.EnableVpn(vpnIndex);
-                                }
-                                break;
-
-                            default:
-                                DisplayRouterIssueDialog(routerStatus);
-                                return;
-                        }
+                        default:
+                            DisplayRouterIssueDialog(routerStatus);
+                            return;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Toast.MakeText(this, String.Format("Unhandled exception {0}", ex.ToString()), ToastLength.Long);
-                }
-                finally
-                {
-                    progressDialog.Dismiss();
-                }
 
-                if (success)
-                {
-                    var mainLayout = this.FindViewById<LinearLayout>(Resource.Id.mainLinearLayout);
-
-                    Snackbar.Make(mainLayout, _updatedMessage, Snackbar.LengthLong)
-                        .SetAction(this.GetString(Resource.String.OkMessage), (view) => {})
-                        .Show();
+                    // TODO
+                    success = true;
                 }
             }
+            catch (Exception ex)
+            {
+                Toast.MakeText(this, String.Format("Unhandled exception {0}", ex.ToString()), ToastLength.Long);
+            }
+            finally
+            {
+                _progressBar.Visibility = ViewStates.Invisible;
+            }
+
+            if (success)
+            {
+                var mainLayout = this.FindViewById<LinearLayout>(Resource.Id.mainLinearLayout);
+
+                Snackbar.Make(mainLayout, _updatedMessage, Snackbar.LengthLong)
+                    .SetAction(this.GetString(Resource.String.OkMessage), (view) => { })
+                    .Show();
+            }
+            
         }
         #endregion Click Events
 
@@ -184,12 +187,6 @@ namespace VeeKee
 
             var routerStatus = RouterConnectionStatus.NotConnected;
 
-            // Check the current status of vpns
-            var progressDialog = new ProgressDialog(this);
-            progressDialog.SetTitle(this.GetString(Resource.String.CheckingVpnStatusMessage));
-            progressDialog.SetMessage(this.GetString(Resource.String.ConnectingToRouterStatusMessage));
-            progressDialog.Show();
-
             using (var asusCommander = GetAsusSshVpnCommander())
             {
                 bool connected = await asusCommander.Connect();
@@ -202,12 +199,12 @@ namespace VeeKee
                     return;
                 }
 
-                progressDialog.SetMessage(this.GetString(Resource.String.CheckingVpnStatusMessage));
+                _progressBar.Visibility = ViewStates.Visible;
                 vpnItems = await CheckCurrentVpnStatus(asusCommander, vpnItems);
                 initialisationIssue = false;
             }
 
-            progressDialog.Dismiss();
+            _progressBar.Visibility = ViewStates.Gone;
 
             var adapter = new VpnArrayAdapter(this, vpnItems);
             var vpnListView = FindViewById<ListView>(Resource.Id.vpnListView);
@@ -283,7 +280,8 @@ namespace VeeKee
 
                 if (i == selectedIndex)
                 {
-                    vpnSwitch.Checked = !vpnSwitch.Checked;
+                    vpnSwitch.Toggle();
+                    //vpnSwitch.Checked = !vpnSwitch.Checked;
                     format = vpnSwitch.Checked ? this.Resources.GetString(Resource.String.EnablingVpnFormat) : this.Resources.GetString(Resource.String.DisablingVpnFormat);
                     _updatingMessage = String.Format(format, (string)vpnName.Text);
 

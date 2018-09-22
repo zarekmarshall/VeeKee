@@ -1,17 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+using A = Android;
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.Preferences;
+using Android.Views;
+using System;
 
-namespace VeeKee
+namespace VeeKee.Android
 {
     [Activity(Label = "Settings", Icon = "@drawable/settings")]
     public class AppPreferencesActivity : PreferenceActivity
@@ -23,14 +17,14 @@ namespace VeeKee
             // Set up the Action Bar
             //ActionBar.DisplayOptions = ActionBarDisplayOptions.ShowHome | ActionBarDisplayOptions.HomeAsUp | ActionBarDisplayOptions.ShowTitle;
 
-            FragmentManager.BeginTransaction().Replace(Android.Resource.Id.Content, new AppPreferencesFragment()).Commit();
+            FragmentManager.BeginTransaction().Replace(A.Resource.Id.Content, new AppPreferencesFragment()).Commit();
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
             {
-                case Android.Resource.Id.Home:
+                case A.Resource.Id.Home:
                     Finish();
                     return true;
                 default:

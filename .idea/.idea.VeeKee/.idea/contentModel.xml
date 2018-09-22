@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="\9934d88c" t="IncludeRecursive" />
+    <e p="\app" t="IncludeRecursive" />
+    <e p="C:\Users\zarek\.Rider2018.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\zarek\.Rider2018.2\system\resharper-host\local\Transient\ReSharperHost\v182\SolutionCaches\_VeeKee.-624344545.00" t="ExcludeRecursive" />
+    <e p="C:\Zarek's Stuff\Dev\VeeKee" t="IncludeRecursive">
+      <e p="Adapters" t="Include">
+        <e p="VpnArrayAdapter.cs" t="Include" />
+      </e>
+      <e p="AppPreferencesActivity.cs" t="Include" />
+      <e p="Assets" t="Include">
+        <e p="AboutAssets.txt" t="Include" />
+      </e>
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="GettingStarted.Xamarin" t="Include" />
+      <e p="MainActivity.cs" t="Include" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive">
+        <e p="Xamarin.Android.Arch.Lifecycle.Runtime.1.0.0" t="Include">
+          <e p="proguard" t="Include">
+            <e p="proguard.txt" t="Include" />
+          </e>
+        </e>
+        <e p="Xamarin.Android.Support.Animated.Vector.Drawable.26.1.0.1" t="Include">
+          <e p="proguard" t="Include">
+            <e p="proguard.txt" t="Include" />
+          </e>
+        </e>
+        <e p="Xamarin.Android.Support.Core.UI.26.1.0.1" t="Include">
+          <e p="proguard" t="Include">
+            <e p="proguard.txt" t="Include" />
+          </e>
+        </e>
+        <e p="Xamarin.Android.Support.Design.26.1.0.1" t="Include">
+          <e p="proguard" t="Include">
+            <e p="proguard.txt" t="Include" />
+          </e>
+        </e>
+        <e p="Xamarin.Android.Support.Media.Compat.26.1.0.1" t="Include">
+          <e p="proguard" t="Include">
+            <e p="proguard.txt" t="Include" />
+          </e>
+        </e>
+        <e p="Xamarin.Android.Support.v7.RecyclerView.26.1.0.1" t="Include">
+          <e p="proguard" t="Include">
+            <e p="proguard.txt" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="packages.config" t="Include" />
+      <e p="Properties" t="Include">
+        <e p="AndroidManifest.xml" t="Include" />
+        <e p="AssemblyInfo.cs" t="Include" />
+      </e>
+      <e p="Resources" t="Include">
+        <e p="AboutResources.txt" t="Include" />
+        <e p="drawable" t="Include">
+          <e p="BRA.png" t="Include" />
+          <e p="DEFAULTFLAG.png" t="Include" />
+          <e p="DEU.png" t="Include" />
+          <e p="FRA.png" t="Include" />
+          <e p="GBR.png" t="Include" />
+          <e p="refresh.png" t="Include" />
+          <e p="settings.png" t="Include" />
+          <e p="USA.png" t="Include" />
+          <e p="VeeKeeIcon.png" t="Include" />
+        </e>
+        <e p="layout" t="Include">
+          <e p="Main.axml" t="Include" />
+          <e p="toolbar.axml" t="Include" />
+          <e p="VpnRow.axml" t="Include" />
+        </e>
+        <e p="menu" t="Include">
+          <e p="connectionrefreshmenu.xml" t="Include" />
+          <e p="settingsmenu.xml" t="Include" />
+        </e>
+        <e p="Resource.Designer.cs" t="Include" />
+        <e p="values" t="Include">
+          <e p="Colors.xml" t="Include" />
+          <e p="Integers.xml" t="Include" />
+          <e p="Strings.xml" t="Include" />
+          <e p="Styles.xml" t="Include" />
+        </e>
+        <e p="xml" t="Include">
+          <e p="Preferences.xml" t="Include" />
+        </e>
+      </e>
+      <e p="Ssh" t="Include">
+        <e p="AsusSshVpnCommander.cs" t="Include" />
+        <e p="ISshCommander.cs" t="Include" />
+        <e p="ISshVpnCommander.cs" t="Include" />
+        <e p="RouterConnectionResult.cs" t="Include" />
+        <e p="SshCommander.cs" t="Include" />
+        <e p="SshNet" t="Include">
+          <e p="SshNetCommander.cs" t="Include" />
+        </e>
+      </e>
+      <e p="VeeKee.csproj" t="IncludeRecursive" />
+      <e p="VeeKee.sln" t="IncludeFlat" />
+      <e p="VeeKeePreferences.cs" t="Include" />
+      <e p="WifiChecker.cs" t="Include" />
+    </e>
+  </component>
+</project>

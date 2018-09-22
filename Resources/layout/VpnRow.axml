@@ -13,7 +13,8 @@
         p1:id="@+id/vpnSwitch"
         p1:layout_width="wrap_content"
         p1:layout_height="match_parent"
-        p1:clickable="false" />
+        p1:clickable="false"
+		p1:focusable="false"/>
     <TextView
         p1:id="@+id/vpnName"
         p1:layout_width="fill_parent"

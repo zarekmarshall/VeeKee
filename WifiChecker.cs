@@ -11,7 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Android.Net;
 
-namespace VeeKee
+namespace VeeKee.Android
 {
     public enum WifiStatus
     {

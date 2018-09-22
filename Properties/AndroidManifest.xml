@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.zarek.veekee" android:versionCode="1" android:versionName="0.1.0" android:installLocation="internalOnly">
-	<uses-sdk android:minSdkVersion="23" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.zarek.veekee" android:versionCode="1" android:versionName="0.2.0" android:installLocation="internalOnly">
+	<uses-sdk android:minSdkVersion="26" android:targetSdkVersion="27" />
 	<application android:label="VeeKee" android:theme="@style/VeekeeTheme" android:icon="@drawable/VeeKeeIcon" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />

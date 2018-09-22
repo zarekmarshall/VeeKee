@@ -10,8 +10,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Preferences;
+using Android;
 
-namespace VeeKee
+namespace VeeKee.Android
 {
     public class VeeKeePreferences
     {

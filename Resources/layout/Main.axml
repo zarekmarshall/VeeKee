@@ -10,6 +10,14 @@
   <include
       android:id="@+id/toolbar"
       layout="@layout/toolbar" />
+	<ProgressBar 
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:id="@+id/progressBarVpnUpdate"
+		android:indeterminateBehavior="repeat"
+		android:indeterminate="true"
+		android:indeterminateOnly="true" />
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"
