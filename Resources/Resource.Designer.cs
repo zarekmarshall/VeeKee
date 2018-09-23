@@ -4043,50 +4043,47 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f0a003e
 			public const int ApplicationName = 2131361854;
 			
-			// aapt resource value: 0x7f0a0051
-			public const int CheckingVpnStatusMessage = 2131361873;
+			// aapt resource value: 0x7f0a0050
+			public const int CheckingVpnStatusMessage = 2131361872;
+			
+			// aapt resource value: 0x7f0a004e
+			public const int CheckingVpnStatusTitle = 2131361870;
 			
 			// aapt resource value: 0x7f0a004f
-			public const int CheckingVpnStatusTitle = 2131361871;
-			
-			// aapt resource value: 0x7f0a0050
-			public const int ConnectingToRouterStatusMessage = 2131361872;
-			
-			// aapt resource value: 0x7f0a0048
-			public const int ConnectionTimeoutMessage = 2131361864;
-			
-			// aapt resource value: 0x7f0a0060
-			public const int DefaultFlag = 2131361888;
-			
-			// aapt resource value: 0x7f0a005e
-			public const int DefaultRouterIpAddress = 2131361886;
-			
-			// aapt resource value: 0x7f0a005f
-			public const int DefaultRouterUsername = 2131361887;
-			
-			// aapt resource value: 0x7f0a004d
-			public const int DisabledVpnFormat = 2131361869;
-			
-			// aapt resource value: 0x7f0a004b
-			public const int DisablingVpnFormat = 2131361867;
-			
-			// aapt resource value: 0x7f0a004c
-			public const int EnabledVpnFormat = 2131361868;
-			
-			// aapt resource value: 0x7f0a004a
-			public const int EnablingVpnFormat = 2131361866;
+			public const int ConnectingToRouterStatusMessage = 2131361871;
 			
 			// aapt resource value: 0x7f0a0047
-			public const int NetworkIssueMessage = 2131361863;
+			public const int ConnectionTimeoutMessage = 2131361863;
 			
-			// aapt resource value: 0x7f0a0044
-			public const int NotConnectedToExpectedWifiMessage = 2131361860;
+			// aapt resource value: 0x7f0a005f
+			public const int DefaultFlag = 2131361887;
+			
+			// aapt resource value: 0x7f0a005d
+			public const int DefaultRouterIpAddress = 2131361885;
+			
+			// aapt resource value: 0x7f0a005e
+			public const int DefaultRouterUsername = 2131361886;
+			
+			// aapt resource value: 0x7f0a004c
+			public const int DisabledVpnFormat = 2131361868;
+			
+			// aapt resource value: 0x7f0a004a
+			public const int DisablingVpnFormat = 2131361866;
+			
+			// aapt resource value: 0x7f0a004b
+			public const int EnabledVpnFormat = 2131361867;
+			
+			// aapt resource value: 0x7f0a0049
+			public const int EnablingVpnFormat = 2131361865;
+			
+			// aapt resource value: 0x7f0a0046
+			public const int NetworkIssueMessage = 2131361862;
 			
 			// aapt resource value: 0x7f0a0043
 			public const int NotConnectedToWifiMessage = 2131361859;
 			
-			// aapt resource value: 0x7f0a004e
-			public const int OkMessage = 2131361870;
+			// aapt resource value: 0x7f0a004d
+			public const int OkMessage = 2131361869;
 			
 			// aapt resource value: 0x7f0a0042
 			public const int OopsMessage = 2131361858;
@@ -4094,56 +4091,56 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f0a0040
 			public const int RefreshItemTitle = 2131361856;
 			
-			// aapt resource value: 0x7f0a0046
-			public const int RouterConnectionAuthorizationIssueMessage = 2131361862;
-			
-			// aapt resource value: 0x7f0a0055
-			public const int RouterIpAddressPreferenceKey = 2131361877;
+			// aapt resource value: 0x7f0a0045
+			public const int RouterConnectionAuthorizationIssueMessage = 2131361861;
 			
 			// aapt resource value: 0x7f0a0054
-			public const int RouterIpAddressPreferenceTitle = 2131361876;
+			public const int RouterIpAddressPreferenceKey = 2131361876;
 			
-			// aapt resource value: 0x7f0a0045
-			public const int RouterNotConnectedMessage = 2131361861;
+			// aapt resource value: 0x7f0a0053
+			public const int RouterIpAddressPreferenceTitle = 2131361875;
 			
-			// aapt resource value: 0x7f0a0059
-			public const int RouterPasswordPreferenceKey = 2131361881;
+			// aapt resource value: 0x7f0a0044
+			public const int RouterNotConnectedMessage = 2131361860;
 			
 			// aapt resource value: 0x7f0a0058
-			public const int RouterPasswordPreferenceTitle = 2131361880;
-			
-			// aapt resource value: 0x7f0a0052
-			public const int RouterPreferenceCategoryTitle = 2131361874;
-			
-			// aapt resource value: 0x7f0a005b
-			public const int RouterSshPortPreferenceKey = 2131361883;
-			
-			// aapt resource value: 0x7f0a005a
-			public const int RouterSshPortPreferenceTitle = 2131361882;
+			public const int RouterPasswordPreferenceKey = 2131361880;
 			
 			// aapt resource value: 0x7f0a0057
-			public const int RouterUsernamePreferenceKey = 2131361879;
+			public const int RouterPasswordPreferenceTitle = 2131361879;
+			
+			// aapt resource value: 0x7f0a0051
+			public const int RouterPreferenceCategoryTitle = 2131361873;
+			
+			// aapt resource value: 0x7f0a005a
+			public const int RouterSshPortPreferenceKey = 2131361882;
+			
+			// aapt resource value: 0x7f0a0059
+			public const int RouterSshPortPreferenceTitle = 2131361881;
 			
 			// aapt resource value: 0x7f0a0056
-			public const int RouterUsernamePreferenceTitle = 2131361878;
+			public const int RouterUsernamePreferenceKey = 2131361878;
+			
+			// aapt resource value: 0x7f0a0055
+			public const int RouterUsernamePreferenceTitle = 2131361877;
 			
 			// aapt resource value: 0x7f0a003f
 			public const int SettingsItemTitle = 2131361855;
 			
-			// aapt resource value: 0x7f0a0049
-			public const int UpdatingVpnTitle = 2131361865;
+			// aapt resource value: 0x7f0a0048
+			public const int UpdatingVpnTitle = 2131361864;
 			
 			// aapt resource value: 0x7f0a0041
 			public const int VpnClientFormat = 2131361857;
 			
-			// aapt resource value: 0x7f0a005d
-			public const int VpnFlagKeyPreferenceFormat = 2131361885;
-			
 			// aapt resource value: 0x7f0a005c
-			public const int VpnFlagPreferenceFormat = 2131361884;
+			public const int VpnFlagKeyPreferenceFormat = 2131361884;
 			
-			// aapt resource value: 0x7f0a0053
-			public const int VpnItemPreferenceCategoryTitle = 2131361875;
+			// aapt resource value: 0x7f0a005b
+			public const int VpnFlagPreferenceFormat = 2131361883;
+			
+			// aapt resource value: 0x7f0a0052
+			public const int VpnItemPreferenceCategoryTitle = 2131361874;
 			
 			// aapt resource value: 0x7f0a0015
 			public const int abc_action_bar_home_description = 2131361813;

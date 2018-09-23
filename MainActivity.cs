@@ -22,7 +22,7 @@ namespace VeeKee.Android
 
         private VeeKeePreferences _preferences;
 
-        private WifiChecker _wifiChecker;
+        private WifiStateService _wifiState;
         private string _updatingMessage;
         private string _updatedMessage;
         private ProgressBar _progressBar;
@@ -161,9 +161,8 @@ namespace VeeKee.Android
 
         private bool ConfirmWifi()
         {
-            DetectAndStoreWifiStatus();
-
-            if (_wifiChecker.Status != WifiStatus.ConnectedToExpectedWifi)
+            _wifiState = new WifiStateService();
+            if (!_wifiState.Connected)
             {
                 DisplayWifiIssueDialog();
                 return false;
@@ -212,7 +211,7 @@ namespace VeeKee.Android
             vpnListView.Enabled = !initialisationIssue;
         }
 
-        private async Task<Dictionary<int, VpnItem>> CheckCurrentVpnStatus(AsusSshVpnCommander asusCommander, Dictionary<int, VpnItem> vpnItems)
+        private async Task<Dictionary<int, VpnItem>> CheckCurrentVpnStatus(AsusSshVpnService asusCommander, Dictionary<int, VpnItem> vpnItems)
         {
             if (asusCommander.Connection.IsConnected)
             {
@@ -241,9 +240,9 @@ namespace VeeKee.Android
             return vpnItems;
         }
 
-        private AsusSshVpnCommander GetAsusSshVpnCommander()
+        private AsusSshVpnService GetAsusSshVpnCommander()
         {
-            var asusCommander = new AsusSshVpnCommander(
+            var asusCommander = new AsusSshVpnService(
                 _preferences.RouterIpAddress,
                 _preferences.RouterUsername,
                 _preferences.RouterPassword,
@@ -295,49 +294,19 @@ namespace VeeKee.Android
             }
         }
 
-        #region Wifi Utils
-        private void DetectAndStoreWifiStatus()
-        {
-            // Check if we are connected to wifi
-            _wifiChecker = new WifiChecker(this.ApplicationContext);
-            _wifiChecker.Check(_preferences.WifiName);
-
-            if (_wifiChecker.Connected && _preferences.WifiName == string.Empty)
-            {
-                // We haven't connected to Wifi before so lets
-                // save the name of the Wifi we are connected to 
-                // (which we will use to check we are connected to the correct Wifi next time)
-                _preferences.WifiName = _wifiChecker.ConnectedToWifiName;
-                _preferences.Save();
-            }
-        }
-        #endregion Wifi Utils
-
         private void DisplayWifiIssueDialog()
         {
             string dialogTitle = this.Resources.GetString(Resource.String.OopsMessage);
             string dialogMessage = String.Empty;
 
-            // Wifi issue?
-            if (!_wifiChecker.Connected)
-            {
-                dialogMessage = this.Resources.GetString(Resource.String.NotConnectedToWifiMessage);
-            }
-            else if (_wifiChecker.Status != WifiStatus.ConnectedToExpectedWifi)
-            {
-                dialogMessage = this.Resources.GetString(Resource.String.NotConnectedToExpectedWifiMessage);
-            }
+            dialogMessage = this.Resources.GetString(Resource.String.NotConnectedToWifiMessage);
 
-            // Display dialog to notify user they're connected to a different wifi connection than last time
-            // Allow them to use this one by default, or allow them to quit
+            // Display dialog to notify the user that they are not connected to a Wifi network
             var builder = new AlertDialog.Builder(this)
             .SetTitle(dialogTitle)
             .SetMessage(dialogMessage)
             .SetPositiveButton("Settings", delegate
             {
-                _preferences.WifiName = string.Empty;
-                _preferences.Save();
-
                 var preferencesIntent = new Intent(Application.Context, typeof(AppPreferencesActivity));
                 StartActivity(preferencesIntent);
             })

@@ -14,7 +14,6 @@
   <string name="OopsMessage">Something is not quite right</string>
   
   <string name="NotConnectedToWifiMessage">You need to enable wifi, and ensure that it is connected</string>
-  <string name="NotConnectedToExpectedWifiMessage">You appear to be connected to a different wifi connection this time</string>
 
   <string name="RouterNotConnectedMessage">Unable to connect to the router</string>
   <string name="RouterConnectionAuthorizationIssueMessage">There has been an authorization problem. Please check your router credentials</string>

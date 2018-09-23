@@ -4,5 +4,5 @@
 	<application android:label="VeeKee" android:theme="@style/VeekeeTheme" android:icon="@drawable/VeeKeeIcon" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-	<uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
