@@ -43,9 +43,7 @@ namespace VeeKee.Android
             _progressBar = FindViewById<ProgressBar>(Resource.Id.progressBarVpnUpdate);
 
             var vpnListView = FindViewById<ListView>(Resource.Id.vpnListView);
-            //vpnListView.ItemClick += new EventHandler<AdapterView.ItemClickEventArgs>(VpnListView_ItemClick);
             vpnListView.ItemClick += VpnListView_ItemClick;
-
         }
 
         async protected override void OnResume()
@@ -100,9 +98,9 @@ namespace VeeKee.Android
             var vpnSwitch = (Switch)vpnRowItem.FindViewById(Resource.Id.vpnSwitch);
 
             bool tappedVpnCurrentlyEnabled = vpnSwitch.Checked;
-
+            
             // Ensure that the correct Vpn Switches are enabled and disabled accordingly
-            this.RunOnUiThread(() => UpdateSelectedVpnItems(vpnListView, e.Position));
+            UpdateSelectedVpnItems(vpnListView, e.Position);
 
             _progressBar.Visibility = ViewStates.Visible;
 
@@ -121,11 +119,13 @@ namespace VeeKee.Android
                         case RouterConnectionStatus.Connected:
                             if (tappedVpnCurrentlyEnabled)
                             {
-                                success = await asusCommander.DisableVpn(vpnIndex);
+                                //success = await asusCommander.DisableVpn(vpnIndex);
+                                await Task.Delay(TimeSpan.FromSeconds(1));
                             }
                             else
                             {
-                                success = await asusCommander.EnableVpn(vpnIndex);
+                                //success = await asusCommander.EnableVpn(vpnIndex);
+                                await Task.Delay(TimeSpan.FromSeconds(1));
                             }
                             break;
 
@@ -270,28 +270,30 @@ namespace VeeKee.Android
         {
             var format = string.Empty;
 
-            // Ensure that the correct Vpn Switches are enabled and disabled accordingly
+            var adapter = (VpnArrayAdapter)vpnListView.Adapter;
+
             for (int i = 0; i < vpnListView.Count; i++)
             {
-                var vpnRowItem = vpnListView.GetChildAt(i);
-                var vpnSwitch = (Switch)vpnRowItem.FindViewById(Resource.Id.vpnSwitch);
-                var vpnName = (TextView)vpnRowItem.FindViewById(Resource.Id.vpnName);
+                var vpnItem = adapter[i];
 
                 if (i == selectedIndex)
                 {
-                    vpnSwitch.Toggle();
-                    //vpnSwitch.Checked = !vpnSwitch.Checked;
-                    format = vpnSwitch.Checked ? this.Resources.GetString(Resource.String.EnablingVpnFormat) : this.Resources.GetString(Resource.String.DisablingVpnFormat);
-                    _updatingMessage = String.Format(format, (string)vpnName.Text);
+                    vpnItem.Status = vpnItem.Status == VpnStatus.Enabled ? VpnStatus.Off : VpnStatus.Enabled;
 
-                    format = vpnSwitch.Checked ? this.Resources.GetString(Resource.String.EnabledVpnFormat) : this.Resources.GetString(Resource.String.DisabledVpnFormat);
-                    _updatedMessage = String.Format(format, (string)vpnName.Text);
+                    format = vpnItem.Status == VpnStatus.Enabled ? this.Resources.GetString(Resource.String.EnablingVpnFormat) : this.Resources.GetString(Resource.String.DisablingVpnFormat);
+                    _updatingMessage = String.Format(format, (string)vpnItem.Name);
+
+                    format = vpnItem.Status == VpnStatus.Enabled ? this.Resources.GetString(Resource.String.EnabledVpnFormat) : this.Resources.GetString(Resource.String.DisabledVpnFormat);
+                    _updatedMessage = String.Format(format, (string)vpnItem.Name);
                 }
                 else
                 {
-                    vpnSwitch.Checked = false;
+                    vpnItem.Status = VpnStatus.Off;
                 }
             }
+
+            // Ensjure that the UI is updated
+            adapter.NotifyDataSetChanged();
         }
 
         private void DisplayWifiIssueDialog()
