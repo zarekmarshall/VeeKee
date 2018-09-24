@@ -238,12 +238,13 @@
 		</Target>
  -->
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
-    <Exec Command="&quot;C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\Extensions\PreEmptiveSolutions\DotfuscatorCE\DotfuscatorCLI.exe&quot; -p=OutDir=$(OutDir) &quot;$(ProjectDir)Obfuscate.VeeKee.xml&quot;" />
+    <Exec Command="&quot;C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\Extensions\PreEmptiveSolutions\DotfuscatorCE\DotfuscatorCLI.exe&quot; -p=OutDir=$(OutDir) &quot;$(ProjectDir)Obfuscate.VeeKee.xml&quot;" />
     <ItemGroup>
       <ObfuscatedFiles Include="$(ProjectDir)\Dotfuscated\*.dll" />
     </ItemGroup>
     <Copy SourceFiles="@(ObfuscatedFiles)" DestinationFolder="$(OutDir)" />
-    <Copy SourceFiles="$(ProjectDir)\Dotfuscated\VeeKee.dll" DestinationFolder="$(ProjectDir)\..\VeeKee\$(OutputPath)" />
+    <Copy SourceFiles="$(ProjectDir)Dotfuscated\VeeKee.Android.dll" DestinationFolder="$(ProjectDir)\..\VeeKee\$(OutputPath)" />
+	<Copy SourceFiles="$(ProjectDir)Dotfuscated\VeeKee.Shared.dll" DestinationFolder="$(ProjectDir)\..\VeeKee\$(OutputPath)" />
   </Target>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

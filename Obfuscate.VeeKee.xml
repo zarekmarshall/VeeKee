@@ -2,25 +2,24 @@
 <!DOCTYPE dotfuscator SYSTEM "http://www.preemptive.com/dotfuscator/dtd/dotfuscator_v2.4.dtd">
 <dotfuscator version="2.3">
   <propertylist>
-    <property name="VeeKee.Android.OutDir" value="C:\Zarek's Stuff\Dev\VeeKee\bin\Release" />
-    <property name="VeeKee.Shared.OutDir" value="C:\Zarek's Stuff\Dev\VeeKeeShared\bin\Release" />
+    <property name="OutDir" value="C:\Zarek's Stuff\Dev\VeeKee\bin\Release" />
   </propertylist>
   <input>
     <loadpaths />
     <asmlist>
-      <inputassembly refid="6343a85e-fe67-46f2-971f-8db82ca7e512">
+      <inputassembly refid="cf42a64e-d2d2-42e9-b1c8-85de81126d28">
         <option>honoroas</option>
         <option>stripoa</option>
         <option>library</option>
         <option>transformxaml</option>
-        <file dir="${VeeKee.Android.OutDir}" name="VeeKee.Android.dll" />
+        <file dir="${OutDir}" name="VeeKee.Android.dll" />
       </inputassembly>
-      <inputassembly refid="68091230-7df2-4c86-9783-c7a605a7cce0">
+      <inputassembly refid="d71eabe6-7a4b-4562-aedb-8d3f2af1c412">
         <option>honoroas</option>
         <option>stripoa</option>
         <option>library</option>
         <option>transformxaml</option>
-        <file dir="${VeeKee.Shared.OutDir}" name="VeeKee.Shared.dll" />
+        <file dir="${OutDir}" name="VeeKee.Shared.dll" />
       </inputassembly>
     </asmlist>
   </input>
