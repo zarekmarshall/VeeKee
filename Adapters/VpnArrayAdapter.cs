@@ -24,12 +24,15 @@ namespace VeeKee.Android.Adapters
     {
         private Dictionary<int, VpnItem> _vpnItems;
 
+        public bool Enabled { get; set; } = false;
+
         Context _context;
 
         public VpnArrayAdapter(Context context, Dictionary<int, VpnItem> vpnItems)
         {
             this._context = context;
             this._vpnItems = vpnItems;
+
         }
 
         public override Java.Lang.Object GetItem(int position)
@@ -94,6 +97,11 @@ namespace VeeKee.Android.Adapters
             {
                 return _vpnItems[position+1];
             }
+        }
+
+        public override bool IsEnabled(int position)
+        {
+            return Enabled;
         }
     }
 

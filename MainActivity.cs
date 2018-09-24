@@ -25,7 +25,7 @@ namespace VeeKee.Android
         private WifiStateService _wifiState;
         private string _updatingMessage;
         private string _updatedMessage;
-        private ProgressBar _progressBar;
+        private FrameLayout _progressBarFrameLayout;
 
         #region Activity Events
         protected override void OnCreate(Bundle bundle)
@@ -40,7 +40,7 @@ namespace VeeKee.Android
             _toolbar = FindViewById<WidgetToolBar>(Resource.Id.toolbar);
             SetSupportActionBar(_toolbar);
 
-            _progressBar = FindViewById<ProgressBar>(Resource.Id.progressBarVpnUpdate);
+            _progressBarFrameLayout = FindViewById<FrameLayout>(Resource.Id.progressBarFrameLayout);
 
             var vpnListView = FindViewById<ListView>(Resource.Id.vpnListView);
             vpnListView.ItemClick += VpnListView_ItemClick;
@@ -98,11 +98,13 @@ namespace VeeKee.Android
             var vpnSwitch = (Switch)vpnRowItem.FindViewById(Resource.Id.vpnSwitch);
 
             bool tappedVpnCurrentlyEnabled = vpnSwitch.Checked;
-            
+            var vpnArrayAdapter = (VpnArrayAdapter)vpnListView.Adapter;
+
             // Ensure that the correct Vpn Switches are enabled and disabled accordingly
             UpdateSelectedVpnItems(vpnListView, e.Position);
 
-            _progressBar.Visibility = ViewStates.Visible;
+            vpnArrayAdapter.Enabled = false;
+            _progressBarFrameLayout.Visibility = ViewStates.Visible;
 
             bool success = false;
             var routerStatus = RouterConnectionStatus.NotConnected;
@@ -119,13 +121,13 @@ namespace VeeKee.Android
                         case RouterConnectionStatus.Connected:
                             if (tappedVpnCurrentlyEnabled)
                             {
-                                //success = await asusCommander.DisableVpn(vpnIndex);
-                                await Task.Delay(TimeSpan.FromSeconds(1));
+                                success = await asusCommander.DisableVpn(vpnIndex);
+                                //await Task.Delay(TimeSpan.FromSeconds(1));
                             }
                             else
                             {
-                                //success = await asusCommander.EnableVpn(vpnIndex);
-                                await Task.Delay(TimeSpan.FromSeconds(1));
+                                success = await asusCommander.EnableVpn(vpnIndex);
+                                //await Task.Delay(TimeSpan.FromSeconds(1));
                             }
                             break;
 
@@ -144,12 +146,13 @@ namespace VeeKee.Android
             }
             finally
             {
-                _progressBar.Visibility = ViewStates.Invisible;
+                _progressBarFrameLayout.Visibility = ViewStates.Gone;
+                vpnArrayAdapter.Enabled = true;
             }
 
             if (success)
             {
-                var mainLayout = this.FindViewById<LinearLayout>(Resource.Id.mainLinearLayout);
+                var mainLayout = this.FindViewById<RelativeLayout>(Resource.Id.mainLayout);
 
                 Snackbar.Make(mainLayout, _updatedMessage, Snackbar.LengthLong)
                     .SetAction(this.GetString(Resource.String.OkMessage), (view) => { })
@@ -198,16 +201,17 @@ namespace VeeKee.Android
                     return;
                 }
 
-                _progressBar.Visibility = ViewStates.Visible;
+                _progressBarFrameLayout.Visibility = ViewStates.Visible;
                 vpnItems = await CheckCurrentVpnStatus(asusCommander, vpnItems);
                 initialisationIssue = false;
             }
 
-            _progressBar.Visibility = ViewStates.Gone;
+            _progressBarFrameLayout.Visibility = ViewStates.Gone;
 
             var adapter = new VpnArrayAdapter(this, vpnItems);
             var vpnListView = FindViewById<ListView>(Resource.Id.vpnListView);
             vpnListView.Adapter = adapter;
+            ((VpnArrayAdapter)vpnListView.Adapter).Enabled = !initialisationIssue;
             vpnListView.Enabled = !initialisationIssue;
         }
 
@@ -292,7 +296,7 @@ namespace VeeKee.Android
                 }
             }
 
-            // Ensjure that the UI is updated
+            // Ensure that the UI is updated
             adapter.NotifyDataSetChanged();
         }
 
