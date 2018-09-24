@@ -121,13 +121,19 @@ namespace VeeKee.Android
                         case RouterConnectionStatus.Connected:
                             if (tappedVpnCurrentlyEnabled)
                             {
+#if DEBUG
+                                await Task.Delay(TimeSpan.FromSeconds(2));
+#else
                                 success = await asusCommander.DisableVpn(vpnIndex);
-                                //await Task.Delay(TimeSpan.FromSeconds(1));
+#endif
                             }
                             else
                             {
+#if DEBUG
+                                await Task.Delay(TimeSpan.FromSeconds(2));
+#else
                                 success = await asusCommander.EnableVpn(vpnIndex);
-                                //await Task.Delay(TimeSpan.FromSeconds(1));
+#endif
                             }
                             break;
 
@@ -160,7 +166,7 @@ namespace VeeKee.Android
             }
             
         }
-        #endregion Click Events
+#endregion Click Events
 
         private bool ConfirmWifi()
         {
