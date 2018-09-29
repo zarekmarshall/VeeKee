@@ -23,7 +23,7 @@
         p1:layout_alignParentTop="true"
         p1:layout_alignWithParentIfMissing="true"
         p1:gravity="center_vertical"
-        p1:drawableLeft="@drawable/BRA"
+        p1:drawableLeft="@drawable/DEFAULTFLAG"
         p1:drawablePadding="10dp"
         p1:text="Vpn 1"
         p1:textSize="16sp" />
