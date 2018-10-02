@@ -4,7 +4,9 @@
 
   <!-- Settings menu -->
   <string name="SettingsItemTitle">Settings</string>
+  <string name="AutoConfigureItemTitle">Auto Configure</string>
   
+
   <!-- Connection menu -->
   <string name="RefreshItemTitle">Refresh</string>
 

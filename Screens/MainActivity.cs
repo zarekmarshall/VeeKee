@@ -7,8 +7,10 @@ using Android.Views;
 using Android.Widget;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using VeeKee.Android.Adapters;
+using VeeKee.Shared.CountryCodeLookup;
 using VeeKee.Shared.Ssh;
 using AlertDialog = Android.Support.V7.App.AlertDialog;
 using WidgetToolBar = Android.Support.V7.Widget.Toolbar;
@@ -80,9 +82,81 @@ namespace VeeKee.Android
                     var preferencesIntent = new Intent(this, typeof(AppPreferencesActivity));
                     StartActivity(preferencesIntent);
                     return true;
+                case Resource.Id.autoconfigure_button:
+                    AutoConfigure();
+                    return true;
             }
 
             return base.OnOptionsItemSelected(item);
+        }
+
+        private async void AutoConfigure()
+        {
+            // TODO check for internet connection
+            if (!ConfirmWifi())
+            {
+                return;
+            }
+
+            var vpnListView = FindViewById<ListView>(Resource.Id.vpnListView);
+            var vpnArrayAdapter = (VpnArrayAdapter)vpnListView.Adapter;
+
+            vpnArrayAdapter.Enabled = false;
+            _progressBarFrameLayout.Visibility = ViewStates.Visible;
+
+            try
+            {
+                // Get all the VPN Names and HostNames from the router
+                Dictionary<int, VpnDetails> vpnDetails = null;
+                using (var asusCommander = GetAsusSshVpnCommander())
+                {
+                    var connected = await asusCommander.Connect();
+                    var routerStatus = asusCommander.Connection.Status;
+
+                    switch (routerStatus)
+                    {
+                        case RouterConnectionStatus.Connected:
+                            {
+                                //await Task.Delay(TimeSpan.FromSeconds(2));
+                                vpnDetails = await asusCommander.Details();
+                            }
+
+                            break;
+                    }
+                }
+
+                for (int i = 0; i<vpnListView.Count; i++)
+                {
+                    var vpnItem = vpnArrayAdapter[i];
+
+                    vpnItem.Name = vpnDetails[i+1].Name;
+                }
+
+                // Lookup the country codes for each configured VPN
+                foreach (int vpnIndex in vpnDetails.Keys)
+                {
+                    // TODO
+                    string countryCode = await IPStackCountryLookupService.LookupAsync(vpnDetails[vpnIndex].Address, new CancellationTokenSource().Token);
+                    
+                    if (countryCode != null)
+                    {
+                        int flagResourceId = GetFlagResourceId(countryCode);
+                        vpnArrayAdapter[vpnIndex-1].FlagResourceId = flagResourceId;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Toast.MakeText(this, String.Format("Unhandled exception {0}", ex.ToString()), ToastLength.Long);
+            }
+            finally
+            {
+                // Ensure that the UI is updated
+                vpnArrayAdapter.NotifyDataSetChanged();
+
+                _progressBarFrameLayout.Visibility = ViewStates.Gone;
+                vpnArrayAdapter.Enabled = true;
+            }
         }
 
         private async void VpnListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)

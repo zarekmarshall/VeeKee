@@ -4,4 +4,8 @@
         android:title="@string/SettingsItemTitle"
         android:icon="@drawable/settings"
         android:showAsAction="always"/>
+  <item android:id="@+id/autoconfigure_button"
+      android:title="@string/AutoConfigureItemTitle"
+      android:icon="@drawable/settings"
+      android:showAsAction="always"/>
 </menu>
