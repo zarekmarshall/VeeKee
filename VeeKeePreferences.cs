@@ -122,10 +122,31 @@ namespace VeeKee.Android
             }
         }
 
+        public string GetVpnName(int i)
+        {
+            var key = String.Format(this._context.GetString(Resource.String.VpnNamePreferenceFormat), i);
+            return _sharedPreferences.GetString(key, key);
+        }
+
+        public void SetVpnName(int i, string name)
+        {
+            var key = String.Format(this._context.GetString(Resource.String.VpnNamePreferenceFormat), i);
+            var editor = _sharedPreferences.Edit();
+            editor.PutString(key, name);
+        }
+
+
         public string GetVpnFlag(int i)
         {
             var key = String.Format(this._context.GetString(Resource.String.VpnFlagKeyPreferenceFormat), i);
             return _sharedPreferences.GetString(key, this._context.GetString(Resource.String.DefaultFlag));
+        }
+
+        public void SetVpnFlag(int i, string flag)
+        {
+            var key = String.Format(this._context.GetString(Resource.String.VpnFlagKeyPreferenceFormat), i);
+            var editor = _sharedPreferences.Edit();
+            editor.PutString(key, flag);
         }
     }
 }

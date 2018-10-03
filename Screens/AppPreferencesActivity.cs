@@ -44,8 +44,14 @@ namespace VeeKee.Android
 
             for (int i=1; i< this.Resources.GetInteger(Resource.Integer.VpnItemCount) + 1; i++)
             {
-                var vpnClientName = string.Format(this.Resources.GetString(Resource.String.VpnFlagPreferenceFormat), i);
+                var vpnClientName = string.Format(this.Resources.GetString(Resource.String.VpnNamePreferenceFormat), i);
                 var vpnClientFlagKey = String.Format(this.Resources.GetString(Resource.String.VpnFlagKeyPreferenceFormat), i);
+
+                var namePreference = new EditTextPreference(preferenceScreen.Context);
+                namePreference.Title = vpnClientName;
+                namePreference.Key = vpnClientName;
+                namePreference.Persistent = true;
+                preferenceScreen.AddPreference(namePreference);
 
                 var flagPreference = new ListPreference(preferenceScreen.Context);
                 flagPreference.SetEntries(Resource.Array.flag_titles);

@@ -10,7 +10,10 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using VeeKee.Android.Adapters;
+using VeeKee.Android.Model;
+using VeeKee.Android.ViewModel;
 using VeeKee.Shared.CountryCodeLookup;
+using VeeKee.Shared.Models;
 using VeeKee.Shared.Ssh;
 using AlertDialog = Android.Support.V7.App.AlertDialog;
 using WidgetToolBar = Android.Support.V7.Widget.Toolbar;
@@ -106,43 +109,10 @@ namespace VeeKee.Android
 
             try
             {
-                // Get all the VPN Names and HostNames from the router
-                Dictionary<int, VpnDetails> vpnDetails = null;
                 using (var asusCommander = GetAsusSshVpnCommander())
                 {
-                    var connected = await asusCommander.Connect();
-                    var routerStatus = asusCommander.Connection.Status;
-
-                    switch (routerStatus)
-                    {
-                        case RouterConnectionStatus.Connected:
-                            {
-                                //await Task.Delay(TimeSpan.FromSeconds(2));
-                                vpnDetails = await asusCommander.Details();
-                            }
-
-                            break;
-                    }
-                }
-
-                for (int i = 0; i<vpnListView.Count; i++)
-                {
-                    var vpnItem = vpnArrayAdapter[i];
-
-                    vpnItem.Name = vpnDetails[i+1].Name;
-                }
-
-                // Lookup the country codes for each configured VPN
-                foreach (int vpnIndex in vpnDetails.Keys)
-                {
-                    // TODO
-                    string countryCode = await IPStackCountryLookupService.LookupAsync(vpnDetails[vpnIndex].Address, new CancellationTokenSource().Token);
-                    
-                    if (countryCode != null)
-                    {
-                        int flagResourceId = GetFlagResourceId(countryCode);
-                        vpnArrayAdapter[vpnIndex-1].FlagResourceId = flagResourceId;
-                    }
+                    // Get all the VPN Names and HostNames from the router
+                    var success = await vpnArrayAdapter.VpnUIItemViewModel.AutoConfigureFromRouterSettings(asusCommander, _preferences);
                 }
             }
             catch (Exception ex)
@@ -265,7 +235,9 @@ namespace VeeKee.Android
             }
 
             // Initialise a list of VpnItems
-            var vpnItems = VpnItems();
+            var vpnUIItemViewModel = new VpnUIItemViewModel(PackageName, this.Resources);
+            vpnUIItemViewModel.LoadVpnUIItemsFromPreferences(_preferences);
+            var vpnItems = vpnUIItemViewModel.VpnUIItems;
 
             var routerStatus = RouterConnectionStatus.NotConnected;
 
@@ -282,46 +254,17 @@ namespace VeeKee.Android
                 }
 
                 _progressBarFrameLayout.Visibility = ViewStates.Visible;
-                vpnItems = await CheckCurrentVpnStatus(asusCommander, vpnItems);
-                initialisationIssue = false;
+                bool success = await vpnUIItemViewModel.UpdateVpnUIItemStatus(asusCommander);
+                initialisationIssue = !success;
             }
 
             _progressBarFrameLayout.Visibility = ViewStates.Gone;
 
-            var adapter = new VpnArrayAdapter(this, vpnItems);
+            var adapter = new VpnArrayAdapter(this, vpnUIItemViewModel);
             var vpnListView = FindViewById<ListView>(Resource.Id.vpnListView);
             vpnListView.Adapter = adapter;
             ((VpnArrayAdapter)vpnListView.Adapter).Enabled = !initialisationIssue;
             vpnListView.Enabled = !initialisationIssue;
-        }
-
-        private async Task<Dictionary<int, VpnItem>> CheckCurrentVpnStatus(AsusSshVpnService asusCommander, Dictionary<int, VpnItem> vpnItems)
-        {
-            if (asusCommander.Connection.IsConnected)
-            {
-                var vpnStatus = await asusCommander.Status();
-
-                foreach (var key in vpnStatus.Keys)
-                {
-                    vpnItems[key].Status = vpnStatus[key];
-                }
-            }
-
-            return vpnItems;
-        }
-
-        private Dictionary<int, VpnItem> VpnItems()
-        {
-            var vpnItems = new Dictionary<int, VpnItem>();
-
-            for (int i = 1; i<this.Resources.GetInteger(Resource.Integer.VpnItemCount) + 1; i++)
-            {
-                var vpnItemName = string.Format(this.Resources.GetString(Resource.String.VpnClientFormat), i);
-
-                vpnItems.Add(i, new VpnItem(vpnItemName, GetFlagResourceId(_preferences.GetVpnFlag(i)), VpnStatus.Off));
-            }
-
-            return vpnItems;
         }
 
         private AsusSshVpnService GetAsusSshVpnCommander()
@@ -334,18 +277,6 @@ namespace VeeKee.Android
                 this.Resources.GetInteger(Resource.Integer.ConnectionTimeoutSeconds));
 
             return asusCommander;
-        }
-
-        private int GetFlagResourceId(string flagName)
-        {
-            int resourceId = Resources.GetIdentifier(flagName.ToLower(), "drawable", PackageName);
-
-            if (resourceId == 0)
-            {
-                resourceId = Resource.Drawable.DEFAULTFLAG;
-            }
-
-            return resourceId;
         }
 
         private void UpdateSelectedVpnItems(

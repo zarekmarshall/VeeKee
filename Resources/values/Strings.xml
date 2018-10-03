@@ -49,7 +49,7 @@
   <string name="RouterSshPortPreferenceTitle">SSH Port</string>
   <string name="RouterSshPortPreferenceKey">RouterSSHPort</string>
 
-  <string name="VpnFlagPreferenceFormat">VPN Client {0}</string>
+  <string name="VpnNamePreferenceFormat">Client {0}</string>
   <string name="VpnFlagKeyPreferenceFormat">VPNClient{0}_flag</string>
   
   <!-- Default Preferences -->

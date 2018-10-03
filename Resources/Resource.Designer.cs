@@ -4898,11 +4898,11 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f0a005d
 			public const int VpnFlagKeyPreferenceFormat = 2131361885;
 			
-			// aapt resource value: 0x7f0a005c
-			public const int VpnFlagPreferenceFormat = 2131361884;
-			
 			// aapt resource value: 0x7f0a0053
 			public const int VpnItemPreferenceCategoryTitle = 2131361875;
+			
+			// aapt resource value: 0x7f0a005c
+			public const int VpnNamePreferenceFormat = 2131361884;
 			
 			// aapt resource value: 0x7f0a0015
 			public const int abc_action_bar_home_description = 2131361813;

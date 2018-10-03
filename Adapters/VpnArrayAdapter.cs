@@ -3,35 +3,24 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using System.Collections.Generic;
-using VeeKee.Shared.Ssh;
+using VeeKee.Android.Model;
+using VeeKee.Android.ViewModel;
+using VeeKee.Shared.Models;
 
 namespace VeeKee.Android.Adapters
 {
-    public class VpnItem
+    public class VpnArrayAdapter : BaseAdapter<VpnUIItem>
     {
-        public string Name { get; set; }
-        public int FlagResourceId { get; set; } 
-        public VpnStatus Status { get; set; }
-        
-        public VpnItem(string name, int flagResourceId, VpnStatus status)
-        {
-            this.Name = name;
-            this.FlagResourceId = flagResourceId;
-            this.Status = status;
-        }
-    }
-    public class VpnArrayAdapter : BaseAdapter<VpnItem>
-    {
-        private Dictionary<int, VpnItem> _vpnItems;
+        public VpnUIItemViewModel VpnUIItemViewModel;
 
         public bool Enabled { get; set; } = false;
 
         Context _context;
 
-        public VpnArrayAdapter(Context context, Dictionary<int, VpnItem> vpnItems)
+        public VpnArrayAdapter(Context context, VpnUIItemViewModel vpnUIItemViewModel)
         {
             this._context = context;
-            this._vpnItems = vpnItems;
+            this.VpnUIItemViewModel = vpnUIItemViewModel;
 
         }
 
@@ -87,15 +76,15 @@ namespace VeeKee.Android.Adapters
         {
             get
             {
-                return _vpnItems.Count;
+                return VpnUIItemViewModel.VpnUIItems.Count;
             }
         }
 
-        public override VpnItem this[int position]
+        public override VpnUIItem this[int position]
         {
             get
             {
-                return _vpnItems[position+1];
+                return VpnUIItemViewModel.VpnUIItems[position+1];
             }
         }
 
