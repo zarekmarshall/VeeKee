@@ -3849,8 +3849,8 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f090036
 			public const int SYM = 2131296310;
 			
-			// aapt resource value: 0x7f0900ba
-			public const int action0 = 2131296442;
+			// aapt resource value: 0x7f0900bb
+			public const int action0 = 2131296443;
 			
 			// aapt resource value: 0x7f09007b
 			public const int action_bar = 2131296379;
@@ -3873,17 +3873,17 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f090059
 			public const int action_bar_title = 2131296345;
 			
-			// aapt resource value: 0x7f0900b7
-			public const int action_container = 2131296439;
+			// aapt resource value: 0x7f0900b8
+			public const int action_container = 2131296440;
 			
 			// aapt resource value: 0x7f09007c
 			public const int action_context_bar = 2131296380;
 			
-			// aapt resource value: 0x7f0900be
-			public const int action_divider = 2131296446;
+			// aapt resource value: 0x7f0900bf
+			public const int action_divider = 2131296447;
 			
-			// aapt resource value: 0x7f0900b8
-			public const int action_image = 2131296440;
+			// aapt resource value: 0x7f0900b9
+			public const int action_image = 2131296441;
 			
 			// aapt resource value: 0x7f090003
 			public const int action_menu_divider = 2131296259;
@@ -3900,11 +3900,11 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f09005b
 			public const int action_mode_close_button = 2131296347;
 			
-			// aapt resource value: 0x7f0900b9
-			public const int action_text = 2131296441;
+			// aapt resource value: 0x7f0900ba
+			public const int action_text = 2131296442;
 			
-			// aapt resource value: 0x7f0900c7
-			public const int actions = 2131296455;
+			// aapt resource value: 0x7f0900c8
+			public const int actions = 2131296456;
 			
 			// aapt resource value: 0x7f09005c
 			public const int activity_chooser_view_content = 2131296348;
@@ -3927,8 +3927,8 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f090043
 			public const int auto = 2131296323;
 			
-			// aapt resource value: 0x7f0900d2
-			public const int autoconfigure_button = 2131296466;
+			// aapt resource value: 0x7f0900d3
+			public const int autoconfigure_button = 2131296467;
 			
 			// aapt resource value: 0x7f09002e
 			public const int beginning = 2131296302;
@@ -3942,8 +3942,8 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f090062
 			public const int buttonPanel = 2131296354;
 			
-			// aapt resource value: 0x7f0900bb
-			public const int cancel_action = 2131296443;
+			// aapt resource value: 0x7f0900bc
+			public const int cancel_action = 2131296444;
 			
 			// aapt resource value: 0x7f090044
 			public const int center = 2131296324;
@@ -3957,8 +3957,8 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f090072
 			public const int checkbox = 2131296370;
 			
-			// aapt resource value: 0x7f0900c3
-			public const int chronometer = 2131296451;
+			// aapt resource value: 0x7f0900c4
+			public const int chronometer = 2131296452;
 			
 			// aapt resource value: 0x7f09004d
 			public const int clip_horizontal = 2131296333;
@@ -4014,8 +4014,8 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f09002f
 			public const int end = 2131296303;
 			
-			// aapt resource value: 0x7f0900c9
-			public const int end_padder = 2131296457;
+			// aapt resource value: 0x7f0900ca
+			public const int end_padder = 2131296458;
 			
 			// aapt resource value: 0x7f09003e
 			public const int enterAlways = 2131296318;
@@ -4059,8 +4059,8 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f090061
 			public const int icon = 2131296353;
 			
-			// aapt resource value: 0x7f0900c8
-			public const int icon_group = 2131296456;
+			// aapt resource value: 0x7f0900c9
+			public const int icon_group = 2131296457;
 			
 			// aapt resource value: 0x7f090039
 			public const int ifRoom = 2131296313;
@@ -4068,8 +4068,8 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f09005e
 			public const int image = 2131296350;
 			
-			// aapt resource value: 0x7f0900c4
-			public const int info = 2131296452;
+			// aapt resource value: 0x7f0900c5
+			public const int info = 2131296453;
 			
 			// aapt resource value: 0x7f090058
 			public const int italic = 2131296344;
@@ -4098,14 +4098,14 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f090098
 			public const int mainLayout = 2131296408;
 			
-			// aapt resource value: 0x7f0900cf
-			public const int masked = 2131296463;
+			// aapt resource value: 0x7f0900d0
+			public const int masked = 2131296464;
 			
-			// aapt resource value: 0x7f0900bd
-			public const int media_actions = 2131296445;
+			// aapt resource value: 0x7f0900be
+			public const int media_actions = 2131296446;
 			
-			// aapt resource value: 0x7f0900ca
-			public const int message = 2131296458;
+			// aapt resource value: 0x7f0900cb
+			public const int message = 2131296459;
 			
 			// aapt resource value: 0x7f090030
 			public const int middle = 2131296304;
@@ -4113,80 +4113,80 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f090052
 			public const int mini = 2131296338;
 			
-			// aapt resource value: 0x7f0900a9
-			public const int mr_art = 2131296425;
-			
-			// aapt resource value: 0x7f09009e
-			public const int mr_chooser_list = 2131296414;
-			
-			// aapt resource value: 0x7f0900a1
-			public const int mr_chooser_route_desc = 2131296417;
+			// aapt resource value: 0x7f0900aa
+			public const int mr_art = 2131296426;
 			
 			// aapt resource value: 0x7f09009f
-			public const int mr_chooser_route_icon = 2131296415;
-			
-			// aapt resource value: 0x7f0900a0
-			public const int mr_chooser_route_name = 2131296416;
-			
-			// aapt resource value: 0x7f09009d
-			public const int mr_chooser_title = 2131296413;
-			
-			// aapt resource value: 0x7f0900a6
-			public const int mr_close = 2131296422;
-			
-			// aapt resource value: 0x7f0900ac
-			public const int mr_control_divider = 2131296428;
-			
-			// aapt resource value: 0x7f0900b2
-			public const int mr_control_playback_ctrl = 2131296434;
-			
-			// aapt resource value: 0x7f0900b5
-			public const int mr_control_subtitle = 2131296437;
-			
-			// aapt resource value: 0x7f0900b4
-			public const int mr_control_title = 2131296436;
-			
-			// aapt resource value: 0x7f0900b3
-			public const int mr_control_title_container = 2131296435;
-			
-			// aapt resource value: 0x7f0900a7
-			public const int mr_custom_control = 2131296423;
-			
-			// aapt resource value: 0x7f0900a8
-			public const int mr_default_control = 2131296424;
-			
-			// aapt resource value: 0x7f0900a3
-			public const int mr_dialog_area = 2131296419;
+			public const int mr_chooser_list = 2131296415;
 			
 			// aapt resource value: 0x7f0900a2
-			public const int mr_expandable_area = 2131296418;
+			public const int mr_chooser_route_desc = 2131296418;
 			
-			// aapt resource value: 0x7f0900b6
-			public const int mr_group_expand_collapse = 2131296438;
+			// aapt resource value: 0x7f0900a0
+			public const int mr_chooser_route_icon = 2131296416;
 			
-			// aapt resource value: 0x7f0900aa
-			public const int mr_media_main_control = 2131296426;
+			// aapt resource value: 0x7f0900a1
+			public const int mr_chooser_route_name = 2131296417;
 			
-			// aapt resource value: 0x7f0900a5
-			public const int mr_name = 2131296421;
+			// aapt resource value: 0x7f09009e
+			public const int mr_chooser_title = 2131296414;
 			
-			// aapt resource value: 0x7f0900ab
-			public const int mr_playback_control = 2131296427;
-			
-			// aapt resource value: 0x7f0900a4
-			public const int mr_title_bar = 2131296420;
+			// aapt resource value: 0x7f0900a7
+			public const int mr_close = 2131296423;
 			
 			// aapt resource value: 0x7f0900ad
-			public const int mr_volume_control = 2131296429;
+			public const int mr_control_divider = 2131296429;
+			
+			// aapt resource value: 0x7f0900b3
+			public const int mr_control_playback_ctrl = 2131296435;
+			
+			// aapt resource value: 0x7f0900b6
+			public const int mr_control_subtitle = 2131296438;
+			
+			// aapt resource value: 0x7f0900b5
+			public const int mr_control_title = 2131296437;
+			
+			// aapt resource value: 0x7f0900b4
+			public const int mr_control_title_container = 2131296436;
+			
+			// aapt resource value: 0x7f0900a8
+			public const int mr_custom_control = 2131296424;
+			
+			// aapt resource value: 0x7f0900a9
+			public const int mr_default_control = 2131296425;
+			
+			// aapt resource value: 0x7f0900a4
+			public const int mr_dialog_area = 2131296420;
+			
+			// aapt resource value: 0x7f0900a3
+			public const int mr_expandable_area = 2131296419;
+			
+			// aapt resource value: 0x7f0900b7
+			public const int mr_group_expand_collapse = 2131296439;
+			
+			// aapt resource value: 0x7f0900ab
+			public const int mr_media_main_control = 2131296427;
+			
+			// aapt resource value: 0x7f0900a6
+			public const int mr_name = 2131296422;
+			
+			// aapt resource value: 0x7f0900ac
+			public const int mr_playback_control = 2131296428;
+			
+			// aapt resource value: 0x7f0900a5
+			public const int mr_title_bar = 2131296421;
 			
 			// aapt resource value: 0x7f0900ae
-			public const int mr_volume_group_list = 2131296430;
+			public const int mr_volume_control = 2131296430;
 			
-			// aapt resource value: 0x7f0900b0
-			public const int mr_volume_item_icon = 2131296432;
+			// aapt resource value: 0x7f0900af
+			public const int mr_volume_group_list = 2131296431;
 			
 			// aapt resource value: 0x7f0900b1
-			public const int mr_volume_slider = 2131296433;
+			public const int mr_volume_item_icon = 2131296433;
+			
+			// aapt resource value: 0x7f0900b2
+			public const int mr_volume_slider = 2131296434;
 			
 			// aapt resource value: 0x7f090026
 			public const int multiply = 2131296294;
@@ -4203,14 +4203,14 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f09001d
 			public const int normal = 2131296285;
 			
-			// aapt resource value: 0x7f0900c6
-			public const int notification_background = 2131296454;
+			// aapt resource value: 0x7f0900c7
+			public const int notification_background = 2131296455;
+			
+			// aapt resource value: 0x7f0900c1
+			public const int notification_main_column = 2131296449;
 			
 			// aapt resource value: 0x7f0900c0
-			public const int notification_main_column = 2131296448;
-			
-			// aapt resource value: 0x7f0900bf
-			public const int notification_main_column_container = 2131296447;
+			public const int notification_main_column_container = 2131296448;
 			
 			// aapt resource value: 0x7f09004b
 			public const int parallax = 2131296331;
@@ -4224,11 +4224,11 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f09004c
 			public const int pin = 2131296332;
 			
-			// aapt resource value: 0x7f09009b
-			public const int progressBarFrameLayout = 2131296411;
-			
 			// aapt resource value: 0x7f09009c
-			public const int progressBarVpnUpdate = 2131296412;
+			public const int progressBarFrameLayout = 2131296412;
+			
+			// aapt resource value: 0x7f09009d
+			public const int progressBarVpnUpdate = 2131296413;
 			
 			// aapt resource value: 0x7f090006
 			public const int progress_circular = 2131296262;
@@ -4239,17 +4239,17 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f090074
 			public const int radio = 2131296372;
 			
-			// aapt resource value: 0x7f0900d0
-			public const int refresh_button = 2131296464;
+			// aapt resource value: 0x7f0900d1
+			public const int refresh_button = 2131296465;
 			
 			// aapt resource value: 0x7f090049
 			public const int right = 2131296329;
 			
-			// aapt resource value: 0x7f0900c5
-			public const int right_icon = 2131296453;
+			// aapt resource value: 0x7f0900c6
+			public const int right_icon = 2131296454;
 			
-			// aapt resource value: 0x7f0900c1
-			public const int right_side = 2131296449;
+			// aapt resource value: 0x7f0900c2
+			public const int right_side = 2131296450;
 			
 			// aapt resource value: 0x7f09000c
 			public const int save_image_matrix = 2131296268;
@@ -4311,8 +4311,8 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f090089
 			public const int select_dialog_listview = 2131296393;
 			
-			// aapt resource value: 0x7f0900d1
-			public const int settings_button = 2131296465;
+			// aapt resource value: 0x7f0900d2
+			public const int settings_button = 2131296466;
 			
 			// aapt resource value: 0x7f090073
 			public const int shortcut = 2131296371;
@@ -4356,8 +4356,8 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f09004a
 			public const int start = 2131296330;
 			
-			// aapt resource value: 0x7f0900bc
-			public const int status_bar_latest_event_content = 2131296444;
+			// aapt resource value: 0x7f0900bd
+			public const int status_bar_latest_event_content = 2131296445;
 			
 			// aapt resource value: 0x7f090075
 			public const int submenuarrow = 2131296373;
@@ -4389,8 +4389,8 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f090015
 			public const int textinput_error = 2131296277;
 			
-			// aapt resource value: 0x7f0900c2
-			public const int time = 2131296450;
+			// aapt resource value: 0x7f0900c3
+			public const int time = 2131296451;
 			
 			// aapt resource value: 0x7f09001b
 			public const int title = 2131296283;
@@ -4440,23 +4440,26 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f090016
 			public const int view_offset_helper = 2131296278;
 			
-			// aapt resource value: 0x7f0900ce
-			public const int visible = 2131296462;
+			// aapt resource value: 0x7f0900cf
+			public const int visible = 2131296463;
 			
-			// aapt resource value: 0x7f0900af
-			public const int volume_item_container = 2131296431;
-			
-			// aapt resource value: 0x7f0900cb
-			public const int vpnLinearLayout = 2131296459;
-			
-			// aapt resource value: 0x7f09009a
-			public const int vpnListView = 2131296410;
-			
-			// aapt resource value: 0x7f0900cd
-			public const int vpnName = 2131296461;
+			// aapt resource value: 0x7f0900b0
+			public const int volume_item_container = 2131296432;
 			
 			// aapt resource value: 0x7f0900cc
-			public const int vpnSwitch = 2131296460;
+			public const int vpnLinearLayout = 2131296460;
+			
+			// aapt resource value: 0x7f09009b
+			public const int vpnListView = 2131296411;
+			
+			// aapt resource value: 0x7f09009a
+			public const int vpnListViewSwipRefresh = 2131296410;
+			
+			// aapt resource value: 0x7f0900ce
+			public const int vpnName = 2131296462;
+			
+			// aapt resource value: 0x7f0900cd
+			public const int vpnSwitch = 2131296461;
 			
 			// aapt resource value: 0x7f09003b
 			public const int withText = 2131296315;
@@ -4817,14 +4820,14 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f0a0048
 			public const int ConnectionTimeoutMessage = 2131361864;
 			
-			// aapt resource value: 0x7f0a0060
-			public const int DefaultFlag = 2131361888;
-			
-			// aapt resource value: 0x7f0a005e
-			public const int DefaultRouterIpAddress = 2131361886;
+			// aapt resource value: 0x7f0a0061
+			public const int DefaultFlag = 2131361889;
 			
 			// aapt resource value: 0x7f0a005f
-			public const int DefaultRouterUsername = 2131361887;
+			public const int DefaultRouterIpAddress = 2131361887;
+			
+			// aapt resource value: 0x7f0a0060
+			public const int DefaultRouterUsername = 2131361888;
 			
 			// aapt resource value: 0x7f0a004d
 			public const int DisabledVpnFormat = 2131361869;
@@ -4895,14 +4898,17 @@ namespace VeeKee.Android
 			// aapt resource value: 0x7f0a0042
 			public const int VpnClientFormat = 2131361858;
 			
-			// aapt resource value: 0x7f0a005d
-			public const int VpnFlagKeyPreferenceFormat = 2131361885;
+			// aapt resource value: 0x7f0a005e
+			public const int VpnFlagKeyPreferenceTitleFormat = 2131361886;
 			
 			// aapt resource value: 0x7f0a0053
 			public const int VpnItemPreferenceCategoryTitle = 2131361875;
 			
+			// aapt resource value: 0x7f0a005d
+			public const int VpnNamePreferenceFormat = 2131361885;
+			
 			// aapt resource value: 0x7f0a005c
-			public const int VpnNamePreferenceFormat = 2131361884;
+			public const int VpnNamePreferenceTitleFormat = 2131361884;
 			
 			// aapt resource value: 0x7f0a0015
 			public const int abc_action_bar_home_description = 2131361813;

@@ -62,6 +62,11 @@ namespace VeeKee.Android.Adapters
             holder.VpnSwitch.Checked = vpnItem.Status == VpnStatus.Enabled;
             holder.VpnName.Text = vpnItem.Name;
 
+            if (vpnItem.Status == VpnStatus.Enabling)
+            {
+                holder.VpnName.Text = holder.VpnName.Text + " (Enabling)";
+            }
+
             // Disable the row if the status is currently changing
             row.Enabled = vpnItem.Status != VpnStatus.Enabling;
 

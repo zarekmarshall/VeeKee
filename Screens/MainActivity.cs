@@ -2,6 +2,7 @@
 using Android.Content;
 using Android.OS;
 using Android.Support.Design.Widget;
+using Android.Support.V4.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
@@ -27,6 +28,8 @@ namespace VeeKee.Android
         private string _updatingMessage;
         private string _updatedMessage;
         private FrameLayout _progressBarFrameLayout;
+        private ListView _vpnListView;
+        private SwipeRefreshLayout _vpnListViewSwipRefresh;
 
         private AsusSshVpnService AsusCommander
         {
@@ -36,7 +39,7 @@ namespace VeeKee.Android
                 _preferences.RouterIpAddress,
                 _preferences.RouterUsername,
                 _preferences.RouterPassword,
-                _preferences.RouterPort,
+                int.Parse(_preferences.RouterPort),
                 this.Resources.GetInteger(Resource.Integer.ConnectionTimeoutSeconds));
             }
         }
@@ -58,8 +61,29 @@ namespace VeeKee.Android
 
             _progressBarFrameLayout = FindViewById<FrameLayout>(Resource.Id.progressBarFrameLayout);
 
-            var vpnListView = FindViewById<ListView>(Resource.Id.vpnListView);
-            vpnListView.ItemClick += VpnListView_ItemClick;
+            _vpnListView = FindViewById<ListView>(Resource.Id.vpnListView);
+            _vpnListView.ItemClick += VpnListView_ItemClick;
+
+            _vpnListViewSwipRefresh = FindViewById<SwipeRefreshLayout>(Resource.Id.vpnListViewSwipRefresh);
+            _vpnListViewSwipRefresh.Refresh += VpnListViewSwipRefresh_Refresh;
+        }
+
+        private void VpnListViewSwipRefresh_Refresh(object sender, EventArgs e)
+        {
+            Task.Run(async () =>
+            {
+                var vpnArrayAdapter = (VpnArrayAdapter)_vpnListView.Adapter;
+                var vpnUIItemViewModel = vpnArrayAdapter.VpnUIItemViewModel;
+
+                using (var asusCommander = AsusCommander)
+                {
+                    bool success = await asusCommander.Connect();
+                    success = await vpnUIItemViewModel.UpdateVpnUIItemStatus(asusCommander);
+                    vpnArrayAdapter.NotifyDataSetChanged();
+                }
+            }).Wait();
+
+            ((SwipeRefreshLayout)sender).Refreshing = false;
         }
 
         async protected override void OnResume()
@@ -84,6 +108,7 @@ namespace VeeKee.Android
             MenuInflater.Inflate(Resource.Menu.settingsmenu, menu);
             return base.OnCreateOptionsMenu(menu);
         }
+
         #endregion Activity Events
 
         #region Click Events

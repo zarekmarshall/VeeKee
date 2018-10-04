@@ -14,6 +14,8 @@ namespace VeeKee.Android
         {
             base.OnCreate(savedInstanceState);
 
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+
             FragmentManager.BeginTransaction().Replace(A.Resource.Id.Content, new AppPreferencesFragment()).Commit();
         }
 
@@ -44,20 +46,19 @@ namespace VeeKee.Android
 
             for (int i=1; i< this.Resources.GetInteger(Resource.Integer.VpnItemCount) + 1; i++)
             {
-                var vpnClientName = string.Format(this.Resources.GetString(Resource.String.VpnNamePreferenceFormat), i);
-                var vpnClientFlagKey = String.Format(this.Resources.GetString(Resource.String.VpnFlagKeyPreferenceFormat), i);
-
+                var namePreferenceTitle = string.Format(this.Resources.GetString(Resource.String.VpnNamePreferenceTitleFormat), i);
                 var namePreference = new EditTextPreference(preferenceScreen.Context);
-                namePreference.Title = vpnClientName;
-                namePreference.Key = vpnClientName;
+                namePreference.Title = namePreferenceTitle;
+                namePreference.Key = String.Format(VeeKeePreferences.VpnNamePreferenceKeyFormat, i);
                 namePreference.Persistent = true;
                 preferenceScreen.AddPreference(namePreference);
 
+                var flagPreferenceTitle = string.Format(this.Resources.GetString(Resource.String.VpnFlagKeyPreferenceTitleFormat), i);
                 var flagPreference = new ListPreference(preferenceScreen.Context);
                 flagPreference.SetEntries(Resource.Array.flag_titles);
                 flagPreference.SetEntryValues(Resource.Array.flag_image_names);
-                flagPreference.Title = vpnClientName;
-                flagPreference.Key = vpnClientFlagKey;
+                flagPreference.Title = flagPreferenceTitle;
+                flagPreference.Key = String.Format(VeeKeePreferences.VpnFlagPreferenceKeyFormat, i); ;
                 flagPreference.Persistent = true;
                 preferenceScreen.AddPreference(flagPreference);
             }

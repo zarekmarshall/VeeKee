@@ -49,8 +49,10 @@
   <string name="RouterSshPortPreferenceTitle">SSH Port</string>
   <string name="RouterSshPortPreferenceKey">RouterSSHPort</string>
 
+  <string name="VpnNamePreferenceTitleFormat">Client {0} Name</string>
   <string name="VpnNamePreferenceFormat">Client {0}</string>
-  <string name="VpnFlagKeyPreferenceFormat">VPNClient{0}_flag</string>
+
+  <string name="VpnFlagKeyPreferenceTitleFormat">Client {0} Flag</string>
   
   <!-- Default Preferences -->
   <string name="DefaultRouterIpAddress">192.168.1.1</string>

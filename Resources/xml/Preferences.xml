@@ -27,6 +27,7 @@
       android:key="@string/RouterSshPortPreferenceKey"
       android:title="@string/RouterSshPortPreferenceTitle"
       android:singleLine="true"
+      android:numeric="integer"
       android:defaultValue="@integer/DefaultRouterSshPort"/>
   </PreferenceCategory>
 
