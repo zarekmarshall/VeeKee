@@ -21,7 +21,6 @@ namespace VeeKee.Android.Adapters
         {
             this._context = context;
             this.VpnUIItemViewModel = vpnUIItemViewModel;
-
         }
 
         public override Java.Lang.Object GetItem(int position)
@@ -59,16 +58,19 @@ namespace VeeKee.Android.Adapters
 
             // Set the control properties for this row
             var vpnItem = this[position];
-            holder.VpnSwitch.Checked = vpnItem.Status == VpnStatus.Enabled;
+            holder.VpnSwitch.Checked = vpnItem.Status == VpnStatus.Enabled || vpnItem.Status == VpnStatus.Enabling;
             holder.VpnName.Text = vpnItem.Name;
 
             if (vpnItem.Status == VpnStatus.Enabling)
             {
-                holder.VpnName.Text = holder.VpnName.Text + " (Enabling)";
+                holder.VpnName.Text = string.Format(_context.GetString(Resource.String.UpdatingPostfixVpnFormat), holder.VpnName.Text);
             }
 
-            // Disable the row if the status is currently changing
-            row.Enabled = vpnItem.Status != VpnStatus.Enabling;
+            if (this.Enabled)
+            { 
+                // Disable the ListView since there is an operation ongoing on the router
+                this.Enabled = vpnItem.Status != VpnStatus.Enabling;
+            }
 
             var flag = this._context.GetDrawable(vpnItem.FlagResourceId);
             flag.SetBounds(0, 0, 157, 105);

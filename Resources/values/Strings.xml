@@ -24,6 +24,7 @@
 
   <string name="UpdatingVpnTitle">Updating...</string>
   <string name="EnablingVpnFormat">Enabling {0}</string>
+  <string name="UpdatingPostfixVpnFormat">{0} (Updating)</string>
   <string name="DisablingVpnFormat">Disabling {0}</string>
   <string name="EnabledVpnFormat">Enabled {0}</string>
   <string name="DisabledVpnFormat">Disabled {0}</string>

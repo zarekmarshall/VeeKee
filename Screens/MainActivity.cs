@@ -73,6 +73,10 @@ namespace VeeKee.Android
             Task.Run(async () =>
             {
                 var vpnArrayAdapter = (VpnArrayAdapter)_vpnListView.Adapter;
+
+                // Reset any previous configuration
+                vpnArrayAdapter.Enabled = true;
+
                 var vpnUIItemViewModel = vpnArrayAdapter.VpnUIItemViewModel;
 
                 using (var asusCommander = AsusCommander)
@@ -130,7 +134,6 @@ namespace VeeKee.Android
 
         private async void AutoConfigure()
         {
-            // TODO check for internet connection
             if (!ConfirmWifi())
             {
                 return;
@@ -179,9 +182,6 @@ namespace VeeKee.Android
             bool tappedVpnCurrentlyEnabled = vpnSwitch.Checked;
             var vpnArrayAdapter = (VpnArrayAdapter)vpnListView.Adapter;
 
-            // Ensure that the correct Vpn Switches are enabled and disabled accordingly
-            //UpdateSelectedVpnItems(vpnListView, e.Position);
-
             vpnArrayAdapter.Enabled = false;
             _progressBarFrameLayout.Visibility = ViewStates.Visible;
 
@@ -191,20 +191,27 @@ namespace VeeKee.Android
             {
                 using (var asusCommander = AsusCommander)
                 {
+                    string selectedVpnItemName = vpnArrayAdapter[e.Position].Name;
                     var vpnIndex = e.Position + 1;
                     var connected = await asusCommander.Connect();
                     routerStatus = asusCommander.Connection.Status;
-
+                    
                     switch (routerStatus)
                     {
                         case RouterConnectionStatus.Connected:
                             if (tappedVpnCurrentlyEnabled)
                             {
+                                _updatingMessage = String.Format(this.Resources.GetString(Resource.String.DisablingVpnFormat), selectedVpnItemName);
+                                _updatedMessage = String.Format(this.Resources.GetString(Resource.String.DisabledVpnFormat), selectedVpnItemName);
                                 success = await asusCommander.DisableVpn(vpnIndex);
+                                // await Task.Delay(TimeSpan.FromSeconds(1));
                             }
                             else
                             {
+                                _updatingMessage = String.Format(this.Resources.GetString(Resource.String.EnablingVpnFormat), selectedVpnItemName);
+                                _updatedMessage = String.Format(this.Resources.GetString(Resource.String.EnabledVpnFormat), selectedVpnItemName);
                                 success = await asusCommander.EnableVpn(vpnIndex);
+                                // await Task.Delay(TimeSpan.FromSeconds(1));
                             }
 
                             success = await vpnArrayAdapter.VpnUIItemViewModel.UpdateVpnUIItemStatus(asusCommander);
@@ -216,7 +223,7 @@ namespace VeeKee.Android
                             return;
                     }
 
-                    // TODO
+                    // TODO - handle non success
                     success = true;
                 }
             }
@@ -295,38 +302,6 @@ namespace VeeKee.Android
             vpnListView.Adapter = adapter;
             ((VpnArrayAdapter)vpnListView.Adapter).Enabled = !initialisationIssue;
             vpnListView.Enabled = !initialisationIssue;
-        }
-
-        private void UpdateSelectedVpnItems(
-            ListView vpnListView,
-            int selectedIndex)
-        {
-            var format = string.Empty;
-
-            var adapter = (VpnArrayAdapter)vpnListView.Adapter;
-
-            for (int i = 0; i < vpnListView.Count; i++)
-            {
-                var vpnItem = adapter[i];
-
-                if (i == selectedIndex)
-                {
-                    vpnItem.Status = vpnItem.Status == VpnStatus.Enabled ? VpnStatus.Off : VpnStatus.Enabled;
-
-                    format = vpnItem.Status == VpnStatus.Enabled ? this.Resources.GetString(Resource.String.EnablingVpnFormat) : this.Resources.GetString(Resource.String.DisablingVpnFormat);
-                    _updatingMessage = String.Format(format, (string)vpnItem.Name);
-
-                    format = vpnItem.Status == VpnStatus.Enabled ? this.Resources.GetString(Resource.String.EnabledVpnFormat) : this.Resources.GetString(Resource.String.DisabledVpnFormat);
-                    _updatedMessage = String.Format(format, (string)vpnItem.Name);
-                }
-                else
-                {
-                    vpnItem.Status = VpnStatus.Off;
-                }
-            }
-
-            // Ensure that the UI is updated
-            adapter.NotifyDataSetChanged();
         }
 
         private void DisplayWifiIssueDialog()
