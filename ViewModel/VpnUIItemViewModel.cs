@@ -41,8 +41,6 @@ namespace VeeKee.Android.ViewModel
                 preferences.SetVpnName(i, vpnUIItem.Name);
                 preferences.SetVpnFlag(i, vpnUIItem.FlagResourceId.ToString());
             }
-
-            preferences.Save();
         }
 
         public async Task<bool> UpdateVpnUIItemStatus(AsusSshVpnService asusCommander)

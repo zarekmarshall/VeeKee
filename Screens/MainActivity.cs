@@ -6,13 +6,9 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using System;
-using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using VeeKee.Android.Adapters;
-using VeeKee.Android.Model;
 using VeeKee.Android.ViewModel;
-using VeeKee.Shared.CountryCodeLookup;
 using VeeKee.Shared.Models;
 using VeeKee.Shared.Ssh;
 using AlertDialog = Android.Support.V7.App.AlertDialog;
@@ -32,13 +28,28 @@ namespace VeeKee.Android
         private string _updatedMessage;
         private FrameLayout _progressBarFrameLayout;
 
+        private AsusSshVpnService AsusCommander
+        {
+            get
+            {
+                return new AsusSshVpnService(
+                _preferences.RouterIpAddress,
+                _preferences.RouterUsername,
+                _preferences.RouterPassword,
+                _preferences.RouterPort,
+                this.Resources.GetInteger(Resource.Integer.ConnectionTimeoutSeconds));
+            }
+        }
+
         #region Activity Events
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
 
+            Xamarin.Essentials.Platform.Init(this, bundle);
+
             // Set up default Shared Preferences (setting defaults if required)
-            _preferences = new VeeKeePreferences(Application.Context);
+            _preferences = new VeeKeePreferences();
 
             this.SetContentView(Resource.Layout.Main);
 
@@ -62,7 +73,6 @@ namespace VeeKee.Android
                 StartActivity(preferencesIntent);
 
                 _preferences.FirstRun = false;
-                _preferences.Save();
                 return;
             }
 
@@ -109,7 +119,7 @@ namespace VeeKee.Android
 
             try
             {
-                using (var asusCommander = GetAsusSshVpnCommander())
+                using (var asusCommander = AsusCommander)
                 {
                     // Get all the VPN Names and HostNames from the router
                     var success = await vpnArrayAdapter.VpnUIItemViewModel.AutoConfigureFromRouterSettings(asusCommander, _preferences);
@@ -145,7 +155,7 @@ namespace VeeKee.Android
             var vpnArrayAdapter = (VpnArrayAdapter)vpnListView.Adapter;
 
             // Ensure that the correct Vpn Switches are enabled and disabled accordingly
-            UpdateSelectedVpnItems(vpnListView, e.Position);
+            //UpdateSelectedVpnItems(vpnListView, e.Position);
 
             vpnArrayAdapter.Enabled = false;
             _progressBarFrameLayout.Visibility = ViewStates.Visible;
@@ -154,7 +164,7 @@ namespace VeeKee.Android
             var routerStatus = RouterConnectionStatus.NotConnected;
             try
             {
-                using (var asusCommander = GetAsusSshVpnCommander())
+                using (var asusCommander = AsusCommander)
                 {
                     var vpnIndex = e.Position + 1;
                     var connected = await asusCommander.Connect();
@@ -165,20 +175,15 @@ namespace VeeKee.Android
                         case RouterConnectionStatus.Connected:
                             if (tappedVpnCurrentlyEnabled)
                             {
-#if DEBUG
-                                await Task.Delay(TimeSpan.FromSeconds(2));
-#else
                                 success = await asusCommander.DisableVpn(vpnIndex);
-#endif
                             }
                             else
                             {
-#if DEBUG
-                                await Task.Delay(TimeSpan.FromSeconds(2));
-#else
                                 success = await asusCommander.EnableVpn(vpnIndex);
-#endif
                             }
+
+                            success = await vpnArrayAdapter.VpnUIItemViewModel.UpdateVpnUIItemStatus(asusCommander);
+                            vpnArrayAdapter.NotifyDataSetChanged();
                             break;
 
                         default:
@@ -224,7 +229,7 @@ namespace VeeKee.Android
             return true;
         }
 
-        async private Task InitialiseMainScreen()
+        private async Task InitialiseMainScreen()
         {
             bool initialisationIssue = true;
 
@@ -241,7 +246,7 @@ namespace VeeKee.Android
 
             var routerStatus = RouterConnectionStatus.NotConnected;
 
-            using (var asusCommander = GetAsusSshVpnCommander())
+            using (var asusCommander = AsusCommander)
             {
                 bool connected = await asusCommander.Connect();
 
@@ -265,18 +270,6 @@ namespace VeeKee.Android
             vpnListView.Adapter = adapter;
             ((VpnArrayAdapter)vpnListView.Adapter).Enabled = !initialisationIssue;
             vpnListView.Enabled = !initialisationIssue;
-        }
-
-        private AsusSshVpnService GetAsusSshVpnCommander()
-        {
-            var asusCommander = new AsusSshVpnService(
-                _preferences.RouterIpAddress,
-                _preferences.RouterUsername,
-                _preferences.RouterPassword,
-                int.Parse(_preferences.RouterPort),
-                this.Resources.GetInteger(Resource.Integer.ConnectionTimeoutSeconds));
-
-            return asusCommander;
         }
 
         private void UpdateSelectedVpnItems(
