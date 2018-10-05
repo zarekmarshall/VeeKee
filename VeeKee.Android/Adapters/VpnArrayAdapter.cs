@@ -65,12 +65,6 @@ namespace VeeKee.Android.Adapters
                 holder.VpnName.Text = string.Format(_context.GetString(Resource.String.UpdatingPostfixVpnFormat), holder.VpnName.Text);
             }
 
-            if (this.Enabled)
-            { 
-                // Disable the ListView since there is an operation ongoing on the router
-                this.Enabled = vpnItem.Status != VpnStatus.Enabling;
-            }
-
             var flag = this._context.GetDrawable(vpnItem.FlagResourceId);
             flag.SetBounds(0, 0, 157, 105);
             holder.VpnName.SetCompoundDrawables(flag, null, null, null);
