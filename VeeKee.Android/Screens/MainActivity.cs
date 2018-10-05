@@ -71,12 +71,10 @@ namespace VeeKee.Android
 
         private void VpnListViewSwipRefresh_Refresh(object sender, EventArgs e)
         {
+            ToggleAppControls(false);
+
             Task.Run(async () =>
             {
-                // Reset any previous configuration
-                //_vpnArrayAdapter.Enabled = true;
-                ToggleAppControls(false);
-
                 var vpnUIItemViewModel = (_vpnListView.Adapter as VpnArrayAdapter).VpnUIItemViewModel;
 
                 using (var asusCommander = AsusCommander)
@@ -196,15 +194,15 @@ namespace VeeKee.Android
                             {
                                 _updatingMessage = String.Format(this.Resources.GetString(Resource.String.DisablingVpnFormat), selectedVpnItemName);
                                 _updatedMessage = String.Format(this.Resources.GetString(Resource.String.DisabledVpnFormat), selectedVpnItemName);
-                                //success = await asusCommander.DisableVpn(vpnIndex);
-                                await Task.Delay(TimeSpan.FromSeconds(3));
+                                success = await asusCommander.DisableVpn(vpnIndex);
+                                //await Task.Delay(TimeSpan.FromSeconds(3));
                             }
                             else
                             {
                                 _updatingMessage = String.Format(this.Resources.GetString(Resource.String.EnablingVpnFormat), selectedVpnItemName);
                                 _updatedMessage = String.Format(this.Resources.GetString(Resource.String.EnabledVpnFormat), selectedVpnItemName);
-                                //success = await asusCommander.EnableVpn(vpnIndex);
-                                await Task.Delay(TimeSpan.FromSeconds(3));
+                                success = await asusCommander.EnableVpn(vpnIndex);
+                                //await Task.Delay(TimeSpan.FromSeconds(3));
                             }
 
                             success = await (_vpnListView.Adapter as VpnArrayAdapter).VpnUIItemViewModel.UpdateVpnUIItemStatus(asusCommander);

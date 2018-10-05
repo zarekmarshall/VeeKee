@@ -2,7 +2,7 @@
 <!DOCTYPE dotfuscatorMap SYSTEM "http://www.preemptive.com/dotfuscator/dtd/dotfuscatorMap_v1.2.dtd">
 <dotfuscatorMap version="1.1">
     <header>
-        <timestamp>2018-10-05T13:10:32</timestamp>
+        <timestamp>2018-10-05T12:59:55</timestamp>
         <product version="5.36.0.7050" user="Zarek Marshall" serial="229657-391">Dotfuscator Community Edition</product>
     </header>
     <mapping>
@@ -914,6 +914,11 @@
                     <field>
                         <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;bool&gt;</signature>
                         <name>&lt;&gt;u__1</name>
+                        <newname>i</newname>
+                    </field>
+                    <field>
+                        <signature>System.Runtime.CompilerServices.TaskAwaiter</signature>
+                        <name>&lt;&gt;u__2</name>
                         <newname>j</newname>
                     </field>
                     <field>
@@ -935,11 +940,6 @@
                         <signature>bool</signature>
                         <name>&lt;tappedVpnCurrentlyEnabled&gt;5__2</name>
                         <newname>e</newname>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>&lt;vpnIndex&gt;5__6</name>
-                        <newname>i</newname>
                     </field>
                     <field>
                         <signature>Android.Widget.AdapterView/ItemClickEventArgs</signature>
