@@ -28,7 +28,9 @@ namespace VeeKee.Android
         private string _updatingMessage;
         private string _updatedMessage;
         private FrameLayout _progressBarFrameLayout;
+
         private ListView _vpnListView;
+
         private SwipeRefreshLayout _vpnListViewSwipRefresh;
 
         private AsusSshVpnService AsusCommander
@@ -72,21 +74,21 @@ namespace VeeKee.Android
         {
             Task.Run(async () =>
             {
-                var vpnArrayAdapter = (VpnArrayAdapter)_vpnListView.Adapter;
-
                 // Reset any previous configuration
-                vpnArrayAdapter.Enabled = true;
+                //_vpnArrayAdapter.Enabled = true;
+                ToggleAppControls(false);
 
-                var vpnUIItemViewModel = vpnArrayAdapter.VpnUIItemViewModel;
+                var vpnUIItemViewModel = (_vpnListView.Adapter as VpnArrayAdapter).VpnUIItemViewModel;
 
                 using (var asusCommander = AsusCommander)
                 {
                     bool success = await asusCommander.Connect();
                     success = await vpnUIItemViewModel.UpdateVpnUIItemStatus(asusCommander);
-                    vpnArrayAdapter.NotifyDataSetChanged();
+                    (_vpnListView.Adapter as VpnArrayAdapter).NotifyDataSetChanged();
                 }
             }).Wait();
 
+            ToggleAppControls(true);
             ((SwipeRefreshLayout)sender).Refreshing = false;
         }
 
@@ -139,18 +141,14 @@ namespace VeeKee.Android
                 return;
             }
 
-            var vpnListView = FindViewById<ListView>(Resource.Id.vpnListView);
-            var vpnArrayAdapter = (VpnArrayAdapter)vpnListView.Adapter;
-
-            vpnArrayAdapter.Enabled = false;
-            _progressBarFrameLayout.Visibility = ViewStates.Visible;
+            ToggleAppControls(false);
 
             try
             {
                 using (var asusCommander = AsusCommander)
                 {
                     // Get all the VPN Names and HostNames from the router
-                    var success = await vpnArrayAdapter.VpnUIItemViewModel.AutoConfigureFromRouterSettings(asusCommander, _preferences);
+                    var success = await (_vpnListView.Adapter as VpnArrayAdapter).VpnUIItemViewModel.AutoConfigureFromRouterSettings(asusCommander, _preferences);
                 }
             }
             catch (Exception ex)
@@ -160,10 +158,9 @@ namespace VeeKee.Android
             finally
             {
                 // Ensure that the UI is updated
-                vpnArrayAdapter.NotifyDataSetChanged();
+                (_vpnListView.Adapter as VpnArrayAdapter).NotifyDataSetChanged();
 
-                _progressBarFrameLayout.Visibility = ViewStates.Gone;
-                vpnArrayAdapter.Enabled = true;
+                ToggleAppControls(true);
             }
         }
 
@@ -175,15 +172,12 @@ namespace VeeKee.Android
                 return;
             }
 
-            var vpnListView = (ListView)sender;
-            var vpnRowItem = vpnListView.GetChildAt(e.Position);
+            var vpnRowItem = _vpnListView.GetChildAt(e.Position);
             var vpnSwitch = (Switch)vpnRowItem.FindViewById(Resource.Id.vpnSwitch);
 
             bool tappedVpnCurrentlyEnabled = vpnSwitch.Checked;
-            var vpnArrayAdapter = (VpnArrayAdapter)vpnListView.Adapter;
 
-            vpnArrayAdapter.Enabled = false;
-            _progressBarFrameLayout.Visibility = ViewStates.Visible;
+            ToggleAppControls(false);
 
             bool success = false;
             var routerStatus = RouterConnectionStatus.NotConnected;
@@ -191,7 +185,7 @@ namespace VeeKee.Android
             {
                 using (var asusCommander = AsusCommander)
                 {
-                    string selectedVpnItemName = vpnArrayAdapter[e.Position].Name;
+                    string selectedVpnItemName = (_vpnListView.Adapter as VpnArrayAdapter)[e.Position].Name;
                     var vpnIndex = e.Position + 1;
                     var connected = await asusCommander.Connect();
                     routerStatus = asusCommander.Connection.Status;
@@ -203,19 +197,19 @@ namespace VeeKee.Android
                             {
                                 _updatingMessage = String.Format(this.Resources.GetString(Resource.String.DisablingVpnFormat), selectedVpnItemName);
                                 _updatedMessage = String.Format(this.Resources.GetString(Resource.String.DisabledVpnFormat), selectedVpnItemName);
-                                success = await asusCommander.DisableVpn(vpnIndex);
-                                // await Task.Delay(TimeSpan.FromSeconds(1));
+                                //success = await asusCommander.DisableVpn(vpnIndex);
+                                await Task.Delay(TimeSpan.FromSeconds(3));
                             }
                             else
                             {
                                 _updatingMessage = String.Format(this.Resources.GetString(Resource.String.EnablingVpnFormat), selectedVpnItemName);
                                 _updatedMessage = String.Format(this.Resources.GetString(Resource.String.EnabledVpnFormat), selectedVpnItemName);
-                                success = await asusCommander.EnableVpn(vpnIndex);
-                                // await Task.Delay(TimeSpan.FromSeconds(1));
+                                //success = await asusCommander.EnableVpn(vpnIndex);
+                                await Task.Delay(TimeSpan.FromSeconds(3));
                             }
 
-                            success = await vpnArrayAdapter.VpnUIItemViewModel.UpdateVpnUIItemStatus(asusCommander);
-                            vpnArrayAdapter.NotifyDataSetChanged();
+                            success = await (_vpnListView.Adapter as VpnArrayAdapter).VpnUIItemViewModel.UpdateVpnUIItemStatus(asusCommander);
+                            (_vpnListView.Adapter as VpnArrayAdapter).NotifyDataSetChanged();
                             break;
 
                         default:
@@ -233,8 +227,7 @@ namespace VeeKee.Android
             }
             finally
             {
-                _progressBarFrameLayout.Visibility = ViewStates.Gone;
-                vpnArrayAdapter.Enabled = true;
+                ToggleAppControls(true);
             }
 
             if (success)
@@ -259,6 +252,12 @@ namespace VeeKee.Android
             }
 
             return true;
+        }
+
+        private void ToggleAppControls(bool enabled)
+        {
+            (_vpnListView.Adapter as VpnArrayAdapter).Enabled = enabled;
+            _progressBarFrameLayout.Visibility = enabled ? ViewStates.Gone : ViewStates.Visible;
         }
 
         private async Task InitialiseMainScreen()

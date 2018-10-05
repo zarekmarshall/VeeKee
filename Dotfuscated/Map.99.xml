@@ -2,7 +2,7 @@
 <!DOCTYPE dotfuscatorMap SYSTEM "http://www.preemptive.com/dotfuscator/dtd/dotfuscatorMap_v1.2.dtd">
 <dotfuscatorMap version="1.1">
     <header>
-        <timestamp>2018-10-04T21:31:06</timestamp>
+        <timestamp>2018-09-26T18:31:30</timestamp>
         <product version="5.36.0.7050" user="Zarek Marshall" serial="229657-391">Dotfuscator Community Edition</product>
     </header>
     <mapping>
@@ -364,7 +364,7 @@
                 <name>VeeKee.Android.Adapters.VpnArrayAdapter</name>
                 <methodlist>
                     <method>
-                        <signature>void(Android.Content.Context, VeeKee.Android.ViewModel.VpnUIItemViewModel)</signature>
+                        <signature>void(Android.Content.Context, System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Android.Adapters.VpnItem&gt;)</signature>
                         <name>.ctor</name>
                     </method>
                     <method>
@@ -392,7 +392,7 @@
                         <name>get_Enabled</name>
                     </method>
                     <method>
-                        <signature>VeeKee.Android.Model.VpnUIItem(int32)</signature>
+                        <signature>VeeKee.Android.Adapters.VpnItem(int32)</signature>
                         <name>get_Item</name>
                     </method>
                     <method>
@@ -404,16 +404,17 @@
                     <field>
                         <signature>bool</signature>
                         <name>&lt;Enabled&gt;k__BackingField</name>
-                        <newname>a</newname>
-                    </field>
-                    <field>
-                        <signature>VeeKee.Android.ViewModel.VpnUIItemViewModel</signature>
-                        <name>VpnUIItemViewModel</name>
+                        <newname>b</newname>
                     </field>
                     <field>
                         <signature>Android.Content.Context</signature>
                         <name>_context</name>
-                        <newname>b</newname>
+                        <newname>c</newname>
+                    </field>
+                    <field>
+                        <signature>System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Android.Adapters.VpnItem&gt;</signature>
+                        <name>_vpnItems</name>
+                        <newname>a</newname>
                     </field>
                 </fieldlist>
                 <propertylist>
@@ -426,7 +427,7 @@
                         <name>Enabled</name>
                     </property>
                     <property>
-                        <signature>VeeKee.Android.Model.VpnUIItem(int32)</signature>
+                        <signature>VeeKee.Android.Adapters.VpnItem(int32)</signature>
                         <name>Item</name>
                     </property>
                 </propertylist>
@@ -481,6 +482,71 @@
                 <eventlist />
             </type>
             <type>
+                <name>VeeKee.Android.Adapters.VpnItem</name>
+                <methodlist>
+                    <method>
+                        <signature>void(string, int32, VeeKee.Shared.Ssh.VpnStatus)</signature>
+                        <name>.ctor</name>
+                    </method>
+                    <method>
+                        <signature>int32()</signature>
+                        <name>get_FlagResourceId</name>
+                    </method>
+                    <method>
+                        <signature>string()</signature>
+                        <name>get_Name</name>
+                    </method>
+                    <method>
+                        <signature>VeeKee.Shared.Ssh.VpnStatus()</signature>
+                        <name>get_Status</name>
+                    </method>
+                    <method>
+                        <signature>void(int32)</signature>
+                        <name>set_FlagResourceId</name>
+                    </method>
+                    <method>
+                        <signature>void(string)</signature>
+                        <name>set_Name</name>
+                    </method>
+                    <method>
+                        <signature>void(VeeKee.Shared.Ssh.VpnStatus)</signature>
+                        <name>set_Status</name>
+                    </method>
+                </methodlist>
+                <fieldlist>
+                    <field>
+                        <signature>int32</signature>
+                        <name>&lt;FlagResourceId&gt;k__BackingField</name>
+                        <newname>b</newname>
+                    </field>
+                    <field>
+                        <signature>string</signature>
+                        <name>&lt;Name&gt;k__BackingField</name>
+                        <newname>a</newname>
+                    </field>
+                    <field>
+                        <signature>VeeKee.Shared.Ssh.VpnStatus</signature>
+                        <name>&lt;Status&gt;k__BackingField</name>
+                        <newname>c</newname>
+                    </field>
+                </fieldlist>
+                <propertylist>
+                    <property>
+                        <signature>int32()</signature>
+                        <name>FlagResourceId</name>
+                    </property>
+                    <property>
+                        <signature>string()</signature>
+                        <name>Name</name>
+                    </property>
+                    <property>
+                        <signature>VeeKee.Shared.Ssh.VpnStatus()</signature>
+                        <name>Status</name>
+                    </property>
+                </propertylist>
+                <eventlist />
+            </type>
+            <type>
                 <name>VeeKee.Android.AppPreferencesActivity</name>
                 <methodlist>
                     <method>
@@ -530,38 +596,33 @@
                     </method>
                     <method>
                         <signature>void(object, Android.Content.DialogClickEventArgs)</signature>
-                        <name>&lt;DisplayRouterIssueDialog&gt;b__20_0</name>
+                        <name>&lt;DisplayRouterIssueDialog&gt;b__19_0</name>
                         <newname>b</newname>
                     </method>
                     <method>
                         <signature>void(object, Android.Content.DialogClickEventArgs)</signature>
-                        <name>&lt;DisplayRouterIssueDialog&gt;b__20_1</name>
+                        <name>&lt;DisplayRouterIssueDialog&gt;b__19_1</name>
                         <newname>a</newname>
                     </method>
                     <method>
                         <signature>void(object, Android.Content.DialogClickEventArgs)</signature>
-                        <name>&lt;DisplayWifiIssueDialog&gt;b__19_0</name>
+                        <name>&lt;DisplayWifiIssueDialog&gt;b__18_0</name>
                         <newname>d</newname>
                     </method>
                     <method>
                         <signature>void(object, Android.Content.DialogClickEventArgs)</signature>
-                        <name>&lt;DisplayWifiIssueDialog&gt;b__19_1</name>
+                        <name>&lt;DisplayWifiIssueDialog&gt;b__18_1</name>
                         <newname>c</newname>
                     </method>
                     <method>
-                        <signature>System.Threading.Tasks.Task()</signature>
-                        <name>&lt;VpnListViewSwipRefresh_Refresh&gt;b__11_0</name>
-                        <newname>b</newname>
-                    </method>
-                    <method>
-                        <signature>void()</signature>
-                        <name>AutoConfigure</name>
-                        <newname>f</newname>
+                        <signature>System.Threading.Tasks.Task`1&lt;System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Android.Adapters.VpnItem&gt;&gt;(VeeKee.Shared.Ssh.AsusSshVpnService, System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Android.Adapters.VpnItem&gt;)</signature>
+                        <name>CheckCurrentVpnStatus</name>
+                        <newname>a</newname>
                     </method>
                     <method>
                         <signature>bool()</signature>
                         <name>ConfirmWifi</name>
-                        <newname>e</newname>
+                        <newname>f</newname>
                     </method>
                     <method>
                         <signature>void(VeeKee.Shared.Ssh.RouterConnectionStatus)</signature>
@@ -571,12 +632,22 @@
                     <method>
                         <signature>void()</signature>
                         <name>DisplayWifiIssueDialog</name>
+                        <newname>b</newname>
+                    </method>
+                    <method>
+                        <signature>VeeKee.Shared.Ssh.AsusSshVpnService()</signature>
+                        <name>GetAsusSshVpnCommander</name>
                         <newname>c</newname>
+                    </method>
+                    <method>
+                        <signature>int32(string)</signature>
+                        <name>GetFlagResourceId</name>
+                        <newname>a</newname>
                     </method>
                     <method>
                         <signature>System.Threading.Tasks.Task()</signature>
                         <name>InitialiseMainScreen</name>
-                        <newname>d</newname>
+                        <newname>e</newname>
                     </method>
                     <method>
                         <signature>void(Android.OS.Bundle)</signature>
@@ -595,19 +666,19 @@
                         <name>OnResume</name>
                     </method>
                     <method>
-                        <signature>void(object, System.EventArgs)</signature>
-                        <name>VpnListViewSwipRefresh_Refresh</name>
+                        <signature>void(Android.Widget.ListView, int32)</signature>
+                        <name>UpdateSelectedVpnItems</name>
                         <newname>a</newname>
+                    </method>
+                    <method>
+                        <signature>System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Android.Adapters.VpnItem&gt;()</signature>
+                        <name>VpnItems</name>
+                        <newname>d</newname>
                     </method>
                     <method>
                         <signature>void(object, Android.Widget.AdapterView/ItemClickEventArgs)</signature>
                         <name>VpnListView_ItemClick</name>
                         <newname>a</newname>
-                    </method>
-                    <method>
-                        <signature>VeeKee.Shared.Ssh.AsusSshVpnService()</signature>
-                        <name>get_AsusCommander</name>
-                        <newname>g</newname>
                     </method>
                 </methodlist>
                 <fieldlist>
@@ -637,79 +708,9 @@
                         <newname>d</newname>
                     </field>
                     <field>
-                        <signature>Android.Widget.ListView</signature>
-                        <name>_vpnListView</name>
-                        <newname>g</newname>
-                    </field>
-                    <field>
-                        <signature>Android.Support.V4.Widget.SwipeRefreshLayout</signature>
-                        <name>_vpnListViewSwipRefresh</name>
-                        <newname>h</newname>
-                    </field>
-                    <field>
                         <signature>VeeKee.Android.WifiStateService</signature>
                         <name>_wifiState</name>
                         <newname>c</newname>
-                    </field>
-                </fieldlist>
-                <propertylist>
-                    <property>
-                        <signature>VeeKee.Shared.Ssh.AsusSshVpnService()</signature>
-                        <name>AsusCommander</name>
-                    </property>
-                </propertylist>
-                <eventlist />
-            </type>
-            <type>
-                <name>VeeKee.Android.MainActivity/&lt;&lt;VpnListViewSwipRefresh_Refresh&gt;b__11_0&gt;d</name>
-                <newname>VeeKee.Android.MainActivity/e</newname>
-                <methodlist>
-                    <method>
-                        <signature>void()</signature>
-                        <name>MoveNext</name>
-                        <newname>d</newname>
-                    </method>
-                    <method>
-                        <signature>void(System.Runtime.CompilerServices.IAsyncStateMachine)</signature>
-                        <name>SetStateMachine</name>
-                        <newname>d</newname>
-                    </method>
-                </methodlist>
-                <fieldlist>
-                    <field>
-                        <signature>int32</signature>
-                        <name>&lt;&gt;1__state</name>
-                        <newname>a</newname>
-                    </field>
-                    <field>
-                        <signature>VeeKee.Android.MainActivity</signature>
-                        <name>&lt;&gt;4__this</name>
-                        <newname>c</newname>
-                    </field>
-                    <field>
-                        <signature>System.Runtime.CompilerServices.AsyncTaskMethodBuilder</signature>
-                        <name>&lt;&gt;t__builder</name>
-                        <newname>b</newname>
-                    </field>
-                    <field>
-                        <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;bool&gt;</signature>
-                        <name>&lt;&gt;u__1</name>
-                        <newname>g</newname>
-                    </field>
-                    <field>
-                        <signature>VeeKee.Shared.Ssh.AsusSshVpnService</signature>
-                        <name>&lt;asusCommander&gt;5__4</name>
-                        <newname>f</newname>
-                    </field>
-                    <field>
-                        <signature>VeeKee.Android.Adapters.VpnArrayAdapter</signature>
-                        <name>&lt;vpnArrayAdapter&gt;5__2</name>
-                        <newname>d</newname>
-                    </field>
-                    <field>
-                        <signature>VeeKee.Android.ViewModel.VpnUIItemViewModel</signature>
-                        <name>&lt;vpnUIItemViewModel&gt;5__3</name>
-                        <newname>e</newname>
                     </field>
                 </fieldlist>
                 <propertylist />
@@ -728,7 +729,7 @@
                     </method>
                     <method>
                         <signature>void(Android.Views.View)</signature>
-                        <name>&lt;VpnListView_ItemClick&gt;b__16_0</name>
+                        <name>&lt;VpnListView_ItemClick&gt;b__10_0</name>
                         <newname>a</newname>
                     </method>
                 </methodlist>
@@ -739,25 +740,25 @@
                     </field>
                     <field>
                         <signature>System.Action`1&lt;Android.Views.View&gt;</signature>
-                        <name>&lt;&gt;9__16_0</name>
+                        <name>&lt;&gt;9__10_0</name>
                     </field>
                 </fieldlist>
                 <propertylist />
                 <eventlist />
             </type>
             <type>
-                <name>VeeKee.Android.MainActivity/&lt;AutoConfigure&gt;d__15</name>
-                <newname>VeeKee.Android.MainActivity/b</newname>
+                <name>VeeKee.Android.MainActivity/&lt;CheckCurrentVpnStatus&gt;d__13</name>
+                <newname>VeeKee.Android.MainActivity/d</newname>
                 <methodlist>
                     <method>
                         <signature>void()</signature>
                         <name>MoveNext</name>
-                        <newname>d</newname>
+                        <newname>e</newname>
                     </method>
                     <method>
                         <signature>void(System.Runtime.CompilerServices.IAsyncStateMachine)</signature>
                         <name>SetStateMachine</name>
-                        <newname>d</newname>
+                        <newname>e</newname>
                     </method>
                 </methodlist>
                 <fieldlist>
@@ -767,28 +768,23 @@
                         <newname>a</newname>
                     </field>
                     <field>
-                        <signature>VeeKee.Android.MainActivity</signature>
-                        <name>&lt;&gt;4__this</name>
-                        <newname>c</newname>
-                    </field>
-                    <field>
-                        <signature>System.Runtime.CompilerServices.AsyncVoidMethodBuilder</signature>
+                        <signature>System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1&lt;System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Android.Adapters.VpnItem&gt;&gt;</signature>
                         <name>&lt;&gt;t__builder</name>
                         <newname>b</newname>
                     </field>
                     <field>
-                        <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;bool&gt;</signature>
+                        <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Shared.Ssh.VpnStatus&gt;&gt;</signature>
                         <name>&lt;&gt;u__1</name>
-                        <newname>f</newname>
-                    </field>
-                    <field>
-                        <signature>VeeKee.Shared.Ssh.AsusSshVpnService</signature>
-                        <name>&lt;asusCommander&gt;5__3</name>
                         <newname>e</newname>
                     </field>
                     <field>
-                        <signature>VeeKee.Android.Adapters.VpnArrayAdapter</signature>
-                        <name>&lt;vpnArrayAdapter&gt;5__2</name>
+                        <signature>VeeKee.Shared.Ssh.AsusSshVpnService</signature>
+                        <name>asusCommander</name>
+                        <newname>c</newname>
+                    </field>
+                    <field>
+                        <signature>System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Android.Adapters.VpnItem&gt;</signature>
+                        <name>vpnItems</name>
                         <newname>d</newname>
                     </field>
                 </fieldlist>
@@ -796,8 +792,8 @@
                 <eventlist />
             </type>
             <type>
-                <name>VeeKee.Android.MainActivity/&lt;InitialiseMainScreen&gt;d__18</name>
-                <newname>VeeKee.Android.MainActivity/d</newname>
+                <name>VeeKee.Android.MainActivity/&lt;InitialiseMainScreen&gt;d__12</name>
+                <newname>VeeKee.Android.MainActivity/c</newname>
                 <methodlist>
                     <method>
                         <signature>void()</signature>
@@ -832,13 +828,18 @@
                         <newname>f</newname>
                     </field>
                     <field>
+                        <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Android.Adapters.VpnItem&gt;&gt;</signature>
+                        <name>&lt;&gt;u__2</name>
+                        <newname>g</newname>
+                    </field>
+                    <field>
                         <signature>VeeKee.Shared.Ssh.AsusSshVpnService</signature>
                         <name>&lt;asusCommander&gt;5__3</name>
                         <newname>e</newname>
                     </field>
                     <field>
-                        <signature>VeeKee.Android.ViewModel.VpnUIItemViewModel</signature>
-                        <name>&lt;vpnUIItemViewModel&gt;5__2</name>
+                        <signature>System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Android.Adapters.VpnItem&gt;</signature>
+                        <name>&lt;vpnItems&gt;5__2</name>
                         <newname>d</newname>
                     </field>
                 </fieldlist>
@@ -846,7 +847,7 @@
                 <eventlist />
             </type>
             <type>
-                <name>VeeKee.Android.MainActivity/&lt;OnResume&gt;d__12</name>
+                <name>VeeKee.Android.MainActivity/&lt;OnResume&gt;d__7</name>
                 <newname>VeeKee.Android.MainActivity/a</newname>
                 <methodlist>
                     <method>
@@ -886,8 +887,8 @@
                 <eventlist />
             </type>
             <type>
-                <name>VeeKee.Android.MainActivity/&lt;VpnListView_ItemClick&gt;d__16</name>
-                <newname>VeeKee.Android.MainActivity/c</newname>
+                <name>VeeKee.Android.MainActivity/&lt;VpnListView_ItemClick&gt;d__10</name>
+                <newname>VeeKee.Android.MainActivity/b</newname>
                 <methodlist>
                     <method>
                         <signature>void()</signature>
@@ -919,17 +920,12 @@
                     <field>
                         <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;bool&gt;</signature>
                         <name>&lt;&gt;u__1</name>
-                        <newname>l</newname>
+                        <newname>k</newname>
                     </field>
                     <field>
                         <signature>VeeKee.Shared.Ssh.AsusSshVpnService</signature>
                         <name>&lt;asusCommander&gt;5__5</name>
                         <newname>i</newname>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>&lt;selectedVpnItemName&gt;5__6</name>
-                        <newname>j</newname>
                     </field>
                     <field>
                         <signature>bool</signature>
@@ -948,8 +944,8 @@
                     </field>
                     <field>
                         <signature>int32</signature>
-                        <name>&lt;vpnIndex&gt;5__7</name>
-                        <newname>k</newname>
+                        <name>&lt;vpnIndex&gt;5__6</name>
+                        <newname>j</newname>
                     </field>
                     <field>
                         <signature>Android.Widget.AdapterView/ItemClickEventArgs</signature>
@@ -962,71 +958,6 @@
                     </field>
                 </fieldlist>
                 <propertylist />
-                <eventlist />
-            </type>
-            <type>
-                <name>VeeKee.Android.Model.VpnUIItem</name>
-                <methodlist>
-                    <method>
-                        <signature>void(string, int32, VeeKee.Shared.Models.VpnStatus)</signature>
-                        <name>.ctor</name>
-                    </method>
-                    <method>
-                        <signature>int32()</signature>
-                        <name>get_FlagResourceId</name>
-                    </method>
-                    <method>
-                        <signature>string()</signature>
-                        <name>get_Name</name>
-                    </method>
-                    <method>
-                        <signature>VeeKee.Shared.Models.VpnStatus()</signature>
-                        <name>get_Status</name>
-                    </method>
-                    <method>
-                        <signature>void(int32)</signature>
-                        <name>set_FlagResourceId</name>
-                    </method>
-                    <method>
-                        <signature>void(string)</signature>
-                        <name>set_Name</name>
-                    </method>
-                    <method>
-                        <signature>void(VeeKee.Shared.Models.VpnStatus)</signature>
-                        <name>set_Status</name>
-                    </method>
-                </methodlist>
-                <fieldlist>
-                    <field>
-                        <signature>int32</signature>
-                        <name>&lt;FlagResourceId&gt;k__BackingField</name>
-                        <newname>a</newname>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>&lt;Name&gt;k__BackingField</name>
-                        <newname>b</newname>
-                    </field>
-                    <field>
-                        <signature>VeeKee.Shared.Models.VpnStatus</signature>
-                        <name>&lt;Status&gt;k__BackingField</name>
-                        <newname>c</newname>
-                    </field>
-                </fieldlist>
-                <propertylist>
-                    <property>
-                        <signature>int32()</signature>
-                        <name>FlagResourceId</name>
-                    </property>
-                    <property>
-                        <signature>string()</signature>
-                        <name>Name</name>
-                    </property>
-                    <property>
-                        <signature>VeeKee.Shared.Models.VpnStatus()</signature>
-                        <name>Status</name>
-                    </property>
-                </propertylist>
                 <eventlist />
             </type>
             <type>
@@ -3835,7 +3766,27 @@
                 <fieldlist>
                     <field>
                         <signature>int32</signature>
+                        <name>BRA</name>
+                    </field>
+                    <field>
+                        <signature>int32</signature>
                         <name>DEFAULTFLAG</name>
+                    </field>
+                    <field>
+                        <signature>int32</signature>
+                        <name>DEU</name>
+                    </field>
+                    <field>
+                        <signature>int32</signature>
+                        <name>FRA</name>
+                    </field>
+                    <field>
+                        <signature>int32</signature>
+                        <name>GBR</name>
+                    </field>
+                    <field>
+                        <signature>int32</signature>
+                        <name>USA</name>
                     </field>
                     <field>
                         <signature>int32</signature>
@@ -4175,62 +4126,6 @@
                     </field>
                     <field>
                         <signature>int32</signature>
-                        <name>ad</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ae</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>af</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ag</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ai</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>al</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>am</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>an</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ao</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>aq</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ar</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>as</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>at</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>au</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
                         <name>avd_hide_password</name>
                     </field>
                     <field>
@@ -4263,182 +4158,6 @@
                     </field>
                     <field>
                         <signature>int32</signature>
-                        <name>aw</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ax</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>az</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ba</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>bb</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>bd</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>be</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>bf</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>bg</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>bh</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>bi</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>bj</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>bl</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>bm</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>bn</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>bo</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>bq</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>br</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>bs</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>bt</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>bv</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>bw</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>by</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>bz</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ca</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>cc</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>cd</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>cf</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>cg</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ch</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ci</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ck</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>cl</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>cm</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>cn</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>co</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>cr</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>cu</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>cv</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>cw</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>cx</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>cy</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>cz</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>de</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
                         <name>design_bottom_navigation_item_background</name>
                     </field>
                     <field>
@@ -4460,198 +4179,6 @@
                     <field>
                         <signature>int32</signature>
                         <name>design_snackbar_background</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>dj</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>dk</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>dm</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>do_</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>dz</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ec</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ee</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>eg</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>eh</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>er</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>es</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>et</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>eu</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>fi</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>fj</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>fk</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>fm</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>fo</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>fr</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ga</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gb</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gb_eng</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gb_nir</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gb_sct</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gb_wls</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gd</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ge</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gf</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gg</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gh</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gi</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gl</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gm</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gn</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gp</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gq</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gr</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gs</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gt</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gu</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gw</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>gy</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>hk</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>hm</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>hn</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>hr</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ht</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>hu</name>
                     </field>
                     <field>
                         <signature>int32</signature>
@@ -5363,210 +4890,6 @@
                     </field>
                     <field>
                         <signature>int32</signature>
-                        <name>id</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ie</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>il</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>im</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>in</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>io</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>iq</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ir</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>is</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>it</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>je</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>jm</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>jo</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>jp</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ke</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>kg</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>kh</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ki</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>km</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>kn</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>kp</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>kr</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>kw</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ky</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>kz</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>la</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>lb</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>lc</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>li</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>lk</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>lr</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ls</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>lt</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>lu</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>lv</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ly</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ma</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>mc</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>md</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>me</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>mf</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>mg</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>mh</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>mk</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ml</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>mm</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>mn</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>mo</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>mp</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>mq</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>mr</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
                         <name>mr_button_connected_dark</name>
                     </field>
                     <field>
@@ -5647,71 +4970,7 @@
                     </field>
                     <field>
                         <signature>int32</signature>
-                        <name>ms</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>mt</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>mu</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>mv</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>mw</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>mx</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>my</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>mz</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>na</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
                         <name>navigation_empty_icon</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>nc</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ne</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>nf</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ng</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ni</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>nl</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>no</name>
                     </field>
                     <field>
                         <signature>int32</signature>
@@ -5763,239 +5022,11 @@
                     </field>
                     <field>
                         <signature>int32</signature>
-                        <name>np</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>nr</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>nu</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>nz</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>om</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>pa</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>pe</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>pf</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>pg</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ph</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>pk</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>pl</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>pm</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>pn</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>pr</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ps</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>pt</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>pw</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>py</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>qa</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>re</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
                         <name>refresh</name>
                     </field>
                     <field>
                         <signature>int32</signature>
-                        <name>ro</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>rs</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ru</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>rw</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>sa</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>sb</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>sc</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>sd</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>se</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
                         <name>settings</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>sg</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>sh</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>si</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>sj</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>sk</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>sl</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>sm</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>sn</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>so</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>sr</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ss</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>st</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>sv</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>sx</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>sy</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>sz</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>tc</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>td</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>tf</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>tg</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>th</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>tj</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>tk</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>tl</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>tm</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>tn</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>to</name>
                     </field>
                     <field>
                         <signature>int32</signature>
@@ -6004,110 +5035,6 @@
                     <field>
                         <signature>int32</signature>
                         <name>tooltip_frame_light</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>tr</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>tt</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>tv</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>tw</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>tz</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ua</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ug</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>um</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>us</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>uy</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>uz</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>va</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>vc</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ve</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>vg</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>vi</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>vn</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>vu</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>wf</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ws</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>xk</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>ye</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>yt</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>za</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>zm</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>zw</name>
                     </field>
                 </fieldlist>
                 <propertylist />
@@ -6253,10 +5180,6 @@
                     <field>
                         <signature>int32</signature>
                         <name>auto</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>autoconfigure_button</name>
                     </field>
                     <field>
                         <signature>int32</signature>
@@ -6956,10 +5879,6 @@
                     </field>
                     <field>
                         <signature>int32</signature>
-                        <name>vpnListViewSwipRefresh</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
                         <name>vpnName</name>
                     </field>
                     <field>
@@ -7425,10 +6344,6 @@
                     </field>
                     <field>
                         <signature>int32</signature>
-                        <name>AutoConfigureItemTitle</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
                         <name>CheckingVpnStatusMessage</name>
                     </field>
                     <field>
@@ -7541,10 +6456,6 @@
                     </field>
                     <field>
                         <signature>int32</signature>
-                        <name>UpdatingPostfixVpnFormat</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
                         <name>UpdatingVpnTitle</name>
                     </field>
                     <field>
@@ -7553,19 +6464,15 @@
                     </field>
                     <field>
                         <signature>int32</signature>
-                        <name>VpnFlagKeyPreferenceTitleFormat</name>
+                        <name>VpnFlagKeyPreferenceFormat</name>
+                    </field>
+                    <field>
+                        <signature>int32</signature>
+                        <name>VpnFlagPreferenceFormat</name>
                     </field>
                     <field>
                         <signature>int32</signature>
                         <name>VpnItemPreferenceCategoryTitle</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>VpnNamePreferenceFormat</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>VpnNamePreferenceTitleFormat</name>
                     </field>
                     <field>
                         <signature>int32</signature>
@@ -11735,185 +10642,157 @@
                 <eventlist />
             </type>
             <type>
-                <name>VeeKee.Android.ViewModel.VpnUIItemViewModel</name>
+                <name>VeeKee.Android.VeeKeePreferences</name>
                 <methodlist>
                     <method>
-                        <signature>void(string, Android.Content.Res.Resources)</signature>
+                        <signature>void(Android.Content.Context)</signature>
                         <name>.ctor</name>
                     </method>
                     <method>
-                        <signature>System.Threading.Tasks.Task`1&lt;bool&gt;(VeeKee.Shared.Ssh.AsusSshVpnService, VeeKee.Android.VeeKeePreferences)</signature>
-                        <name>AutoConfigureFromRouterSettings</name>
+                        <signature>string(int32)</signature>
+                        <name>GetVpnFlag</name>
                     </method>
                     <method>
-                        <signature>int32(string, string, Android.Content.Res.Resources)</signature>
-                        <name>GetFlagResourceId</name>
-                        <newname>a</newname>
+                        <signature>void()</signature>
+                        <name>Save</name>
                     </method>
                     <method>
-                        <signature>void(VeeKee.Android.VeeKeePreferences)</signature>
-                        <name>LoadVpnUIItemsFromPreferences</name>
+                        <signature>bool()</signature>
+                        <name>get_FirstRun</name>
                     </method>
                     <method>
-                        <signature>void(VeeKee.Android.VeeKeePreferences)</signature>
-                        <name>SaveVpnUIItemsPreferences</name>
+                        <signature>string()</signature>
+                        <name>get_RouterIpAddress</name>
                     </method>
                     <method>
-                        <signature>System.Threading.Tasks.Task`1&lt;bool&gt;(VeeKee.Shared.Ssh.AsusSshVpnService)</signature>
-                        <name>UpdateVpnUIItemStatus</name>
+                        <signature>string()</signature>
+                        <name>get_RouterPassword</name>
                     </method>
                     <method>
-                        <signature>System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Android.Model.VpnUIItem&gt;()</signature>
-                        <name>get_VpnUIItems</name>
+                        <signature>string()</signature>
+                        <name>get_RouterPort</name>
                     </method>
                     <method>
-                        <signature>void(System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Android.Model.VpnUIItem&gt;)</signature>
-                        <name>set_VpnUIItems</name>
+                        <signature>string()</signature>
+                        <name>get_RouterUsername</name>
+                    </method>
+                    <method>
+                        <signature>string()</signature>
+                        <name>get_WifiName</name>
+                    </method>
+                    <method>
+                        <signature>void(bool)</signature>
+                        <name>set_FirstRun</name>
+                    </method>
+                    <method>
+                        <signature>void(string)</signature>
+                        <name>set_RouterIpAddress</name>
+                    </method>
+                    <method>
+                        <signature>void(string)</signature>
+                        <name>set_RouterPassword</name>
+                    </method>
+                    <method>
+                        <signature>void(string)</signature>
+                        <name>set_RouterPort</name>
+                    </method>
+                    <method>
+                        <signature>void(string)</signature>
+                        <name>set_RouterUsername</name>
+                    </method>
+                    <method>
+                        <signature>void(string)</signature>
+                        <name>set_WifiName</name>
                     </method>
                 </methodlist>
                 <fieldlist>
                     <field>
-                        <signature>System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Android.Model.VpnUIItem&gt;</signature>
-                        <name>&lt;VpnUIItems&gt;k__BackingField</name>
+                        <signature>string</signature>
+                        <name>FirstRunPreferenceKey</name>
                         <newname>a</newname>
                     </field>
                     <field>
                         <signature>string</signature>
-                        <name>_packageName</name>
+                        <name>RouterIpAddressPreferenceDefault</name>
+                        <newname>g</newname>
+                    </field>
+                    <field>
+                        <signature>int32</signature>
+                        <name>RouterPortPreferenceDefault</name>
+                        <newname>i</newname>
+                    </field>
+                    <field>
+                        <signature>string</signature>
+                        <name>RouterUsernamePreferenceDefault</name>
+                        <newname>h</newname>
+                    </field>
+                    <field>
+                        <signature>string</signature>
+                        <name>WifiNamePreferenceName</name>
                         <newname>b</newname>
                     </field>
                     <field>
-                        <signature>Android.Content.Res.Resources</signature>
-                        <name>_resources</name>
+                        <signature>Android.Content.Context</signature>
+                        <name>_context</name>
+                        <newname>l</newname>
+                    </field>
+                    <field>
+                        <signature>string</signature>
+                        <name>_routerIpAddressPreferenceKey</name>
                         <newname>c</newname>
+                    </field>
+                    <field>
+                        <signature>string</signature>
+                        <name>_routerPasswordPreferenceKey</name>
+                        <newname>e</newname>
+                    </field>
+                    <field>
+                        <signature>string</signature>
+                        <name>_routerPortPreferenceKey</name>
+                        <newname>f</newname>
+                    </field>
+                    <field>
+                        <signature>string</signature>
+                        <name>_routerUsernamePreferenceKey</name>
+                        <newname>d</newname>
+                    </field>
+                    <field>
+                        <signature>Android.Content.ISharedPreferences</signature>
+                        <name>_sharedPreferences</name>
+                        <newname>j</newname>
+                    </field>
+                    <field>
+                        <signature>Android.Content.ISharedPreferencesEditor</signature>
+                        <name>_sharedPreferencesEditor</name>
+                        <newname>k</newname>
                     </field>
                 </fieldlist>
                 <propertylist>
                     <property>
-                        <signature>System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Android.Model.VpnUIItem&gt;()</signature>
-                        <name>VpnUIItems</name>
+                        <signature>bool()</signature>
+                        <name>FirstRun</name>
+                    </property>
+                    <property>
+                        <signature>string()</signature>
+                        <name>RouterIpAddress</name>
+                    </property>
+                    <property>
+                        <signature>string()</signature>
+                        <name>RouterPassword</name>
+                    </property>
+                    <property>
+                        <signature>string()</signature>
+                        <name>RouterPort</name>
+                    </property>
+                    <property>
+                        <signature>string()</signature>
+                        <name>RouterUsername</name>
+                    </property>
+                    <property>
+                        <signature>string()</signature>
+                        <name>WifiName</name>
                     </property>
                 </propertylist>
-                <eventlist />
-            </type>
-            <type>
-                <name>VeeKee.Android.ViewModel.VpnUIItemViewModel/&lt;AutoConfigureFromRouterSettings&gt;d__10</name>
-                <newname>VeeKee.Android.ViewModel.VpnUIItemViewModel/b</newname>
-                <methodlist>
-                    <method>
-                        <signature>void()</signature>
-                        <name>MoveNext</name>
-                        <newname>f</newname>
-                    </method>
-                    <method>
-                        <signature>void(System.Runtime.CompilerServices.IAsyncStateMachine)</signature>
-                        <name>SetStateMachine</name>
-                        <newname>f</newname>
-                    </method>
-                </methodlist>
-                <fieldlist>
-                    <field>
-                        <signature>int32</signature>
-                        <name>&lt;&gt;1__state</name>
-                        <newname>a</newname>
-                    </field>
-                    <field>
-                        <signature>VeeKee.Android.ViewModel.VpnUIItemViewModel</signature>
-                        <name>&lt;&gt;4__this</name>
-                        <newname>d</newname>
-                    </field>
-                    <field>
-                        <signature>System.Collections.Generic.Dictionary`2/KeyCollection/Enumerator&lt;int32,VeeKee.Shared.Ssh.VpnDetails&gt;</signature>
-                        <name>&lt;&gt;7__wrap2</name>
-                        <newname>i</newname>
-                    </field>
-                    <field>
-                        <signature>System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1&lt;bool&gt;</signature>
-                        <name>&lt;&gt;t__builder</name>
-                        <newname>b</newname>
-                    </field>
-                    <field>
-                        <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;bool&gt;</signature>
-                        <name>&lt;&gt;u__1</name>
-                        <newname>g</newname>
-                    </field>
-                    <field>
-                        <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Shared.Ssh.VpnDetails&gt;&gt;</signature>
-                        <name>&lt;&gt;u__2</name>
-                        <newname>h</newname>
-                    </field>
-                    <field>
-                        <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;string&gt;</signature>
-                        <name>&lt;&gt;u__3</name>
-                        <newname>k</newname>
-                    </field>
-                    <field>
-                        <signature>System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Shared.Ssh.VpnDetails&gt;</signature>
-                        <name>&lt;vpnDetails&gt;5__2</name>
-                        <newname>f</newname>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>&lt;vpnIndex&gt;5__4</name>
-                        <newname>j</newname>
-                    </field>
-                    <field>
-                        <signature>VeeKee.Shared.Ssh.AsusSshVpnService</signature>
-                        <name>asusCommander</name>
-                        <newname>c</newname>
-                    </field>
-                    <field>
-                        <signature>VeeKee.Android.VeeKeePreferences</signature>
-                        <name>preferences</name>
-                        <newname>e</newname>
-                    </field>
-                </fieldlist>
-                <propertylist />
-                <eventlist />
-            </type>
-            <type>
-                <name>VeeKee.Android.ViewModel.VpnUIItemViewModel/&lt;UpdateVpnUIItemStatus&gt;d__9</name>
-                <newname>VeeKee.Android.ViewModel.VpnUIItemViewModel/a</newname>
-                <methodlist>
-                    <method>
-                        <signature>void()</signature>
-                        <name>MoveNext</name>
-                        <newname>e</newname>
-                    </method>
-                    <method>
-                        <signature>void(System.Runtime.CompilerServices.IAsyncStateMachine)</signature>
-                        <name>SetStateMachine</name>
-                        <newname>e</newname>
-                    </method>
-                </methodlist>
-                <fieldlist>
-                    <field>
-                        <signature>int32</signature>
-                        <name>&lt;&gt;1__state</name>
-                        <newname>a</newname>
-                    </field>
-                    <field>
-                        <signature>VeeKee.Android.ViewModel.VpnUIItemViewModel</signature>
-                        <name>&lt;&gt;4__this</name>
-                        <newname>d</newname>
-                    </field>
-                    <field>
-                        <signature>System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1&lt;bool&gt;</signature>
-                        <name>&lt;&gt;t__builder</name>
-                        <newname>b</newname>
-                    </field>
-                    <field>
-                        <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Shared.Models.VpnStatus&gt;&gt;</signature>
-                        <name>&lt;&gt;u__1</name>
-                        <newname>e</newname>
-                    </field>
-                    <field>
-                        <signature>VeeKee.Shared.Ssh.AsusSshVpnService</signature>
-                        <name>asusCommander</name>
-                        <newname>c</newname>
-                    </field>
-                </fieldlist>
-                <propertylist />
                 <eventlist />
             </type>
             <type>
@@ -12001,334 +10880,6 @@
         <module>
             <name>VeeKee.Shared.dll</name>
             <type>
-                <name>VeeKee.Android.VeeKeePreferences</name>
-                <methodlist>
-                    <method>
-                        <signature>void()</signature>
-                        <name>.ctor</name>
-                    </method>
-                    <method>
-                        <signature>string(int32)</signature>
-                        <name>GetVpnFlag</name>
-                    </method>
-                    <method>
-                        <signature>string(int32)</signature>
-                        <name>GetVpnName</name>
-                    </method>
-                    <method>
-                        <signature>void(int32, string)</signature>
-                        <name>SetVpnFlag</name>
-                    </method>
-                    <method>
-                        <signature>void(int32, string)</signature>
-                        <name>SetVpnName</name>
-                    </method>
-                    <method>
-                        <signature>bool()</signature>
-                        <name>get_FirstRun</name>
-                    </method>
-                    <method>
-                        <signature>string()</signature>
-                        <name>get_RouterIpAddress</name>
-                    </method>
-                    <method>
-                        <signature>string()</signature>
-                        <name>get_RouterPassword</name>
-                    </method>
-                    <method>
-                        <signature>string()</signature>
-                        <name>get_RouterPort</name>
-                    </method>
-                    <method>
-                        <signature>string()</signature>
-                        <name>get_RouterUsername</name>
-                    </method>
-                    <method>
-                        <signature>void(bool)</signature>
-                        <name>set_FirstRun</name>
-                    </method>
-                    <method>
-                        <signature>void(string)</signature>
-                        <name>set_RouterIpAddress</name>
-                    </method>
-                    <method>
-                        <signature>void(string)</signature>
-                        <name>set_RouterPassword</name>
-                    </method>
-                    <method>
-                        <signature>void(string)</signature>
-                        <name>set_RouterPort</name>
-                    </method>
-                    <method>
-                        <signature>void(string)</signature>
-                        <name>set_RouterUsername</name>
-                    </method>
-                </methodlist>
-                <fieldlist>
-                    <field>
-                        <signature>string</signature>
-                        <name>FirstRunPreferenceKey</name>
-                        <newname>a</newname>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>RouterIpAddressPreferenceDefault</name>
-                        <newname>g</newname>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>RouterIpAddressPreferenceKey</name>
-                        <newname>c</newname>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>RouterPasswordPreferenceKey</name>
-                        <newname>e</newname>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>RouterPortPreferenceDefault</name>
-                        <newname>i</newname>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>RouterPortPreferenceKey</name>
-                        <newname>f</newname>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>RouterUsernamePreferenceDefault</name>
-                        <newname>h</newname>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>RouterUsernamePreferenceKey</name>
-                        <newname>d</newname>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>VpnFlagPreferenceKeyFormat</name>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>VpnNamePreferenceDefaultFormat</name>
-                        <newname>j</newname>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>VpnNamePreferenceKeyFormat</name>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>WifiNamePreferenceName</name>
-                        <newname>b</newname>
-                    </field>
-                </fieldlist>
-                <propertylist>
-                    <property>
-                        <signature>bool()</signature>
-                        <name>FirstRun</name>
-                    </property>
-                    <property>
-                        <signature>string()</signature>
-                        <name>RouterIpAddress</name>
-                    </property>
-                    <property>
-                        <signature>string()</signature>
-                        <name>RouterPassword</name>
-                    </property>
-                    <property>
-                        <signature>string()</signature>
-                        <name>RouterPort</name>
-                    </property>
-                    <property>
-                        <signature>string()</signature>
-                        <name>RouterUsername</name>
-                    </property>
-                </propertylist>
-                <eventlist />
-            </type>
-            <type>
-                <name>VeeKee.Shared.CountryCodeLookup.IPStackCountryCodeResponse</name>
-                <methodlist>
-                    <method>
-                        <signature>void()</signature>
-                        <name>.ctor</name>
-                    </method>
-                    <method>
-                        <signature>string()</signature>
-                        <name>get_country_code</name>
-                    </method>
-                    <method>
-                        <signature>void(string)</signature>
-                        <name>set_country_code</name>
-                    </method>
-                </methodlist>
-                <fieldlist>
-                    <field>
-                        <signature>string</signature>
-                        <name>&lt;country_code&gt;k__BackingField</name>
-                        <newname>a</newname>
-                    </field>
-                </fieldlist>
-                <propertylist>
-                    <property>
-                        <signature>string()</signature>
-                        <name>country_code</name>
-                    </property>
-                </propertylist>
-                <eventlist />
-            </type>
-            <type>
-                <name>VeeKee.Shared.CountryCodeLookup.IPStackCountryLookupService</name>
-                <methodlist>
-                    <method>
-                        <signature>void()</signature>
-                        <name>.ctor</name>
-                    </method>
-                    <method>
-                        <signature>System.Threading.Tasks.Task`1&lt;string&gt;(string, System.Threading.CancellationToken)</signature>
-                        <name>LookupAsync</name>
-                    </method>
-                </methodlist>
-                <fieldlist>
-                    <field>
-                        <signature>string</signature>
-                        <name>APIKey</name>
-                        <newname>a</newname>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>UrlFormat</name>
-                        <newname>b</newname>
-                    </field>
-                </fieldlist>
-                <propertylist />
-                <eventlist />
-            </type>
-            <type>
-                <name>VeeKee.Shared.CountryCodeLookup.IPStackCountryLookupService/&lt;LookupAsync&gt;d__2</name>
-                <newname>VeeKee.Shared.CountryCodeLookup.IPStackCountryLookupService/a</newname>
-                <methodlist>
-                    <method>
-                        <signature>void()</signature>
-                        <name>MoveNext</name>
-                        <newname>e</newname>
-                    </method>
-                    <method>
-                        <signature>void(System.Runtime.CompilerServices.IAsyncStateMachine)</signature>
-                        <name>SetStateMachine</name>
-                        <newname>e</newname>
-                    </method>
-                </methodlist>
-                <fieldlist>
-                    <field>
-                        <signature>int32</signature>
-                        <name>&lt;&gt;1__state</name>
-                        <newname>a</newname>
-                    </field>
-                    <field>
-                        <signature>System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1&lt;string&gt;</signature>
-                        <name>&lt;&gt;t__builder</name>
-                        <newname>b</newname>
-                    </field>
-                    <field>
-                        <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;System.Net.Http.HttpResponseMessage&gt;</signature>
-                        <name>&lt;&gt;u__1</name>
-                        <newname>h</newname>
-                    </field>
-                    <field>
-                        <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;string&gt;</signature>
-                        <name>&lt;&gt;u__2</name>
-                        <newname>i</newname>
-                    </field>
-                    <field>
-                        <signature>System.Net.Http.HttpClient</signature>
-                        <name>&lt;client&gt;5__2</name>
-                        <newname>e</newname>
-                    </field>
-                    <field>
-                        <signature>System.Net.Http.HttpRequestMessage</signature>
-                        <name>&lt;request&gt;5__3</name>
-                        <newname>f</newname>
-                    </field>
-                    <field>
-                        <signature>System.Net.Http.HttpResponseMessage</signature>
-                        <name>&lt;response&gt;5__4</name>
-                        <newname>g</newname>
-                    </field>
-                    <field>
-                        <signature>System.Threading.CancellationToken</signature>
-                        <name>cancellationToken</name>
-                        <newname>d</newname>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>host</name>
-                        <newname>c</newname>
-                    </field>
-                </fieldlist>
-                <propertylist />
-                <eventlist />
-            </type>
-            <type>
-                <name>VeeKee.Shared.Models.IVpnUIItem</name>
-                <methodlist>
-                    <method>
-                        <signature>string()</signature>
-                        <name>get_Name</name>
-                    </method>
-                    <method>
-                        <signature>VeeKee.Shared.Models.VpnStatus()</signature>
-                        <name>get_Status</name>
-                    </method>
-                    <method>
-                        <signature>void(string)</signature>
-                        <name>set_Name</name>
-                    </method>
-                    <method>
-                        <signature>void(VeeKee.Shared.Models.VpnStatus)</signature>
-                        <name>set_Status</name>
-                    </method>
-                </methodlist>
-                <fieldlist />
-                <propertylist>
-                    <property>
-                        <signature>string()</signature>
-                        <name>Name</name>
-                    </property>
-                    <property>
-                        <signature>VeeKee.Shared.Models.VpnStatus()</signature>
-                        <name>Status</name>
-                    </property>
-                </propertylist>
-                <eventlist />
-            </type>
-            <type>
-                <name>VeeKee.Shared.Models.VpnStatus</name>
-                <methodlist />
-                <fieldlist>
-                    <field>
-                        <signature>VeeKee.Shared.Models.VpnStatus</signature>
-                        <name>Enabled</name>
-                    </field>
-                    <field>
-                        <signature>VeeKee.Shared.Models.VpnStatus</signature>
-                        <name>Enabling</name>
-                    </field>
-                    <field>
-                        <signature>VeeKee.Shared.Models.VpnStatus</signature>
-                        <name>Off</name>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>value__</name>
-                    </field>
-                </fieldlist>
-                <propertylist />
-                <eventlist />
-            </type>
-            <type>
                 <name>VeeKee.Shared.Ssh.AsusSshVpnService</name>
                 <methodlist>
                     <method>
@@ -12337,12 +10888,8 @@
                     </method>
                     <method>
                         <signature>System.Threading.Tasks.Task`1&lt;string&gt;(string)</signature>
-                        <name>&lt;ToggleVpn&gt;b__14_0</name>
+                        <name>&lt;ToggleVpn&gt;b__11_0</name>
                         <newname>a</newname>
-                    </method>
-                    <method>
-                        <signature>System.Threading.Tasks.Task`1&lt;System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Shared.Ssh.VpnDetails&gt;&gt;()</signature>
-                        <name>Details</name>
                     </method>
                     <method>
                         <signature>System.Threading.Tasks.Task`1&lt;bool&gt;(int32)</signature>
@@ -12353,12 +10900,12 @@
                         <name>EnableVpn</name>
                     </method>
                     <method>
-                        <signature>VeeKee.Shared.Models.VpnStatus(string)</signature>
+                        <signature>VeeKee.Shared.Ssh.VpnStatus(string)</signature>
                         <name>ParseVpnStatusResult</name>
                         <newname>b</newname>
                     </method>
                     <method>
-                        <signature>System.Threading.Tasks.Task`1&lt;System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Shared.Models.VpnStatus&gt;&gt;()</signature>
+                        <signature>System.Threading.Tasks.Task`1&lt;System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Shared.Ssh.VpnStatus&gt;&gt;()</signature>
                         <name>Status</name>
                     </method>
                     <method>
@@ -12379,19 +10926,9 @@
                         <newname>b</newname>
                     </field>
                     <field>
-                        <signature>string</signature>
-                        <name>VpnClientAddressCommandTemplate</name>
-                        <newname>f</newname>
-                    </field>
-                    <field>
                         <signature>int32</signature>
                         <name>VpnClientCount</name>
                         <newname>a</newname>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>VpnClientNameCommandTemplate</name>
-                        <newname>e</newname>
                     </field>
                     <field>
                         <signature>string</signature>
@@ -12401,35 +10938,35 @@
                     <field>
                         <signature>int32</signature>
                         <name>VpnClientStatusEnabled</name>
-                        <newname>i</newname>
+                        <newname>g</newname>
                     </field>
                     <field>
                         <signature>int32</signature>
                         <name>VpnClientStatusEnabling</name>
-                        <newname>h</newname>
+                        <newname>f</newname>
                     </field>
                     <field>
                         <signature>int32</signature>
                         <name>VpnClientStatusOff</name>
-                        <newname>g</newname>
+                        <newname>e</newname>
                     </field>
                 </fieldlist>
                 <propertylist />
                 <eventlist />
             </type>
             <type>
-                <name>VeeKee.Shared.Ssh.AsusSshVpnService/&lt;Details&gt;d__11</name>
+                <name>VeeKee.Shared.Ssh.AsusSshVpnService/&lt;DisableVpn&gt;d__9</name>
                 <newname>VeeKee.Shared.Ssh.AsusSshVpnService/b</newname>
                 <methodlist>
                     <method>
                         <signature>void()</signature>
                         <name>MoveNext</name>
-                        <newname>d</newname>
+                        <newname>e</newname>
                     </method>
                     <method>
                         <signature>void(System.Runtime.CompilerServices.IAsyncStateMachine)</signature>
                         <name>SetStateMachine</name>
-                        <newname>d</newname>
+                        <newname>e</newname>
                     </method>
                 </methodlist>
                 <fieldlist>
@@ -12444,36 +10981,26 @@
                         <newname>c</newname>
                     </field>
                     <field>
-                        <signature>System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1&lt;System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Shared.Ssh.VpnDetails&gt;&gt;</signature>
+                        <signature>System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1&lt;bool&gt;</signature>
                         <name>&lt;&gt;t__builder</name>
                         <newname>b</newname>
                     </field>
                     <field>
-                        <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;string&gt;</signature>
+                        <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;bool&gt;</signature>
                         <name>&lt;&gt;u__1</name>
-                        <newname>g</newname>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>&lt;i&gt;5__3</name>
                         <newname>e</newname>
                     </field>
                     <field>
-                        <signature>System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Shared.Ssh.VpnDetails&gt;</signature>
-                        <name>&lt;vpnDetailsList&gt;5__2</name>
+                        <signature>int32</signature>
+                        <name>vpnIndex</name>
                         <newname>d</newname>
-                    </field>
-                    <field>
-                        <signature>string</signature>
-                        <name>&lt;vpnNameResult&gt;5__4</name>
-                        <newname>f</newname>
                     </field>
                 </fieldlist>
                 <propertylist />
                 <eventlist />
             </type>
             <type>
-                <name>VeeKee.Shared.Ssh.AsusSshVpnService/&lt;DisableVpn&gt;d__12</name>
+                <name>VeeKee.Shared.Ssh.AsusSshVpnService/&lt;EnableVpn&gt;d__10</name>
                 <newname>VeeKee.Shared.Ssh.AsusSshVpnService/c</newname>
                 <methodlist>
                     <method>
@@ -12518,52 +11045,7 @@
                 <eventlist />
             </type>
             <type>
-                <name>VeeKee.Shared.Ssh.AsusSshVpnService/&lt;EnableVpn&gt;d__13</name>
-                <newname>VeeKee.Shared.Ssh.AsusSshVpnService/d</newname>
-                <methodlist>
-                    <method>
-                        <signature>void()</signature>
-                        <name>MoveNext</name>
-                        <newname>e</newname>
-                    </method>
-                    <method>
-                        <signature>void(System.Runtime.CompilerServices.IAsyncStateMachine)</signature>
-                        <name>SetStateMachine</name>
-                        <newname>e</newname>
-                    </method>
-                </methodlist>
-                <fieldlist>
-                    <field>
-                        <signature>int32</signature>
-                        <name>&lt;&gt;1__state</name>
-                        <newname>a</newname>
-                    </field>
-                    <field>
-                        <signature>VeeKee.Shared.Ssh.AsusSshVpnService</signature>
-                        <name>&lt;&gt;4__this</name>
-                        <newname>c</newname>
-                    </field>
-                    <field>
-                        <signature>System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1&lt;bool&gt;</signature>
-                        <name>&lt;&gt;t__builder</name>
-                        <newname>b</newname>
-                    </field>
-                    <field>
-                        <signature>System.Runtime.CompilerServices.TaskAwaiter`1&lt;bool&gt;</signature>
-                        <name>&lt;&gt;u__1</name>
-                        <newname>e</newname>
-                    </field>
-                    <field>
-                        <signature>int32</signature>
-                        <name>vpnIndex</name>
-                        <newname>d</newname>
-                    </field>
-                </fieldlist>
-                <propertylist />
-                <eventlist />
-            </type>
-            <type>
-                <name>VeeKee.Shared.Ssh.AsusSshVpnService/&lt;Status&gt;d__10</name>
+                <name>VeeKee.Shared.Ssh.AsusSshVpnService/&lt;Status&gt;d__8</name>
                 <newname>VeeKee.Shared.Ssh.AsusSshVpnService/a</newname>
                 <methodlist>
                     <method>
@@ -12589,7 +11071,7 @@
                         <newname>c</newname>
                     </field>
                     <field>
-                        <signature>System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1&lt;System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Shared.Models.VpnStatus&gt;&gt;</signature>
+                        <signature>System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1&lt;System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Shared.Ssh.VpnStatus&gt;&gt;</signature>
                         <name>&lt;&gt;t__builder</name>
                         <newname>b</newname>
                     </field>
@@ -12604,7 +11086,7 @@
                         <newname>e</newname>
                     </field>
                     <field>
-                        <signature>System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Shared.Models.VpnStatus&gt;</signature>
+                        <signature>System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Shared.Ssh.VpnStatus&gt;</signature>
                         <name>&lt;vpnStatusList&gt;5__2</name>
                         <newname>d</newname>
                     </field>
@@ -12613,8 +11095,8 @@
                 <eventlist />
             </type>
             <type>
-                <name>VeeKee.Shared.Ssh.AsusSshVpnService/&lt;ToggleVpn&gt;d__14</name>
-                <newname>VeeKee.Shared.Ssh.AsusSshVpnService/e</newname>
+                <name>VeeKee.Shared.Ssh.AsusSshVpnService/&lt;ToggleVpn&gt;d__11</name>
+                <newname>VeeKee.Shared.Ssh.AsusSshVpnService/d</newname>
                 <methodlist>
                     <method>
                         <signature>void()</signature>
@@ -12697,7 +11179,7 @@
                         <name>EnableVpn</name>
                     </method>
                     <method>
-                        <signature>System.Threading.Tasks.Task`1&lt;System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Shared.Models.VpnStatus&gt;&gt;()</signature>
+                        <signature>System.Threading.Tasks.Task`1&lt;System.Collections.Generic.Dictionary`2&lt;int32,VeeKee.Shared.Ssh.VpnStatus&gt;&gt;()</signature>
                         <name>Status</name>
                     </method>
                 </methodlist>
@@ -13036,51 +11518,27 @@
                 <eventlist />
             </type>
             <type>
-                <name>VeeKee.Shared.Ssh.VpnDetails</name>
-                <methodlist>
-                    <method>
-                        <signature>void()</signature>
-                        <name>.ctor</name>
-                    </method>
-                    <method>
-                        <signature>string()</signature>
-                        <name>get_Address</name>
-                    </method>
-                    <method>
-                        <signature>string()</signature>
-                        <name>get_Name</name>
-                    </method>
-                    <method>
-                        <signature>void(string)</signature>
-                        <name>set_Address</name>
-                    </method>
-                    <method>
-                        <signature>void(string)</signature>
-                        <name>set_Name</name>
-                    </method>
-                </methodlist>
+                <name>VeeKee.Shared.Ssh.VpnStatus</name>
+                <methodlist />
                 <fieldlist>
                     <field>
-                        <signature>string</signature>
-                        <name>&lt;Address&gt;k__BackingField</name>
-                        <newname>b</newname>
+                        <signature>VeeKee.Shared.Ssh.VpnStatus</signature>
+                        <name>Enabled</name>
                     </field>
                     <field>
-                        <signature>string</signature>
-                        <name>&lt;Name&gt;k__BackingField</name>
-                        <newname>a</newname>
+                        <signature>VeeKee.Shared.Ssh.VpnStatus</signature>
+                        <name>Enabling</name>
+                    </field>
+                    <field>
+                        <signature>VeeKee.Shared.Ssh.VpnStatus</signature>
+                        <name>Off</name>
+                    </field>
+                    <field>
+                        <signature>int32</signature>
+                        <name>value__</name>
                     </field>
                 </fieldlist>
-                <propertylist>
-                    <property>
-                        <signature>string()</signature>
-                        <name>Address</name>
-                    </property>
-                    <property>
-                        <signature>string()</signature>
-                        <name>Name</name>
-                    </property>
-                </propertylist>
+                <propertylist />
                 <eventlist />
             </type>
             <type>
@@ -13105,19 +11563,19 @@
     <statistics>
         <statisticline>
             <description>Total Classes</description>
-            <statistic>78</statistic>
+            <statistic>68</statistic>
         </statisticline>
         <statisticline>
             <description>Total Methods</description>
-            <statistic>194</statistic>
+            <statistic>162</statistic>
         </statisticline>
         <statisticline>
             <description>Total Fields</description>
-            <statistic>2812</statistic>
+            <statistic>2504</statistic>
         </statisticline>
         <statisticline>
             <description>Total Properties</description>
-            <statistic>28</statistic>
+            <statistic>22</statistic>
         </statisticline>
         <statisticline>
             <description>Total Events</description>
@@ -13125,18 +11583,18 @@
         </statisticline>
         <statisticline>
             <description>Total Classes Renamed</description>
-            <statistic>35</statistic>
-            <statistic>44.87 %</statistic>
+            <statistic>30</statistic>
+            <statistic>44.12 %</statistic>
         </statisticline>
         <statisticline>
             <description>Total Methods Renamed</description>
-            <statistic>52</statistic>
-            <statistic>26.80 %</statistic>
+            <statistic>42</statistic>
+            <statistic>25.93 %</statistic>
         </statisticline>
         <statisticline>
             <description>Total Fields Renamed</description>
-            <statistic>192</statistic>
-            <statistic>6.83 %</statistic>
+            <statistic>143</statistic>
+            <statistic>5.71 %</statistic>
         </statisticline>
         <statisticline>
             <description>Total Properties Renamed</description>
@@ -13149,39 +11607,34 @@
             <statistic>0.00 %</statistic>
         </statisticline>
         <statisticline>
-            <description>Methods Renamed to 'd'</description>
-            <statistic>16</statistic>
-            <statistic>8.25 %</statistic>
+            <description>Methods Renamed to 'a'</description>
+            <statistic>12</statistic>
+            <statistic>7.41 %</statistic>
         </statisticline>
         <statisticline>
-            <description>Methods Renamed to 'a'</description>
-            <statistic>11</statistic>
-            <statistic>5.67 %</statistic>
+            <description>Methods Renamed to 'd'</description>
+            <statistic>10</statistic>
+            <statistic>6.17 %</statistic>
         </statisticline>
         <statisticline>
             <description>Methods Renamed to 'e'</description>
-            <statistic>11</statistic>
-            <statistic>5.67 %</statistic>
+            <statistic>9</statistic>
+            <statistic>5.56 %</statistic>
         </statisticline>
         <statisticline>
             <description>Methods Renamed to 'f'</description>
-            <statistic>7</statistic>
-            <statistic>3.61 %</statistic>
+            <statistic>5</statistic>
+            <statistic>3.09 %</statistic>
         </statisticline>
         <statisticline>
             <description>Methods Renamed to 'b'</description>
             <statistic>4</statistic>
-            <statistic>2.06 %</statistic>
+            <statistic>2.47 %</statistic>
         </statisticline>
         <statisticline>
             <description>Methods Renamed to 'c'</description>
             <statistic>2</statistic>
-            <statistic>1.03 %</statistic>
-        </statisticline>
-        <statisticline>
-            <description>Methods Renamed to 'g'</description>
-            <statistic>1</statistic>
-            <statistic>0.52 %</statistic>
+            <statistic>1.23 %</statistic>
         </statisticline>
     </statistics>
 </dotfuscatorMap>
