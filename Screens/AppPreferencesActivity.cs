@@ -1,9 +1,9 @@
-using A = Android;
 using Android.App;
 using Android.OS;
 using Android.Preferences;
 using Android.Views;
 using System;
+using A = Android;
 
 namespace VeeKee.Android
 {

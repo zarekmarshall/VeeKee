@@ -10,7 +10,6 @@ using System;
 using System.Threading.Tasks;
 using VeeKee.Android.Adapters;
 using VeeKee.Android.ViewModel;
-using VeeKee.Shared.Models;
 using VeeKee.Shared.Ssh;
 using AlertDialog = Android.Support.V7.App.AlertDialog;
 using WidgetToolBar = Android.Support.V7.Widget.Toolbar;

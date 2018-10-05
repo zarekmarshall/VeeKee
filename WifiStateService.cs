@@ -1,9 +1,8 @@
 using Android.App;
 using Android.Content;
-using System.Linq;
-using A = Android.Net.Wifi;
-using VeeKee.Shared.Wifi;
 using Android.Net;
+using System.Linq;
+using VeeKee.Shared.Wifi;
 
 namespace VeeKee.Android
 {

@@ -2,7 +2,6 @@ using Android.Content;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using System.Collections.Generic;
 using VeeKee.Android.Model;
 using VeeKee.Android.ViewModel;
 using VeeKee.Shared.Models;
